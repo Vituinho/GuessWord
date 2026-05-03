@@ -4,7 +4,6 @@
     "type": "module",
     "scripts": {
         "build": "vite build",
-        "start": "next start",
         "dev": "vite"
     },
     "devDependencies": {
