@@ -1,0 +1,111 @@
+############################
+# 🧠 GENERAL
+############################
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
+*.swp
+*.swo
+*.pid
+*.seed
+*.lock
+
+############################
+# 🔐 ENV / SECRETS
+############################
+.env
+.env.*
+!.env.example
+!.env.example.frontend
+
+############################
+# 🧑‍💻 IDE / EDITOR
+############################
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+############################
+# 🧱 BUILD FILES
+############################
+*.tar
+*.gz
+
+############################
+# 📦 FRONTEND (Next.js)
+############################
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+frontend/build/
+frontend/dist/
+frontend/.vercel/
+frontend/*.tsbuildinfo
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+frontend/pnpm-debug.log*
+frontend/.cache/
+frontend/coverage/
+frontend/.nyc_output/
+
+############################
+# 🐘 BACKEND (Laravel)
+############################
+backend/vendor/
+backend/node_modules/
+backend/public/storage
+backend/storage/*.key
+
+############################
+# 🗂️ BACKEND STORAGE
+############################
+backend/storage/app/*
+backend/storage/framework/cache/*
+backend/storage/framework/sessions/*
+backend/storage/framework/views/*
+backend/storage/logs/*
+
+!backend/storage/app/public/
+
+############################
+# ⚙️ BACKEND CACHE / CONFIG
+############################
+backend/bootstrap/cache/*
+!backend/bootstrap/cache/.gitignore
+
+############################
+# 🧾 DATABASE
+############################
+*.sqlite
+backend/*.sqlite
+
+############################
+# 🧪 PHPUNIT
+############################
+backend/.phpunit.result.cache
+
+############################
+# 🐳 DOCKER
+############################
+docker-compose.override.yml
+*.zip
+
+############################
+# 🔥 OPTIONAL (logs e debug)
+############################
+debug.log
+error.log
+
+############################
+# 📁 UPLOADS (opcional)
+############################
+public/uploads/
+
+############################
+# 🛠️ SYSTEM FILES
+############################
+ehthumbs.db
+Icon?
