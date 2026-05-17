@@ -42,7 +42,7 @@ Este projeto combina um backend Laravel com um frontend Next.js para entregar:
 ### Backend
 - Laravel 13
 - PHP ^8.3
-- SQLite (padrão) ou outro banco configurado
+- PostgreSQL (padrao)
 - Composer
 
 ### Frontend
@@ -69,13 +69,14 @@ Este projeto combina um backend Laravel com um frontend Next.js para entregar:
    ```bash
    php artisan key:generate
    ```
-5. Se usar SQLite, crie o arquivo de banco de dados:
+5. Suba o PostgreSQL local:
    ```bash
-   touch database/database.sqlite
+   docker compose up -d postgres
    ```
-   No Windows PowerShell:
-   ```powershell
-   New-Item -ItemType File database\database.sqlite
+   Se voce ja usa um PostgreSQL instalado localmente, crie o banco e usuario equivalentes ao `.env`:
+   ```sql
+   CREATE USER guessword WITH PASSWORD 'guessword';
+   CREATE DATABASE guessword OWNER guessword;
    ```
 6. Rode as migrations e o seeder:
    ```bash
@@ -109,7 +110,8 @@ Este projeto combina um backend Laravel com um frontend Next.js para entregar:
 
 ### Backend (`backend/.env`)
 - `APP_URL` — URL base da API
-- `DB_CONNECTION` — conexão do banco de dados (`sqlite` por padrão)
+- `DB_CONNECTION` — conexao do banco de dados (`pgsql` por padrao)
+- `DB_HOST`, `DB_PORT`, `DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD` — credenciais do PostgreSQL
 - `GOOGLE_CLIENT_ID` — ID do cliente Google OAuth
 - `GOOGLE_CLIENT_SECRET` — segredo do cliente Google OAuth
 - `GOOGLE_REDIRECT_URI` — URL de callback (padrão: `http://127.0.0.1:8000/api/auth/google-callback`)
@@ -120,7 +122,9 @@ Este projeto combina um backend Laravel com um frontend Next.js para entregar:
 ## Endpoints principais da API
 
 - `GET /api/health`
+- `POST /api/auth/register`
 - `POST /api/auth/login`
+- `POST /api/auth/logout`
 - `GET /api/auth/google-url`
 - `GET /api/auth/google-callback`
 - `GET /api/words?level={A1|A2|B1|B2|C1|C2}`
