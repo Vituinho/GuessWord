@@ -6,7 +6,9 @@ use App\Http\Controllers\Api\VocabularyController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/health', [VocabularyController::class, 'health']);
+Route::post('/auth/register', [AuthController::class, 'register']);
 Route::post('/auth/login', [AuthController::class, 'login']);
+Route::post('/auth/logout', [AuthController::class, 'logout']);
 Route::get('/auth/google-url', [AuthController::class, 'googleUrl']);
 Route::get('/auth/google-callback', [AuthController::class, 'googleCallback']);
 Route::get('/words', [VocabularyController::class, 'words']);

@@ -5,47 +5,101 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\UserProfile;
+use App\Support\SessionToken;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rules\Password;
+use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
-    public function login(Request $request): JsonResponse
+    private const MAX_LOGIN_ATTEMPTS = 5;
+
+    private const LOGIN_DECAY_SECONDS = 60;
+
+    public function register(Request $request): JsonResponse
     {
         $validated = $request->validate([
             'name' => ['required', 'string', 'min:2', 'max:80'],
-            'email' => ['required', 'email', 'max:120'],
+            'email' => ['required', 'email:rfc', 'max:120'],
             'nationality' => ['required', 'string', 'min:2', 'max:80'],
-            'provider' => ['nullable', 'in:email,gmail'],
-            'password' => ['nullable', 'string', 'min:4', 'max:120'],
+            'password' => ['required', 'confirmed', Password::min(8)->letters()->mixedCase()->numbers(), 'max:120'],
         ]);
 
-        $provider = $validated['provider'] ?? 'email';
         $email = Str::lower($validated['email']);
-        $existingUser = User::where('email', $email)->first();
 
-        if ($provider === 'email' && empty($validated['password'])) {
-            return response()->json(['message' => 'Password is required.'], 422);
+        if (User::where('email', $email)->exists()) {
+            throw ValidationException::withMessages([
+                'email' => ['Este email ja esta cadastrado.'],
+            ]);
         }
 
-        if ($provider === 'email' && $existingUser && ! Hash::check($validated['password'], $existingUser->password)) {
-            return response()->json(['message' => 'Invalid credentials.'], 422);
-        }
+        $user = User::create([
+            'public_id' => (string) Str::uuid(),
+            'name' => $validated['name'],
+            'email' => $email,
+            'nationality' => $validated['nationality'],
+            'provider' => 'email',
+            'password' => $validated['password'],
+        ]);
 
-        $user = $this->upsertUser(
-            $validated['name'],
-            $email,
-            $validated['nationality'],
-            $provider,
-            password: $validated['password'] ?? null
-        );
+        $this->syncProfile($user);
+        $sessionToken = $this->rotateSessionToken($user);
 
         return response()->json([
-            'data' => $this->sessionResource($user),
+            'data' => $this->sessionResource($user, $sessionToken),
+        ], 201);
+    }
+
+    public function login(Request $request): JsonResponse
+    {
+        $validated = $request->validate([
+            'email' => ['required', 'email:rfc', 'max:120'],
+            'password' => ['required', 'string', 'max:120'],
         ]);
+
+        $email = Str::lower($validated['email']);
+        $throttleKey = $this->throttleKey($request, $email);
+
+        if (RateLimiter::tooManyAttempts($throttleKey, self::MAX_LOGIN_ATTEMPTS)) {
+            return response()->json([
+                'message' => 'Muitas tentativas. Tente novamente em '.RateLimiter::availableIn($throttleKey).' segundos.',
+            ], 429);
+        }
+
+        $user = User::where('email', $email)->first();
+
+        if (! $user || ! Hash::check($validated['password'], $user->password)) {
+            RateLimiter::hit($throttleKey, self::LOGIN_DECAY_SECONDS);
+
+            throw ValidationException::withMessages([
+                'email' => ['Email ou senha invalidos.'],
+            ]);
+        }
+
+        RateLimiter::clear($throttleKey);
+        $sessionToken = $this->rotateSessionToken($user);
+
+        return response()->json([
+            'data' => $this->sessionResource($user, $sessionToken),
+        ]);
+    }
+
+    public function logout(Request $request): JsonResponse
+    {
+        $token = $request->bearerToken();
+
+        if ($token) {
+            User::where('session_token', SessionToken::hash($token))->update([
+                'session_token' => null,
+            ]);
+        }
+
+        return response()->json(['message' => 'Sessao encerrada.']);
     }
 
     public function googleUrl(Request $request): JsonResponse
@@ -118,6 +172,10 @@ class AuthController extends Controller
             return response()->json(['message' => 'Google profile fetch failed.'], 422);
         }
 
+        if (! $profileResponse->json('email')) {
+            return response()->json(['message' => 'Google profile did not return an email.'], 422);
+        }
+
         $state = json_decode(base64_decode($validated['state'] ?? '') ?: '{}', true) ?: [];
         $user = $this->upsertUser(
             $profileResponse->json('name') ?? Str::before($profileResponse->json('email'), '@'),
@@ -127,9 +185,10 @@ class AuthController extends Controller
             $profileResponse->json('sub'),
             $profileResponse->json('picture')
         );
+        $sessionToken = $this->rotateSessionToken($user);
 
         return response()->json([
-            'data' => $this->sessionResource($user),
+            'data' => $this->sessionResource($user, $sessionToken),
         ]);
     }
 
@@ -147,11 +206,11 @@ class AuthController extends Controller
         if (! $user->exists) {
             $user->public_id = (string) Str::uuid();
             $user->password = $password ?? Str::random(32);
-            $user->session_token = Str::random(48);
+            $user->session_token = SessionToken::hash(SessionToken::generate());
         }
 
         $user->public_id ??= (string) Str::uuid();
-        $user->session_token ??= Str::random(48);
+        $user->session_token ??= SessionToken::hash(SessionToken::generate());
 
         $user->name = $name;
         $user->nationality = $nationality;
@@ -165,6 +224,13 @@ class AuthController extends Controller
 
         $user->save();
 
+        $this->syncProfile($user);
+
+        return $user;
+    }
+
+    private function syncProfile(User $user): void
+    {
         UserProfile::updateOrCreate(
             ['client_id' => $user->public_id],
             [
@@ -173,13 +239,25 @@ class AuthController extends Controller
                 'nationality' => $user->nationality,
             ]
         );
-
-        return $user;
     }
 
-    private function sessionResource(User $user): array
+    private function rotateSessionToken(User $user): string
     {
-        return [
+        $token = SessionToken::generate();
+        $user->session_token = SessionToken::hash($token);
+        $user->save();
+
+        return $token;
+    }
+
+    private function throttleKey(Request $request, string $email): string
+    {
+        return Str::lower($email).'|'.$request->ip();
+    }
+
+    private function sessionResource(User $user, ?string $sessionToken = null): array
+    {
+        $resource = [
             'client_id' => $user->public_id,
             'name' => $user->name,
             'email' => $user->email,
@@ -188,5 +266,11 @@ class AuthController extends Controller
             'avatar_url' => $user->avatar_url,
             'gmail_connected' => (bool) $user->gmail_connected_at,
         ];
+
+        if ($sessionToken) {
+            $resource['session_token'] = $sessionToken;
+        }
+
+        return $resource;
     }
 }
