@@ -128,10 +128,36 @@ h1 {
   font-size: 2.7rem;
 }
 
+.auth-tabs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 26px;
+  padding: 5px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.auth-tabs button {
+  min-height: 42px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--muted);
+  font-weight: 850;
+}
+
+.auth-tabs button.active {
+  background: rgba(255, 255, 255, 0.13);
+  color: white;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.11);
+}
+
 .login-form {
   display: grid;
   gap: 16px;
-  margin-top: 28px;
+  margin-top: 18px;
 }
 
 .login-form label {
@@ -203,6 +229,59 @@ h1 {
   border: 1px solid rgba(255, 255, 255, 0.18);
   background: white;
   color: #14204b;
+}
+
+.offline-button {
+  min-height: 44px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--muted);
+  font-weight: 800;
+}
+
+.password-panel {
+  display: grid;
+  gap: 10px;
+  margin-top: -4px;
+}
+
+.password-meter {
+  overflow: hidden;
+  height: 7px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.password-meter span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--amber), var(--green));
+  transition: width 180ms ease;
+}
+
+.password-rules {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 7px;
+}
+
+.password-rules span {
+  min-height: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 7px 9px;
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.05);
+  font-size: 0.78rem;
+  font-weight: 750;
+}
+
+.password-rules span.ok {
+  border-color: rgba(94, 224, 141, 0.32);
+  color: #d9ffe6;
+  background: rgba(94, 224, 141, 0.1);
 }
 
 .login-error {
@@ -743,6 +822,10 @@ h1 {
   }
 
   .login-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .password-rules {
     grid-template-columns: 1fr;
   }
 
