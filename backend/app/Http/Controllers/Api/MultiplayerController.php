@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\MultiplayerPlayer;
 use App\Models\MultiplayerRoom;
 use App\Models\Word;
+use App\Support\SessionToken;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -23,6 +24,10 @@ class MultiplayerController extends Controller
             'nationality' => ['nullable', 'string', 'max:80'],
             'level' => ['required', 'in:'.implode(',', self::LEVELS)],
         ]);
+
+        if (! SessionToken::allows($request, $validated['client_id'])) {
+            return $this->invalidSessionResponse();
+        }
 
         $room = MultiplayerRoom::create([
             'code' => $this->uniqueCode(),
@@ -47,6 +52,10 @@ class MultiplayerController extends Controller
             'nationality' => ['nullable', 'string', 'max:80'],
         ]);
 
+        if (! SessionToken::allows($request, $validated['client_id'])) {
+            return $this->invalidSessionResponse();
+        }
+
         $room = $this->findRoom($code);
         $this->touchPlayer($room, $validated);
 
@@ -69,6 +78,10 @@ class MultiplayerController extends Controller
             'seconds_spent' => ['nullable', 'integer', 'min:0', 'max:900'],
             'hints_used' => ['nullable', 'boolean'],
         ]);
+
+        if (! SessionToken::allows($request, $validated['client_id'])) {
+            return $this->invalidSessionResponse();
+        }
 
         $room = $this->findRoom($code);
         $player = $this->touchPlayer($room, $validated);
@@ -153,6 +166,11 @@ class MultiplayerController extends Controller
         } while (MultiplayerRoom::where('code', $code)->exists());
 
         return $code;
+    }
+
+    private function invalidSessionResponse(): JsonResponse
+    {
+        return response()->json(['message' => 'Sessao invalida ou expirada.'], 401);
     }
 
     private function normalizeAnswer(string $answer): string
