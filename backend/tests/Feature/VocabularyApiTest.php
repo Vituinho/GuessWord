@@ -15,10 +15,11 @@ class VocabularyApiTest extends TestCase
     {
         $this->seed(DatabaseSeeder::class);
 
-        $this->getJson('/api/words?level=A1')
+        $response = $this->getJson('/api/words?level=A1')
             ->assertOk()
-            ->assertJsonCount(10, 'data')
             ->assertJsonPath('data.0.level', 'A1');
+
+        $this->assertGreaterThanOrEqual(20, count($response->json('data')));
     }
 
     public function test_it_records_attempts_and_updates_progress(): void

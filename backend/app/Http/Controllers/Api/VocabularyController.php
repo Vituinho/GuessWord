@@ -7,6 +7,7 @@ use App\Models\StudyAttempt;
 use App\Models\UserProfile;
 use App\Models\Word;
 use App\Models\WordProgress;
+use App\Support\SessionToken;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Http\JsonResponse;
@@ -54,6 +55,11 @@ class VocabularyController extends Controller
         $clientId = $validated['client_id'] ?? null;
         $level = $validated['level'] ?? 'A1';
         $mode = $validated['mode'] ?? 'level';
+
+        if ($clientId && ! SessionToken::allows($request, $clientId)) {
+            return $this->invalidSessionResponse();
+        }
+
         $candidates = $this->candidateWords($clientId, $level, $mode);
 
         if ($candidates->isEmpty()) {
@@ -91,6 +97,10 @@ class VocabularyController extends Controller
         $mode = $validated['mode'] ?? 'level';
         $clientId = $validated['client_id'];
         $now = Carbon::now();
+
+        if (! SessionToken::allows($request, $clientId)) {
+            return $this->invalidSessionResponse();
+        }
 
         $progress = WordProgress::firstOrCreate(
             ['client_id' => $clientId, 'word_id' => $word->id],
@@ -152,6 +162,11 @@ class VocabularyController extends Controller
         ]);
 
         $clientId = $validated['client_id'];
+
+        if (! SessionToken::allows($request, $clientId)) {
+            return $this->invalidSessionResponse();
+        }
+
         $profile = UserProfile::firstOrCreate(['client_id' => $clientId]);
 
         return response()->json([
@@ -223,6 +238,11 @@ class VocabularyController extends Controller
         }
 
         return Word::query()->where('level', $level)->get();
+    }
+
+    private function invalidSessionResponse(): JsonResponse
+    {
+        return response()->json(['message' => 'Sessao invalida ou expirada.'], 401);
     }
 
     /**

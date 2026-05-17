@@ -31,6 +31,7 @@ const STORAGE_KEY = "guessword-study-state-v1";
 const ROUND_SECONDS = 30;
 
 type Feedback = "idle" | "correct" | "incorrect" | "timeout";
+type AuthMode = "login" | "register";
 type LoginProvider = "email" | "gmail";
 
 type UserSession = {
@@ -40,6 +41,7 @@ type UserSession = {
   nationality: string;
   provider: LoginProvider;
   gmailConnected: boolean;
+  sessionToken?: string | null;
   avatarUrl?: string | null;
 };
 
@@ -75,6 +77,24 @@ type MultiplayerRoom = {
 
 type ApiWordsResponse = {
   data: Array<Partial<VocabWord> & Pick<VocabWord, "id" | "word" | "definition" | "example" | "level">>;
+};
+
+type AuthResponse = {
+  data: {
+    client_id: string;
+    name: string;
+    email: string;
+    nationality: string;
+    provider: LoginProvider;
+    gmail_connected: boolean;
+    session_token?: string | null;
+    avatar_url?: string | null;
+  };
+};
+
+type ApiErrorPayload = {
+  message?: string;
+  errors?: Record<string, string[]>;
 };
 
 const nationalities = [
@@ -149,6 +169,29 @@ function hydrateWord(word: ApiWordsResponse["data"][number]): VocabWord {
     level: word.level,
     part_of_speech: word.part_of_speech ?? null,
   };
+}
+
+function jsonHeaders(session?: UserSession | null): HeadersInit {
+  const headers: Record<string, string> = {
+    "Content-Type": "application/json",
+  };
+
+  if (session?.sessionToken) {
+    headers.Authorization = `Bearer ${session.sessionToken}`;
+  }
+
+  return headers;
+}
+
+async function readApiMessage(response: Response, fallback: string): Promise<string> {
+  try {
+    const payload = (await response.json()) as ApiErrorPayload;
+    const firstError = payload.errors ? Object.values(payload.errors).flat()[0] : null;
+
+    return firstError ?? payload.message ?? fallback;
+  } catch {
+    return fallback;
+  }
 }
 
 function defaultProgress(): WordProgress {
@@ -265,6 +308,7 @@ function localUserSession(name: string, email: string, nationality: string, prov
     nationality,
     provider,
     gmailConnected: provider === "gmail",
+    sessionToken: null,
   };
 }
 
@@ -285,11 +329,14 @@ export default function Home() {
   const [leaderboard, setLeaderboard] = useState<Leader[]>([]);
   const [multiplayerRoom, setMultiplayerRoom] = useState<MultiplayerRoom | null>(null);
   const [joinCode, setJoinCode] = useState("");
+  const [authMode, setAuthMode] = useState<AuthMode>("login");
   const [loginName, setLoginName] = useState("");
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
+  const [loginPasswordConfirmation, setLoginPasswordConfirmation] = useState("");
   const [loginNationality, setLoginNationality] = useState("Brazil");
   const [loginError, setLoginError] = useState("");
+  const [authLoading, setAuthLoading] = useState(false);
   const [initialized, setInitialized] = useState(false);
   const inputRef = useRef<HTMLInputElement | null>(null);
   const studyStateRef = useRef(studyState);
@@ -454,9 +501,7 @@ export default function Home() {
       try {
         const response = await fetch(`${API_BASE}/attempts`, {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
+          headers: jsonHeaders(user),
           body: JSON.stringify({
             client_id: studyStateRef.current.clientId,
             word_id: word.id,
@@ -476,9 +521,7 @@ export default function Home() {
         if (response.ok && user && roomRef.current) {
           const roomResponse = await fetch(`${API_BASE}/multiplayer/rooms/${roomRef.current.code}/attempts`, {
             method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
+            headers: jsonHeaders(user),
             body: JSON.stringify({
               client_id: user.clientId,
               display_name: user.name,
@@ -554,6 +597,19 @@ export default function Home() {
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [beginRound, feedback]);
 
+  const passwordChecks = useMemo(
+    () => ({
+      length: loginPassword.length >= 8,
+      mixedCase: /[a-z]/.test(loginPassword) && /[A-Z]/.test(loginPassword),
+      number: /\d/.test(loginPassword),
+      match: loginPassword.length > 0 && loginPassword === loginPasswordConfirmation,
+    }),
+    [loginPassword, loginPasswordConfirmation],
+  );
+  const passwordScore = Object.values(passwordChecks).filter(Boolean).length;
+  const registerPasswordReady =
+    passwordChecks.length && passwordChecks.mixedCase && passwordChecks.number && passwordChecks.match;
+
   const stats = useMemo(() => {
     const progressValues = Object.values(studyState.wordProgress);
     const accuracy =
@@ -593,47 +649,54 @@ export default function Home() {
     submitAnswer(false);
   };
 
-  const login = async (provider: LoginProvider) => {
-    if (!loginName.trim() || !loginEmail.trim() || !loginNationality.trim()) {
-      setLoginError("Preencha nome, email e nacionalidade.");
+  const switchAuthMode = (nextMode: AuthMode) => {
+    setAuthMode(nextMode);
+    setLoginError("");
+  };
+
+  const submitAuth = async () => {
+    const email = loginEmail.trim().toLowerCase();
+    const name = loginName.trim();
+
+    if (!email || !loginPassword) {
+      setLoginError("Preencha email e senha.");
       return;
     }
 
-    if (provider === "email" && loginPassword.length < 4) {
-      setLoginError("A senha precisa ter pelo menos 4 caracteres.");
+    if (authMode === "register" && (!name || !loginNationality.trim())) {
+      setLoginError("Preencha nome e nacionalidade.");
       return;
     }
+
+    if (authMode === "register" && !registerPasswordReady) {
+      setLoginError("A senha precisa cumprir todos os requisitos.");
+      return;
+    }
+
+    setAuthLoading(true);
+    setLoginError("");
 
     try {
-      const response = await fetch(`${API_BASE}/auth/login`, {
+      const response = await fetch(`${API_BASE}/auth/${authMode === "register" ? "register" : "login"}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          name: loginName.trim(),
-          email: loginEmail.trim(),
+          name: authMode === "register" ? name : undefined,
+          email,
           nationality: loginNationality,
-          provider,
-          password: provider === "email" ? loginPassword : undefined,
+          password: loginPassword,
+          password_confirmation: authMode === "register" ? loginPasswordConfirmation : undefined,
         }),
       });
 
       if (!response.ok) {
-        throw new Error("Login unavailable");
+        setLoginError(await readApiMessage(response, "Nao foi possivel autenticar."));
+        return;
       }
 
-      const payload = (await response.json()) as {
-        data: {
-          client_id: string;
-          name: string;
-          email: string;
-          nationality: string;
-          provider: LoginProvider;
-          gmail_connected: boolean;
-          avatar_url?: string | null;
-        };
-      };
+      const payload = (await response.json()) as AuthResponse;
 
       finishLogin({
         clientId: payload.data.client_id,
@@ -642,16 +705,66 @@ export default function Home() {
         nationality: payload.data.nationality,
         provider: payload.data.provider,
         gmailConnected: payload.data.gmail_connected,
+        sessionToken: payload.data.session_token ?? null,
         avatarUrl: payload.data.avatar_url,
       });
       setApiOnline(true);
     } catch {
       setApiOnline(false);
-      finishLogin(localUserSession(loginName.trim(), loginEmail.trim(), loginNationality, provider));
+      setLoginError("Nao foi possivel conectar ao servidor de autenticacao.");
+    } finally {
+      setAuthLoading(false);
     }
   };
 
+  const startGoogleLogin = async () => {
+    setAuthLoading(true);
+    setLoginError("");
+
+    try {
+      const response = await fetch(`${API_BASE}/auth/google-url?nationality=${encodeURIComponent(loginNationality)}`);
+
+      if (!response.ok) {
+        setLoginError(await readApiMessage(response, "Google nao esta disponivel agora."));
+        return;
+      }
+
+      const payload = (await response.json()) as { configured: boolean; message?: string; url?: string };
+
+      if (!payload.configured || !payload.url) {
+        setLoginError(payload.message ?? "Google OAuth ainda nao esta configurado no backend.");
+        return;
+      }
+
+      window.location.href = payload.url;
+    } catch {
+      setApiOnline(false);
+      setLoginError("Nao foi possivel iniciar o login com Google.");
+    } finally {
+      setAuthLoading(false);
+    }
+  };
+
+  const continueOffline = () => {
+    const name = loginName.trim() || "Player";
+    const email = loginEmail.trim().toLowerCase() || "local@guessword.app";
+
+    finishLogin(localUserSession(name, email, loginNationality, "email"));
+    setApiOnline(false);
+  };
+
   const logout = () => {
+    const sessionToken = currentUser?.sessionToken;
+
+    if (sessionToken) {
+      void fetch(`${API_BASE}/auth/logout`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${sessionToken}`,
+        },
+      }).catch(() => undefined);
+    }
+
     window.localStorage.removeItem(SESSION_KEY);
     setCurrentUser(null);
     setMultiplayerRoom(null);
@@ -666,9 +779,7 @@ export default function Home() {
     try {
       const response = await fetch(`${API_BASE}/multiplayer/rooms`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: jsonHeaders(currentUser),
         body: JSON.stringify({
           client_id: currentUser.clientId,
           display_name: currentUser.name,
@@ -698,9 +809,7 @@ export default function Home() {
     try {
       const response = await fetch(`${API_BASE}/multiplayer/rooms/${joinCode.trim().toUpperCase()}/join`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: jsonHeaders(currentUser),
         body: JSON.stringify({
           client_id: currentUser.clientId,
           display_name: currentUser.name,
@@ -749,14 +858,46 @@ export default function Home() {
             </div>
           </div>
 
-          <form className="login-form" onSubmit={(event) => event.preventDefault()}>
-            <label>
-              Nome
-              <input onChange={(event) => setLoginName(event.target.value)} placeholder="Seu nome" value={loginName} />
-            </label>
+          <div className="auth-tabs" role="tablist" aria-label="Autenticacao">
+            <button
+              className={authMode === "login" ? "active" : ""}
+              onClick={() => switchAuthMode("login")}
+              type="button"
+            >
+              Entrar
+            </button>
+            <button
+              className={authMode === "register" ? "active" : ""}
+              onClick={() => switchAuthMode("register")}
+              type="button"
+            >
+              Criar conta
+            </button>
+          </div>
+
+          <form
+            className="login-form"
+            onSubmit={(event) => {
+              event.preventDefault();
+              void submitAuth();
+            }}
+          >
+            {authMode === "register" ? (
+              <label>
+                Nome
+                <input
+                  autoComplete="name"
+                  onChange={(event) => setLoginName(event.target.value)}
+                  placeholder="Seu nome"
+                  value={loginName}
+                />
+              </label>
+            ) : null}
+
             <label>
               Email
               <input
+                autoComplete="email"
                 onChange={(event) => setLoginEmail(event.target.value)}
                 placeholder="voce@email.com"
                 type="email"
@@ -766,33 +907,66 @@ export default function Home() {
             <label>
               Senha
               <input
+                autoComplete={authMode === "login" ? "current-password" : "new-password"}
                 onChange={(event) => setLoginPassword(event.target.value)}
-                placeholder="Minimo de 4 caracteres"
+                placeholder={authMode === "login" ? "Sua senha" : "Minimo de 8 caracteres"}
                 type="password"
                 value={loginPassword}
               />
             </label>
-            <label>
-              Nacionalidade
-              <select onChange={(event) => setLoginNationality(event.target.value)} value={loginNationality}>
-                {nationalities.map((nationality) => (
-                  <option key={nationality} value={nationality}>
-                    {nationality}
-                  </option>
-                ))}
-              </select>
-            </label>
+
+            {authMode === "register" ? (
+              <>
+                <label>
+                  Confirmar senha
+                  <input
+                    autoComplete="new-password"
+                    onChange={(event) => setLoginPasswordConfirmation(event.target.value)}
+                    placeholder="Repita a senha"
+                    type="password"
+                    value={loginPasswordConfirmation}
+                  />
+                </label>
+
+                <div className="password-panel" aria-live="polite">
+                  <div className="password-meter">
+                    <span style={{ width: `${(passwordScore / 4) * 100}%` }} />
+                  </div>
+                  <div className="password-rules">
+                    <span className={passwordChecks.length ? "ok" : ""}>8+ caracteres</span>
+                    <span className={passwordChecks.mixedCase ? "ok" : ""}>Maiuscula e minuscula</span>
+                    <span className={passwordChecks.number ? "ok" : ""}>Numero</span>
+                    <span className={passwordChecks.match ? "ok" : ""}>Confirmacao igual</span>
+                  </div>
+                </div>
+
+                <label>
+                  Nacionalidade
+                  <select onChange={(event) => setLoginNationality(event.target.value)} value={loginNationality}>
+                    {nationalities.map((nationality) => (
+                      <option key={nationality} value={nationality}>
+                        {nationality}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+              </>
+            ) : null}
 
             {loginError ? <div className="login-error">{loginError}</div> : null}
 
             <div className="login-actions">
-              <button onClick={() => void login("email")} type="button">
-                Entrar
+              <button disabled={authLoading} type="submit">
+                {authLoading ? "Aguarde" : authMode === "login" ? "Entrar" : "Criar conta"}
               </button>
-              <button className="gmail-button" onClick={() => void login("gmail")} type="button">
-                Conectar Gmail
+              <button className="gmail-button" disabled={authLoading} onClick={() => void startGoogleLogin()} type="button">
+                Google
               </button>
             </div>
+
+            <button className="offline-button" disabled={authLoading} onClick={continueOffline} type="button">
+              Modo local
+            </button>
           </form>
         </section>
       </main>
