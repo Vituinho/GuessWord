@@ -10,6 +10,7 @@ Route::post('/auth/register', [AuthController::class, 'register']);
 Route::post('/auth/login', [AuthController::class, 'login']);
 Route::post('/auth/logout', [AuthController::class, 'logout']);
 Route::get('/auth/google-url', [AuthController::class, 'googleUrl']);
+Route::get('/auth/google/redirect', [AuthController::class, 'googleRedirect']);
 Route::get('/auth/google-callback', [AuthController::class, 'googleCallback']);
 Route::get('/words', [VocabularyController::class, 'words']);
 Route::get('/challenge', [VocabularyController::class, 'challenge']);

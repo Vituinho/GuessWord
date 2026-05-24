@@ -194,6 +194,60 @@ async function readApiMessage(response: Response, fallback: string): Promise<str
   }
 }
 
+function decodeBase64Url(value: string): string {
+  const normalized = value.replace(/-/g, "+").replace(/_/g, "/");
+  const padding = (4 - (normalized.length % 4)) % 4;
+  const binary = window.atob(`${normalized}${"=".repeat(padding)}`);
+  const bytes = Uint8Array.from(binary, (character) => character.charCodeAt(0));
+
+  return new TextDecoder().decode(bytes);
+}
+
+function authPayloadToSession(payload: AuthResponse["data"]): UserSession {
+  return {
+    clientId: payload.client_id,
+    name: payload.name,
+    email: payload.email,
+    nationality: payload.nationality,
+    provider: payload.provider,
+    gmailConnected: payload.gmail_connected,
+    sessionToken: payload.session_token ?? null,
+    avatarUrl: payload.avatar_url,
+  };
+}
+
+function consumeGoogleAuthResult(): { session?: UserSession; error?: string } | null {
+  if (typeof window === "undefined" || !window.location.hash) {
+    return null;
+  }
+
+  const params = new URLSearchParams(window.location.hash.slice(1));
+  const sessionValue = params.get("session");
+  const errorValue = params.get("auth_error");
+
+  if (!sessionValue && !errorValue) {
+    return null;
+  }
+
+  window.history.replaceState(null, document.title, `${window.location.pathname}${window.location.search}`);
+
+  if (sessionValue) {
+    try {
+      return {
+        session: authPayloadToSession(JSON.parse(decodeBase64Url(sessionValue)) as AuthResponse["data"]),
+      };
+    } catch {
+      return { error: "Nao foi possivel concluir o login com Google." };
+    }
+  }
+
+  try {
+    return { error: errorValue ? decodeBase64Url(errorValue) : "Login com Google cancelado." };
+  } catch {
+    return { error: "Login com Google cancelado." };
+  }
+}
+
 function defaultProgress(): WordProgress {
   return {
     attempts: 0,
@@ -377,6 +431,7 @@ export default function Home() {
   }, []);
 
   const finishLogin = useCallback((session: UserSession) => {
+    window.localStorage.setItem(CLIENT_ID_KEY, session.clientId);
     window.localStorage.setItem(SESSION_KEY, JSON.stringify(session));
     setCurrentUser(session);
     const restored = safeStudyState(session.clientId);
@@ -388,6 +443,19 @@ export default function Home() {
 
   useEffect(() => {
     const hydrateTimer = window.setTimeout(() => {
+      const googleAuth = consumeGoogleAuthResult();
+
+      if (googleAuth?.session) {
+        finishLogin(googleAuth.session);
+        setApiOnline(true);
+        setInitialized(true);
+        return;
+      }
+
+      if (googleAuth?.error) {
+        setLoginError(googleAuth.error);
+      }
+
       const session = safeSession();
       const anonymousClientId = window.localStorage.getItem(CLIENT_ID_KEY) ?? createClientId();
       window.localStorage.setItem(CLIENT_ID_KEY, anonymousClientId);
@@ -432,7 +500,7 @@ export default function Home() {
       window.clearTimeout(hydrateTimer);
       controller.abort();
     };
-  }, [loadLeaderboard]);
+  }, [finishLogin, loadLeaderboard]);
 
   useEffect(() => {
     if (!initialized) {
@@ -698,16 +766,7 @@ export default function Home() {
 
       const payload = (await response.json()) as AuthResponse;
 
-      finishLogin({
-        clientId: payload.data.client_id,
-        name: payload.data.name,
-        email: payload.data.email,
-        nationality: payload.data.nationality,
-        provider: payload.data.provider,
-        gmailConnected: payload.data.gmail_connected,
-        sessionToken: payload.data.session_token ?? null,
-        avatarUrl: payload.data.avatar_url,
-      });
+      finishLogin(authPayloadToSession(payload.data));
       setApiOnline(true);
     } catch {
       setApiOnline(false);
@@ -717,31 +776,17 @@ export default function Home() {
     }
   };
 
-  const startGoogleLogin = async () => {
+  const startGoogleLogin = () => {
     setAuthLoading(true);
     setLoginError("");
 
     try {
-      const response = await fetch(`${API_BASE}/auth/google-url?nationality=${encodeURIComponent(loginNationality)}`);
-
-      if (!response.ok) {
-        setLoginError(await readApiMessage(response, "Google nao esta disponivel agora."));
-        return;
-      }
-
-      const payload = (await response.json()) as { configured: boolean; message?: string; url?: string };
-
-      if (!payload.configured || !payload.url) {
-        setLoginError(payload.message ?? "Google OAuth ainda nao esta configurado no backend.");
-        return;
-      }
-
-      window.location.href = payload.url;
+      const redirectUrl = new URL(`${API_BASE.replace(/\/$/, "")}/auth/google/redirect`, window.location.origin);
+      redirectUrl.searchParams.set("nationality", loginNationality);
+      window.location.assign(redirectUrl.toString());
     } catch {
-      setApiOnline(false);
-      setLoginError("Nao foi possivel iniciar o login com Google.");
-    } finally {
       setAuthLoading(false);
+      setLoginError("Nao foi possivel iniciar o login com Google.");
     }
   };
 
@@ -854,7 +899,7 @@ export default function Home() {
             <div className="brand-mark">GW</div>
             <div>
               <p className="eyebrow">GuessWord</p>
-              <h1>Vocabulary battle</h1>
+              <h1>Vocabulary</h1>
             </div>
           </div>
 
@@ -959,8 +1004,8 @@ export default function Home() {
               <button disabled={authLoading} type="submit">
                 {authLoading ? "Aguarde" : authMode === "login" ? "Entrar" : "Criar conta"}
               </button>
-              <button className="gmail-button" disabled={authLoading} onClick={() => void startGoogleLogin()} type="button">
-                Google
+              <button className="gmail-button" disabled={authLoading} onClick={startGoogleLogin} type="button">
+                Continuar com Google
               </button>
             </div>
 

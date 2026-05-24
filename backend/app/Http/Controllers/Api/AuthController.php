@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\UserProfile;
 use App\Support\SessionToken;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
@@ -108,29 +109,14 @@ class AuthController extends Controller
             'nationality' => ['nullable', 'string', 'max:80'],
         ]);
 
-        $clientId = config('services.google.client_id');
-        $redirectUri = config('services.google.redirect_uri');
+        $url = $this->googleAuthorizationUrl($validated['nationality'] ?? null);
 
-        if (! $clientId || ! $redirectUri) {
+        if (! $url) {
             return response()->json([
                 'configured' => false,
-                'message' => 'Google OAuth is not configured.',
+                'message' => 'Login com Google ainda nao esta configurado.',
             ]);
         }
-
-        $state = base64_encode(json_encode([
-            'nationality' => $validated['nationality'] ?? null,
-            'nonce' => Str::random(16),
-        ]));
-
-        $url = 'https://accounts.google.com/o/oauth2/v2/auth?'.http_build_query([
-            'client_id' => $clientId,
-            'redirect_uri' => $redirectUri,
-            'response_type' => 'code',
-            'scope' => 'openid email profile',
-            'prompt' => 'select_account',
-            'state' => $state,
-        ]);
 
         return response()->json([
             'configured' => true,
@@ -138,11 +124,39 @@ class AuthController extends Controller
         ]);
     }
 
-    public function googleCallback(Request $request): JsonResponse
+    public function googleRedirect(Request $request): RedirectResponse
     {
         $validated = $request->validate([
+            'nationality' => ['nullable', 'string', 'max:80'],
+        ]);
+
+        $url = $this->googleAuthorizationUrl($validated['nationality'] ?? null);
+
+        if (! $url) {
+            return redirect()->away($this->frontendAuthUrl([
+                'auth_error' => $this->base64UrlEncode('Login com Google ainda nao esta configurado.'),
+            ]));
+        }
+
+        return redirect()->away($url);
+    }
+
+    public function googleCallback(Request $request): JsonResponse|RedirectResponse
+    {
+        if ($request->filled('error')) {
+            return $this->googleErrorResponse(
+                $request,
+                $request->string('error_description')->toString() ?: 'Login com Google cancelado.'
+            );
+        }
+
+        if (! $request->filled('code') || ! $request->filled('state')) {
+            return $this->googleErrorResponse($request, 'Nao foi possivel concluir o login com Google.', 422);
+        }
+
+        $validated = $request->validate([
             'code' => ['required', 'string'],
-            'state' => ['nullable', 'string'],
+            'state' => ['required', 'string'],
         ]);
 
         $clientId = config('services.google.client_id');
@@ -150,7 +164,13 @@ class AuthController extends Controller
         $redirectUri = config('services.google.redirect_uri');
 
         if (! $clientId || ! $clientSecret || ! $redirectUri) {
-            return response()->json(['message' => 'Google OAuth is not configured.'], 501);
+            return $this->googleErrorResponse($request, 'Login com Google ainda nao esta configurado.', 501);
+        }
+
+        $state = $this->decodeGoogleState($validated['state']);
+
+        if (! $state) {
+            return $this->googleErrorResponse($request, 'A sessao do login com Google expirou. Tente novamente.', 422);
         }
 
         $tokenResponse = Http::asForm()->post('https://oauth2.googleapis.com/token', [
@@ -162,34 +182,43 @@ class AuthController extends Controller
         ]);
 
         if (! $tokenResponse->successful()) {
-            return response()->json(['message' => 'Google token exchange failed.'], 422);
+            return $this->googleErrorResponse($request, 'Nao foi possivel validar o login com Google.', 422);
         }
 
         $accessToken = $tokenResponse->json('access_token');
         $profileResponse = Http::withToken($accessToken)->get('https://www.googleapis.com/oauth2/v3/userinfo');
 
         if (! $profileResponse->successful()) {
-            return response()->json(['message' => 'Google profile fetch failed.'], 422);
+            return $this->googleErrorResponse($request, 'Nao foi possivel buscar o perfil do Google.', 422);
         }
 
         if (! $profileResponse->json('email')) {
-            return response()->json(['message' => 'Google profile did not return an email.'], 422);
+            return $this->googleErrorResponse($request, 'A conta Google nao retornou um email.', 422);
         }
 
-        $state = json_decode(base64_decode($validated['state'] ?? '') ?: '{}', true) ?: [];
         $user = $this->upsertUser(
             $profileResponse->json('name') ?? Str::before($profileResponse->json('email'), '@'),
             Str::lower($profileResponse->json('email')),
             $state['nationality'] ?? 'Not informed',
             'gmail',
             $profileResponse->json('sub'),
-            $profileResponse->json('picture')
+            $profileResponse->json('picture'),
+            null,
+            (bool) $profileResponse->json('email_verified')
         );
         $sessionToken = $this->rotateSessionToken($user);
+        $session = $this->sessionResource($user, $sessionToken);
 
-        return response()->json([
-            'data' => $this->sessionResource($user, $sessionToken),
-        ]);
+        if ($this->wantsJson($request)) {
+            return response()->json([
+                'data' => $session,
+            ]);
+        }
+
+        return redirect()->away($this->frontendAuthUrl([
+            'auth' => 'google',
+            'session' => $this->base64UrlEncode(json_encode($session, JSON_THROW_ON_ERROR)),
+        ]));
     }
 
     private function upsertUser(
@@ -199,11 +228,13 @@ class AuthController extends Controller
         string $provider,
         ?string $googleId = null,
         ?string $avatarUrl = null,
-        ?string $password = null
+        ?string $password = null,
+        bool $emailVerified = false
     ): User {
         $user = User::firstOrNew(['email' => $email]);
+        $isNewUser = ! $user->exists;
 
-        if (! $user->exists) {
+        if ($isNewUser) {
             $user->public_id = (string) Str::uuid();
             $user->password = $password ?? Str::random(32);
             $user->session_token = SessionToken::hash(SessionToken::generate());
@@ -213,13 +244,17 @@ class AuthController extends Controller
         $user->session_token ??= SessionToken::hash(SessionToken::generate());
 
         $user->name = $name;
-        $user->nationality = $nationality;
+        $user->nationality = $isNewUser || ! $user->nationality ? $nationality : $user->nationality;
         $user->provider = $provider;
         $user->google_id = $googleId ?? $user->google_id;
         $user->avatar_url = $avatarUrl ?? $user->avatar_url;
 
         if ($provider === 'gmail') {
             $user->gmail_connected_at = now();
+        }
+
+        if ($emailVerified) {
+            $user->email_verified_at ??= now();
         }
 
         $user->save();
@@ -253,6 +288,112 @@ class AuthController extends Controller
     private function throttleKey(Request $request, string $email): string
     {
         return Str::lower($email).'|'.$request->ip();
+    }
+
+    private function googleAuthorizationUrl(?string $nationality = null): ?string
+    {
+        $clientId = config('services.google.client_id');
+        $redirectUri = config('services.google.redirect_uri');
+
+        if (! $clientId || ! $redirectUri) {
+            return null;
+        }
+
+        return 'https://accounts.google.com/o/oauth2/v2/auth?'.http_build_query([
+            'client_id' => $clientId,
+            'redirect_uri' => $redirectUri,
+            'response_type' => 'code',
+            'scope' => 'openid email profile',
+            'prompt' => 'select_account',
+            'access_type' => 'online',
+            'include_granted_scopes' => 'true',
+            'state' => $this->encodeGoogleState($nationality),
+        ], '', '&', PHP_QUERY_RFC3986);
+    }
+
+    private function encodeGoogleState(?string $nationality): string
+    {
+        $payload = $this->base64UrlEncode(json_encode([
+            'nationality' => $nationality,
+            'nonce' => Str::random(32),
+            'issued_at' => now()->timestamp,
+        ], JSON_THROW_ON_ERROR));
+
+        return $payload.'.'.hash_hmac('sha256', $payload, $this->googleStateSigningKey());
+    }
+
+    /**
+     * @return array{nationality?: string|null, nonce?: string, issued_at?: int}
+     */
+    private function decodeGoogleState(?string $state): array
+    {
+        if (! $state || ! str_contains($state, '.')) {
+            return [];
+        }
+
+        [$payload, $signature] = explode('.', $state, 2);
+        $expectedSignature = hash_hmac('sha256', $payload, $this->googleStateSigningKey());
+
+        if (! hash_equals($expectedSignature, $signature)) {
+            return [];
+        }
+
+        $json = $this->base64UrlDecode($payload);
+        $decoded = $json ? json_decode($json, true) : null;
+
+        if (! is_array($decoded)) {
+            return [];
+        }
+
+        $issuedAt = (int) ($decoded['issued_at'] ?? 0);
+
+        if ($issuedAt < now()->subMinutes(15)->timestamp) {
+            return [];
+        }
+
+        return $decoded;
+    }
+
+    private function googleStateSigningKey(): string
+    {
+        return (string) config('app.key')
+            ?: (string) config('services.google.client_secret')
+            ?: 'guessword-local-google-state';
+    }
+
+    private function wantsJson(Request $request): bool
+    {
+        return $request->expectsJson() || $request->query('format') === 'json';
+    }
+
+    private function googleErrorResponse(Request $request, string $message, int $status = 422): JsonResponse|RedirectResponse
+    {
+        if ($this->wantsJson($request)) {
+            return response()->json(['message' => $message], $status);
+        }
+
+        return redirect()->away($this->frontendAuthUrl([
+            'auth_error' => $this->base64UrlEncode($message),
+        ]));
+    }
+
+    private function frontendAuthUrl(array $params): string
+    {
+        $frontendUrl = rtrim((string) config('app.frontend_url', 'http://127.0.0.1:3000'), '/');
+
+        return $frontendUrl.'/#'.http_build_query($params, '', '&', PHP_QUERY_RFC3986);
+    }
+
+    private function base64UrlEncode(string $value): string
+    {
+        return rtrim(strtr(base64_encode($value), '+/', '-_'), '=');
+    }
+
+    private function base64UrlDecode(string $value): string|false
+    {
+        $padding = (4 - strlen($value) % 4) % 4;
+
+        return base64_decode(strtr($value.str_repeat('=', $padding), '-_', '+/'), true);
     }
 
     private function sessionResource(User $user, ?string $sessionToken = null): array

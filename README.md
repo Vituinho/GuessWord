@@ -110,11 +110,18 @@ Este projeto combina um backend Laravel com um frontend Next.js para entregar:
 
 ### Backend (`backend/.env`)
 - `APP_URL` — URL base da API
+- `FRONTEND_URL` — URL do Next.js para onde o Google volta depois do callback (padrao: `http://127.0.0.1:3000`)
 - `DB_CONNECTION` — conexao do banco de dados (`pgsql` por padrao)
 - `DB_HOST`, `DB_PORT`, `DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD` — credenciais do PostgreSQL
 - `GOOGLE_CLIENT_ID` — ID do cliente Google OAuth
 - `GOOGLE_CLIENT_SECRET` — segredo do cliente Google OAuth
 - `GOOGLE_REDIRECT_URI` — URL de callback (padrão: `http://127.0.0.1:8000/api/auth/google-callback`)
+
+No Google Cloud Console, em OAuth Client, adicione exatamente este Authorized redirect URI:
+```env
+http://127.0.0.1:8000/api/auth/google-callback
+```
+O botao "Continuar com Google" abre `GET /api/auth/google/redirect`, que redireciona o navegador para `accounts.google.com` e depois volta para `FRONTEND_URL`.
 
 ### Frontend (`frontend/.env.local`)
 - `NEXT_PUBLIC_API_URL` — URL completa da API Laravel
@@ -126,6 +133,7 @@ Este projeto combina um backend Laravel com um frontend Next.js para entregar:
 - `POST /api/auth/login`
 - `POST /api/auth/logout`
 - `GET /api/auth/google-url`
+- `GET /api/auth/google/redirect`
 - `GET /api/auth/google-callback`
 - `GET /api/words?level={A1|A2|B1|B2|C1|C2}`
 - `GET /api/challenge?client_id={id}&level={nivel}&mode={level|review|seen|auto}`
