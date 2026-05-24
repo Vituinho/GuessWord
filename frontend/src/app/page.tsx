@@ -781,9 +781,9 @@ export default function Home() {
     setLoginError("");
 
     try {
-      const redirectUrl = new URL(`${API_BASE.replace(/\/$/, "")}/auth/google/redirect`, window.location.origin);
-      redirectUrl.searchParams.set("nationality", loginNationality);
-      window.location.assign(redirectUrl.toString());
+      const base = API_BASE.replace(/\/$/, "");
+      const redirectUrl = `${base}/auth/google/redirect?nationality=${encodeURIComponent(loginNationality)}`;
+      window.location.assign(redirectUrl);
     } catch {
       setAuthLoading(false);
       setLoginError("Nao foi possivel iniciar o login com Google.");
