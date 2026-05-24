@@ -21,3 +21,12 @@ Route::post('/multiplayer/rooms', [MultiplayerController::class, 'create']);
 Route::get('/multiplayer/rooms/{code}', [MultiplayerController::class, 'show']);
 Route::post('/multiplayer/rooms/{code}/join', [MultiplayerController::class, 'join']);
 Route::post('/multiplayer/rooms/{code}/attempts', [MultiplayerController::class, 'attempt']);
+
+Route::get('/debug-google', function () {
+    return response()->json([
+        'client_id' => config('services.google.client_id') ? 'SET' : 'MISSING',
+        'client_secret' => config('services.google.client_secret') ? 'SET' : 'MISSING',
+        'redirect_uri' => config('services.google.redirect_uri'),
+        'app_key' => config('app.key') ? 'SET' : 'MISSING',
+    ]);
+});

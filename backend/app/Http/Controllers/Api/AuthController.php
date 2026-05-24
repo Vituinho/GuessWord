@@ -173,7 +173,7 @@ class AuthController extends Controller
             return $this->googleErrorResponse($request, 'A sessao do login com Google expirou. Tente novamente.', 422);
         }
 
-        $tokenResponse = Http::asForm()->post('https://oauth2.googleapis.com/token', [
+        /* $tokenResponse = Http::asForm()->post('https://oauth2.googleapis.com/token', [
             'client_id' => $clientId,
             'client_secret' => $clientSecret,
             'code' => $validated['code'],
@@ -183,6 +183,22 @@ class AuthController extends Controller
 
         if (! $tokenResponse->successful()) {
             return $this->googleErrorResponse($request, 'Nao foi possivel validar o login com Google.', 422);
+        } */
+
+        $tokenResponse = Http::asForm()->post('https://oauth2.googleapis.com/token', [
+            'client_id' => $clientId,
+            'client_secret' => $clientSecret,
+            'code' => $validated['code'],
+            'grant_type' => 'authorization_code',
+            'redirect_uri' => $redirectUri,
+        ]);
+
+        if (! $tokenResponse->successful()) {
+            return response()->json([
+                'error' => $tokenResponse->json(),
+                'status' => $tokenResponse->status(),
+                'redirect_uri_used' => $redirectUri,
+            ], 422);
         }
 
         $accessToken = $tokenResponse->json('access_token');
