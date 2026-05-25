@@ -370,7 +370,16 @@ export default function Home() {
   const [words, setWords] = useState<VocabWord[]>(fallbackWords);
   const [selectedLevel, setSelectedLevel] = useState<Level>("A1");
   const [mode, setMode] = useState<PracticeMode>("auto");
-  const [studyState, setStudyState] = useState<StudyState>(() => createEmptyStudyState());
+  const [studyState, setStudyState] = useState<StudyState>(() => {
+    if (typeof window === "undefined") {
+      return createEmptyStudyState();
+    }
+    const savedClientId = window.localStorage.getItem(CLIENT_ID_KEY);
+    if (savedClientId) {
+      return safeStudyState(savedClientId);
+    }
+    return createEmptyStudyState();
+  });
   const [currentUser, setCurrentUser] = useState<UserSession | null>(null);
   const [currentWord, setCurrentWord] = useState<VocabWord | null>(null);
   const [answer, setAnswer] = useState("");
@@ -509,6 +518,25 @@ export default function Home() {
 
     window.localStorage.setItem(`${STORAGE_KEY}-${studyState.clientId}`, JSON.stringify(studyState));
   }, [initialized, studyState]);
+
+  useEffect(() => {
+    if (!currentUser || leaderboard.length === 0) {
+      return;
+    }
+
+    const userInLeaderboard = leaderboard.find(
+      (leader) => leader.client_id === currentUser.clientId || leader.display_name === currentUser.name
+    );
+
+    if (userInLeaderboard && userInLeaderboard.xp !== studyState.xp) {
+      setStudyState((prev) => ({
+        ...prev,
+        xp: userInLeaderboard.xp,
+        level: userInLeaderboard.level,
+        streak: userInLeaderboard.streak,
+      }));
+    }
+  }, [leaderboard, currentUser]);
 
   const beginRound = useCallback(() => {
     const next = selectNextWord(
@@ -1267,31 +1295,19 @@ export default function Home() {
               <span>Leaderboard</span>
               <strong>global</strong>
             </div>
-            <div className="leaderboard">
               <div className="leader-row self">
                 <span>Você</span>
                 <strong>{studyState.xp} XP</strong>
               </div>
-              {leaderboard.slice(0, 6).map((leader) => {
-                const distance = leader.xp - studyState.xp;
-                const maxDistance = Math.max(...leaderboard.slice(0, 6).map(l => l.xp - studyState.xp));
-                const distancePercentage = maxDistance > 0 ? (distance / maxDistance) * 100 : 0;
-                
-                return (
-                  <div className="leader-row top-6" key={`${leader.rank}-${leader.client_id}`}>
-                    <span>
-                      #{leader.rank} {leader.display_name}
-                    </span>
-                    <div>
-                      <div className="distance-bar">
-                        <div className="distance-bar-fill" style={{ width: `${distancePercentage}%` }}></div>
-                      </div>
-                      <strong>{leader.xp} XP</strong>
-                      <span>{distance > 0 ? `+${distance}` : distance} XP</span>
-                    </div>
-                  </div>
-                );
-              })}
+            <div className="leaderboard">
+              {leaderboard.slice(0, 6).map((leader) => (
+                <div className="leader-row" key={`${leader.rank}-${leader.client_id}`}>
+                  <span>
+                    #{leader.rank} {leader.display_name}
+                  </span>
+                  <strong>{leader.xp} XP</strong>
+                </div>
+              ))}
             </div>
           </section>
 
