@@ -554,6 +554,62 @@ h1 {
 
 .leader-row.self {
   border-color: rgba(139, 92, 246, 0.38);
+  background: rgba(139, 92, 246, 0.1);
+}
+
+.leader-row.top-6 {
+  border-color: rgba(59, 130, 246, 0.38);
+  background: rgba(59, 130, 246, 0.08);
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  min-height: auto;
+  padding: 12px;
+}
+
+.leader-row.top-6 > span:first-child {
+  width: 100%;
+}
+
+.leader-row.top-6 > div {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.leader-row.top-6 > div > .distance-bar {
+  flex: 1;
+  height: 6px;
+}
+
+.leader-row.top-6 strong {
+  min-width: fit-content;
+  font-size: 0.9rem;
+}
+
+.leader-row.top-6 span:last-child {
+  font-size: 0.75rem;
+  color: var(--muted);
+  min-width: 50px;
+  text-align: right;
+}
+
+.distance-bar {
+  flex: 1;
+  height: 6px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  position: relative;
+}
+
+.distance-bar-fill {
+  height: 100%;
+  border-radius: 3px;
+  background: linear-gradient(90deg, rgba(59, 130, 246, 0.8), rgba(139, 92, 246, 0.8));
+  width: 0%;
+  transition: width 300ms ease;
 }
 
 .challenge-panel {

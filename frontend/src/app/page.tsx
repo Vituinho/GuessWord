@@ -1269,17 +1269,29 @@ export default function Home() {
             </div>
             <div className="leaderboard">
               <div className="leader-row self">
-                <span>Voce</span>
+                <span>Você</span>
                 <strong>{studyState.xp} XP</strong>
               </div>
-              {leaderboard.slice(0, 6).map((leader) => (
-                <div className="leader-row" key={`${leader.rank}-${leader.client_id}`}>
-                  <span>
-                    #{leader.rank} {leader.display_name}
-                  </span>
-                  <strong>{leader.xp} XP</strong>
-                </div>
-              ))}
+              {leaderboard.slice(0, 6).map((leader) => {
+                const distance = leader.xp - studyState.xp;
+                const maxDistance = Math.max(...leaderboard.slice(0, 6).map(l => l.xp - studyState.xp));
+                const distancePercentage = maxDistance > 0 ? (distance / maxDistance) * 100 : 0;
+                
+                return (
+                  <div className="leader-row top-6" key={`${leader.rank}-${leader.client_id}`}>
+                    <span>
+                      #{leader.rank} {leader.display_name}
+                    </span>
+                    <div>
+                      <div className="distance-bar">
+                        <div className="distance-bar-fill" style={{ width: `${distancePercentage}%` }}></div>
+                      </div>
+                      <strong>{leader.xp} XP</strong>
+                      <span>{distance > 0 ? `+${distance}` : distance} XP</span>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </section>
 
