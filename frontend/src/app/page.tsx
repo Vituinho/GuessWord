@@ -1008,10 +1008,6 @@ export default function Home() {
                 Continuar com Google
               </button>
             </div>
-
-            <button className="offline-button" disabled={authLoading} onClick={continueOffline} type="button">
-              Modo local
-            </button>
           </form>
         </section>
       </main>
