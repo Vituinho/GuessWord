@@ -1295,11 +1295,11 @@ export default function Home() {
               <span>Leaderboard</span>
               <strong>global</strong>
             </div>
+            <div className="leaderboard">
               <div className="leader-row self">
                 <span>Você</span>
                 <strong>{studyState.xp} XP</strong>
               </div>
-            <div className="leaderboard">
               {leaderboard.slice(0, 6).map((leader) => (
                 <div className="leader-row" key={`${leader.rank}-${leader.client_id}`}>
                   <span>
