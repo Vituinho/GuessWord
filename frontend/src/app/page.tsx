@@ -237,7 +237,7 @@ function consumeGoogleAuthResult(): { session?: UserSession; error?: string } | 
         session: authPayloadToSession(JSON.parse(decodeBase64Url(sessionValue)) as AuthResponse["data"]),
       };
     } catch {
-      return { error: "Nao foi possivel concluir o login com Google." };
+      return { error: "Não foi possível concluir o login com Google." };
     }
   }
 
@@ -788,7 +788,7 @@ export default function Home() {
       });
 
       if (!response.ok) {
-        setLoginError(await readApiMessage(response, "Nao foi possivel autenticar."));
+        setLoginError(await readApiMessage(response, "Não foi possivel autenticar."));
         return;
       }
 
@@ -798,7 +798,7 @@ export default function Home() {
       setApiOnline(true);
     } catch {
       setApiOnline(false);
-      setLoginError("Nao foi possivel conectar ao servidor de autenticacao.");
+      setLoginError("Não foi possível conectar ao servidor de autenticação.");
     } finally {
       setAuthLoading(false);
     }
@@ -814,7 +814,7 @@ export default function Home() {
       window.location.assign(redirectUrl);
     } catch {
       setAuthLoading(false);
-      setLoginError("Nao foi possivel iniciar o login com Google.");
+      setLoginError("Não foi possível iniciar o login com Google.");
     }
   };
 
@@ -1008,8 +1008,8 @@ export default function Home() {
                   <div className="password-rules">
                     <span className={passwordChecks.length ? "ok" : ""}>8+ caracteres</span>
                     <span className={passwordChecks.mixedCase ? "ok" : ""}>Maiuscula e minuscula</span>
-                    <span className={passwordChecks.number ? "ok" : ""}>Numero</span>
-                    <span className={passwordChecks.match ? "ok" : ""}>Confirmacao igual</span>
+                    <span className={passwordChecks.number ? "ok" : ""}>Número</span>
+                    <span className={passwordChecks.match ? "ok" : ""}>Confirmação igual</span>
                   </div>
                 </div>
 
@@ -1053,10 +1053,12 @@ export default function Home() {
           </div>
         </div>
         <div className="top-actions">
-          <div className={`api-status ${apiOnline ? "online" : apiOnline === false ? "offline" : ""}`}>
-            <span />
-            {apiOnline ? "API online" : apiOnline === false ? "Modo local" : "Conectando"}
-          </div>
+          {apiOnline !== false ? (
+            <div className={`api-status ${apiOnline ? "online" : ""}`}>
+              <span />
+              {apiOnline ? "API online" : "Conectando"}
+            </div>
+          ) : null}
           <button className="ghost-button compact" onClick={logout} type="button">
             Sair
           </button>
@@ -1104,7 +1106,7 @@ export default function Home() {
           <section>
             <div className="section-title">
               <span>Modo</span>
-              <strong>{stats.dueReviews} revisoes</strong>
+              <strong>{stats.dueReviews} revisões</strong>
             </div>
             <div className="segmented-control">
               {(Object.keys(modeLabels) as PracticeMode[]).map((item) => (
@@ -1211,7 +1213,7 @@ export default function Home() {
               </div>
 
               <div className="definition-block">
-                <span>Definicao</span>
+                <span>Definição</span>
                 <p>{currentWord.definition}</p>
               </div>
 
@@ -1242,7 +1244,7 @@ export default function Home() {
                   Ouvir
                 </button>
                 <button className="ghost-button primary" disabled={feedback === "idle"} onClick={beginRound} type="button">
-                  Proxima
+                  Próxima
                 </button>
               </div>
 
@@ -1334,7 +1336,7 @@ export default function Home() {
 
           <section>
             <div className="section-title">
-              <span>Historico</span>
+              <span>Histórico</span>
               <strong>{studyState.totalAttempts} rodadas</strong>
             </div>
             <div className="history-list">
