@@ -399,7 +399,7 @@ class VocabularyController extends Controller
 
         return [
             'client_id' => $clientId,
-            'display_name' => $profile->display_name ?? 'Player',
+            'display_name' => $profile->display_name ?? 'Player#' . $this->generateUniquePlayerNumber(),
             'nationality' => $profile->nationality,
             'accuracy' => $attempts > 0 ? round(($correct / $attempts) * 100, 1) : 0,
             'attempts' => $attempts,
@@ -414,6 +414,17 @@ class VocabularyController extends Controller
             'history' => $history,
             'levels' => $levels,
         ];
+    }
+
+    private function generateUniquePlayerNumber(): string
+    {
+        do {
+            $number = rand(1000, 9999); // ou rand(1, 999999) para mais variações
+        } while (
+            Profile::where('display_name', 'Player#' . $number)->exists()
+        );
+
+        return (string) $number;
     }
 
     private function wordResource(Word $word): array
