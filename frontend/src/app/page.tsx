@@ -818,14 +818,6 @@ export default function Home() {
     }
   };
 
-  const continueOffline = () => {
-    const name = loginName.trim() || "Player";
-    const email = loginEmail.trim().toLowerCase() || "local@guessword.app";
-
-    finishLogin(localUserSession(name, email, loginNationality, "email"));
-    setApiOnline(false);
-  };
-
   const logout = () => {
     const sessionToken = currentUser?.sessionToken;
 
