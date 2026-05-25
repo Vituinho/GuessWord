@@ -553,8 +553,21 @@ h1 {
 }
 
 .leader-row.self {
+  position: relative;
   border-color: rgba(139, 92, 246, 0.38);
   background: rgba(139, 92, 246, 0.1);
+  padding-left: 16px;
+}
+
+.leader-row.self::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  border-radius: 8px 0 0 8px;
+  background: linear-gradient(180deg, rgba(139, 92, 246, 0.9), rgba(59, 130, 246, 0.9));
 }
 
 .challenge-panel {
