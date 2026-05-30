@@ -6,6 +6,7 @@ export type VocabWord = {
   id: number;
   word: string;
   definition: string;
+  definition_pt?: string;
   example: string;
   example_with_blank: string;
   level: Level;
@@ -909,7 +910,8 @@ export const fallbackWords: VocabWord[] = rawWords.map(
   ([word, definition, example, level, partOfSpeech], index) => ({
     id: index + 1,
     word,
-    definition: portugueseDefinitions[word] ?? definition,
+    definition: definition,
+    definition_pt: portugueseDefinitions[word] ?? definition,
     example,
     example_with_blank: blankExample(example, word),
     level,
