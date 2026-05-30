@@ -227,9 +227,12 @@ class VocabularyController extends Controller
 
         if ($mode === 'auto' && $clientId) {
             $due = Word::query()
-                ->whereHas('progress', fn ($query) => $query
-                    ->where('client_id', $clientId)
-                    ->where('next_review_at', '<=', Carbon::now()))
+                ->where('level', $level)
+                ->whereHas('progress', function ($query) use ($clientId): void {
+                    $query->where('client_id', $clientId)
+                        ->where('next_review_at', '<=', Carbon::now())
+                        ->where('correct_attempts', 0);
+                })
                 ->get();
 
             if ($due->isNotEmpty()) {
@@ -237,7 +240,17 @@ class VocabularyController extends Controller
             }
         }
 
-        return Word::query()->where('level', $level)->get();
+        $query = Word::query()->where('level', $level);
+
+        if ($clientId && $mode !== 'review' && $mode !== 'seen') {
+            $guessedWordIds = WordProgress::query()
+                ->where('client_id', $clientId)
+                ->where('correct_attempts', '>', 0)
+                ->pluck('word_id');
+            $query->whereNotIn('id', $guessedWordIds);
+        }
+
+        return $query->get();
     }
 
     private function invalidSessionResponse(): JsonResponse
