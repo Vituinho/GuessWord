@@ -116,14 +116,14 @@ class VocabularyController extends Controller
             $progress->ease_factor = min(3.2, $progress->ease_factor + ($progress->streak_correct >= 2 ? 0.15 : 0.05));
             $progress->interval_days = $this->nextIntervalDays($progress);
             $progress->next_review_at = $now->copy()->addDays($progress->interval_days);
-            $progress->learned = $progress->correct_attempts >= 3 && $progress->streak_correct >= 2;
+            $progress->learned = $progress->correct_attempts > 0;
         } else {
             $progress->incorrect_attempts++;
             $progress->streak_correct = 0;
             $progress->ease_factor = max(1.3, $progress->ease_factor - 0.25);
             $progress->interval_days = 0;
             $progress->next_review_at = $now->copy()->addMinutes(10);
-            $progress->learned = false;
+            $progress->learned = $progress->correct_attempts > 0;
         }
 
         $progress->save();
@@ -410,6 +410,12 @@ class VocabularyController extends Controller
             ]];
         });
 
+        $wordProgressMap = WordProgress::where('client_id', $clientId)
+            ->get()
+            ->keyBy('word_id')
+            ->map(fn (WordProgress $p): array => $this->wordProgressResource($p))
+            ->toArray();
+
         return [
             'client_id' => $clientId,
             'display_name' => $profile->display_name ?? 'Player#' . $this->generateUniquePlayerNumber(),
@@ -426,6 +432,7 @@ class VocabularyController extends Controller
             'best_streak' => $profile->best_streak,
             'history' => $history,
             'levels' => $levels,
+            'word_progress' => $wordProgressMap,
         ];
     }
 
@@ -445,7 +452,8 @@ class VocabularyController extends Controller
         return [
             'id' => $word->id,
             'word' => $word->word,
-            'definition' => $this->portugueseDefinition($word),
+            'definition' => $word->definition,
+            'definition_pt' => $this->portugueseDefinition($word),
             'example' => $word->example,
             'example_with_blank' => $word->exampleWithBlank(),
             'level' => $word->level,
