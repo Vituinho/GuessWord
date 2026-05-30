@@ -367,6 +367,11 @@ function localUserSession(name: string, email: string, nationality: string, prov
 }
 
 export default function Home() {
+  const [gameStarted, setGameStarted] = useState(false);
+  const [clueMode, setClueMode] = useState<"hint" | "no-hint">("hint");
+  const [guessedLetters, setGuessedLetters] = useState<string[]>([]);
+  const [tiles, setTiles] = useState<Array<{ id: number; letter: string; used: boolean }>>([]);
+  const [guessedLettersTileMap, setGuessedLettersTileMap] = useState<Record<number, number>>({});
   const [words, setWords] = useState<VocabWord[]>(fallbackWords);
   const [selectedLevel, setSelectedLevel] = useState<Level>("A1");
   const [mode, setMode] = useState<PracticeMode>("auto");
@@ -407,6 +412,184 @@ export default function Home() {
   const userRef = useRef(currentUser);
   const roomRef = useRef(multiplayerRoom);
   const lastWordIdRef = useRef<number | null>(null);
+
+  const initializeTilesAndBoxes = useCallback((word: string, currentClueMode: "hint" | "no-hint") => {
+    const len = word.length;
+    const wordLower = word.toLowerCase();
+    setGuessedLettersTileMap({});
+    
+    if (currentClueMode === "hint") {
+      const initialGuessed = Array(len).fill("");
+      initialGuessed[0] = wordLower[0];
+      setGuessedLetters(initialGuessed);
+      setAnswer(wordLower[0]);
+      
+      const remainingLetters = wordLower.slice(1).split("");
+      const alphabet = "abcdefghijklmnopqrstuvwxyz";
+      const decoys: string[] = [];
+      while (decoys.length < 5) {
+        const randChar = alphabet[Math.floor(Math.random() * 26)];
+        if (!wordLower.includes(randChar) && !decoys.includes(randChar)) {
+          decoys.push(randChar);
+        }
+      }
+      
+      const combined = [...remainingLetters, ...decoys];
+      for (let i = combined.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [combined[i], combined[j]] = [combined[j], combined[i]];
+      }
+      
+      setTiles(combined.map((letter, index) => ({
+        id: index,
+        letter,
+        used: false
+      })));
+    } else {
+      setGuessedLetters(Array(len).fill(""));
+      setAnswer("");
+      
+      const alphabet = "abcdefghijklmnopqrstuvwxyz";
+      const randomLetters: string[] = [];
+      for (let i = 0; i < 14; i++) {
+        const randChar = alphabet[Math.floor(Math.random() * 26)];
+        randomLetters.push(randChar);
+      }
+      
+      setTiles(randomLetters.map((letter, index) => ({
+        id: index,
+        letter,
+        used: false
+      })));
+    }
+  }, [setAnswer]);
+
+  const handleTileClick = useCallback((tileIdx: number) => {
+    if (feedback !== "idle" || !currentWord) return;
+    const tile = tiles[tileIdx];
+    if (tile.used) return;
+    
+    const firstEmpty = guessedLetters.findIndex((l, idx) => {
+      if (clueMode === "hint" && idx === 0) return false;
+      return l === "";
+    });
+    
+    if (firstEmpty !== -1) {
+      const nextGuessed = [...guessedLetters];
+      nextGuessed[firstEmpty] = tile.letter;
+      setGuessedLetters(nextGuessed);
+      setAnswer(nextGuessed.join(""));
+      
+      const nextTiles = [...tiles];
+      nextTiles[tileIdx].used = true;
+      setTiles(nextTiles);
+      
+      setGuessedLettersTileMap((prev) => ({
+        ...prev,
+        [firstEmpty]: tileIdx
+      }));
+    }
+  }, [guessedLetters, tiles, clueMode, feedback, currentWord, setAnswer]);
+
+  const handleBackspace = useCallback(() => {
+    if (feedback !== "idle" || !currentWord) return;
+    
+    const lastFilled = [...guessedLetters].reverse().findIndex((l, revIdx) => {
+      const idx = guessedLetters.length - 1 - revIdx;
+      if (clueMode === "hint" && idx === 0) return false;
+      return l !== "";
+    });
+    
+    if (lastFilled !== -1) {
+      const actualIdx = guessedLetters.length - 1 - lastFilled;
+      const nextGuessed = [...guessedLetters];
+      nextGuessed[actualIdx] = "";
+      setGuessedLetters(nextGuessed);
+      setAnswer(nextGuessed.join(""));
+      
+      const tileIdx = guessedLettersTileMap[actualIdx];
+      if (tileIdx !== undefined && tileIdx !== -1) {
+        const nextTiles = [...tiles];
+        nextTiles[tileIdx].used = false;
+        setTiles(nextTiles);
+      }
+      
+      setGuessedLettersTileMap((prev) => {
+        const nextMap = { ...prev };
+        delete nextMap[actualIdx];
+        return nextMap;
+      });
+    }
+  }, [guessedLetters, guessedLettersTileMap, tiles, clueMode, feedback, currentWord, setAnswer]);
+
+  const removeLetterAtIndex = useCallback((boxIdx: number) => {
+    if (feedback !== "idle" || !currentWord) return;
+    if (clueMode === "hint" && boxIdx === 0) return;
+    
+    const val = guessedLetters[boxIdx];
+    if (!val) return;
+    
+    const nextGuessed = [...guessedLetters];
+    nextGuessed[boxIdx] = "";
+    setGuessedLetters(nextGuessed);
+    setAnswer(nextGuessed.join(""));
+    
+    const tileIdx = guessedLettersTileMap[boxIdx];
+    if (tileIdx !== undefined && tileIdx !== -1) {
+      const nextTiles = [...tiles];
+      nextTiles[tileIdx].used = false;
+      setTiles(nextTiles);
+    }
+    
+    setGuessedLettersTileMap((prev) => {
+      const nextMap = { ...prev };
+      delete nextMap[boxIdx];
+      return nextMap;
+    });
+  }, [guessedLetters, guessedLettersTileMap, tiles, clueMode, feedback, currentWord, setAnswer]);
+
+  const handleClear = useCallback(() => {
+    if (feedback !== "idle" || !currentWord) return;
+    
+    const len = currentWord.word.length;
+    const wordLower = currentWord.word.toLowerCase();
+    
+    if (clueMode === "hint") {
+      const initialGuessed = Array(len).fill("");
+      initialGuessed[0] = wordLower[0];
+      setGuessedLetters(initialGuessed);
+      setAnswer(wordLower[0]);
+    } else {
+      setGuessedLetters(Array(len).fill(""));
+      setAnswer("");
+    }
+    
+    const nextTiles = tiles.map((t) => ({ ...t, used: false }));
+    setTiles(nextTiles);
+    setGuessedLettersTileMap({});
+  }, [currentWord, clueMode, tiles, feedback, setAnswer]);
+
+  const handleReshuffle = useCallback(() => {
+    if (feedback !== "idle" || !currentWord || clueMode !== "no-hint") return;
+    
+    const alphabet = "abcdefghijklmnopqrstuvwxyz";
+    const randomLetters: string[] = [];
+    for (let i = 0; i < 14; i++) {
+      const randChar = alphabet[Math.floor(Math.random() * 26)];
+      randomLetters.push(randChar);
+    }
+    
+    setTiles(randomLetters.map((letter, index) => ({
+      id: index,
+      letter,
+      used: false
+    })));
+    
+    const len = currentWord.word.length;
+    setGuessedLetters(Array(len).fill(""));
+    setAnswer("");
+    setGuessedLettersTileMap({});
+  }, [currentWord, clueMode, feedback, setAnswer]);
 
   useEffect(() => {
     studyStateRef.current = studyState;
@@ -554,8 +737,21 @@ export default function Home() {
     setTimeLeft(ROUND_SECONDS);
     setHintVisible(false);
     setHintLetters(next ? scrambleWord(next.word) : []);
-    window.setTimeout(() => inputRef.current?.focus(), 0);
-  }, [mode, selectedLevel]);
+    
+    if (next) {
+      initializeTilesAndBoxes(next.word, clueMode);
+    }
+  }, [mode, selectedLevel, clueMode, initializeTilesAndBoxes]);
+
+  const startGame = (selectedClueMode: "hint" | "no-hint") => {
+    setClueMode(selectedClueMode);
+    setGameStarted(true);
+    if (currentWord) {
+      initializeTilesAndBoxes(currentWord.word, selectedClueMode);
+    } else {
+      beginRound();
+    }
+  };
 
   useEffect(() => {
     if (initialized) {
@@ -682,16 +878,83 @@ export default function Home() {
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Enter" && feedback !== "idle") {
+      if (!gameStarted || !currentWord) return;
+
+      if (feedback !== "idle") {
+        if (event.key === "Enter") {
+          event.preventDefault();
+          beginRound();
+        }
+        return;
+      }
+
+      const key = event.key.toLowerCase();
+
+      if (event.key === "Backspace") {
         event.preventDefault();
-        beginRound();
+        handleBackspace();
+        return;
+      }
+
+      if (event.key === "Enter") {
+        event.preventDefault();
+        const isFilled = guessedLetters.every((l) => l !== "");
+        if (isFilled) {
+          submitAnswer(false);
+        }
+        return;
+      }
+
+      if (/^[a-z]$/.test(key)) {
+        event.preventDefault();
+
+        const firstEmpty = guessedLetters.findIndex((l, idx) => {
+          if (clueMode === "hint" && idx === 0) return false;
+          return l === "";
+        });
+
+        if (firstEmpty !== -1) {
+          const tileIdx = tiles.findIndex((t) => t.letter === key && !t.used);
+
+          const nextGuessed = [...guessedLetters];
+          nextGuessed[firstEmpty] = key;
+          setGuessedLetters(nextGuessed);
+          setAnswer(nextGuessed.join(""));
+
+          if (tileIdx !== -1) {
+            const nextTiles = [...tiles];
+            nextTiles[tileIdx].used = true;
+            setTiles(nextTiles);
+            setGuessedLettersTileMap((prev) => ({
+              ...prev,
+              [firstEmpty]: tileIdx
+            }));
+          } else {
+            setGuessedLettersTileMap((prev) => ({
+              ...prev,
+              [firstEmpty]: -1
+            }));
+          }
+        }
       }
     };
 
     window.addEventListener("keydown", onKeyDown);
 
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [beginRound, feedback]);
+  }, [
+    gameStarted,
+    feedback,
+    currentWord,
+    guessedLetters,
+    tiles,
+    clueMode,
+    beginRound,
+    handleBackspace,
+    guessedLettersTileMap,
+    setAnswer,
+    submitAnswer,
+  ]);
 
   const passwordChecks = useMemo(
     () => ({
@@ -1034,6 +1297,59 @@ export default function Home() {
     );
   }
 
+  if (!gameStarted) {
+    return (
+      <main className="login-shell">
+        <section className="login-panel" style={{ width: "min(640px, 100%)" }}>
+          <div className="brand-lockup" style={{ marginBottom: "24px" }}>
+            <div className="brand-mark">GW</div>
+            <div>
+              <p className="eyebrow">GuessWord Lobby</p>
+              <h1>Escolha o Modo</h1>
+            </div>
+          </div>
+          
+          <div className="lobby-modes-grid">
+            <button
+              type="button"
+              className={`lobby-mode-card ${clueMode === "hint" ? "active" : ""}`}
+              onClick={() => setClueMode("hint")}
+            >
+              <div className="lobby-mode-header">
+                <span className="lobby-mode-icon">💡</span>
+                <h3>Modo com Dica</h3>
+              </div>
+              <p>A primeira letra é revelada e travada. As peças abaixo contêm as letras certas e algumas falsas embaralhadas.</p>
+            </button>
+            
+            <button
+              type="button"
+              className={`lobby-mode-card ${clueMode === "no-hint" ? "active" : ""}`}
+              onClick={() => setClueMode("no-hint")}
+            >
+              <div className="lobby-mode-header">
+                <span className="lobby-mode-icon">🎯</span>
+                <h3>Modo sem Dica</h3>
+              </div>
+              <p>Clássico! Nenhuma letra é revelada. As peças abaixo são puramente aleatórias e não contêm dicas.</p>
+            </button>
+          </div>
+
+          <div className="login-actions" style={{ marginTop: "32px", gridTemplateColumns: "1fr" }}>
+            <button
+              type="button"
+              className="lobby-play-button"
+              onClick={() => startGame(clueMode)}
+              style={{ width: "100%" }}
+            >
+              Jogar GuessWord
+            </button>
+          </div>
+        </section>
+      </main>
+    );
+  }
+
   return (
     <main className="app-shell">
       <header className="topbar">
@@ -1111,6 +1427,34 @@ export default function Home() {
                   {modeLabels[item]}
                 </button>
               ))}
+            </div>
+          </section>
+
+          <section>
+            <div className="section-title">
+              <span>Tipo de Dica</span>
+            </div>
+            <div className="segmented-control">
+              <button
+                className={clueMode === "hint" ? "active" : ""}
+                onClick={() => {
+                  setClueMode("hint");
+                  if (currentWord) initializeTilesAndBoxes(currentWord.word, "hint");
+                }}
+                type="button"
+              >
+                Com Dica
+              </button>
+              <button
+                className={clueMode === "no-hint" ? "active" : ""}
+                onClick={() => {
+                  setClueMode("no-hint");
+                  if (currentWord) initializeTilesAndBoxes(currentWord.word, "no-hint");
+                }}
+                type="button"
+              >
+                Sem Dica
+              </button>
             </div>
           </section>
 
@@ -1209,29 +1553,88 @@ export default function Home() {
                 <p>{currentWord.definition}</p>
               </div>
 
-              <form className="answer-form" onSubmit={onSubmit}>
-                <input
-                  autoComplete="off"
-                  autoFocus
-                  disabled={feedback !== "idle"}
-                  onChange={(event) => setAnswer(event.target.value)}
-                  placeholder="Digite a palavra em ingles"
-                  ref={inputRef}
-                  spellCheck={false}
-                  value={answer}
-                />
-                <button type="submit">{feedback === "idle" ? "Responder" : "Enter"}</button>
-              </form>
+              <div className="letter-boxes-row">
+                {currentWord.word.split("").map((char, index) => {
+                  const isLocked = clueMode === "hint" && index === 0;
+                  const val = guessedLetters[index] ?? "";
+                  const isActive = feedback === "idle" && (
+                    clueMode === "hint"
+                      ? (index > 0 && guessedLetters.slice(1, index).every((l) => l !== "") && val === "")
+                      : (guessedLetters.slice(0, index).every((l) => l !== "") && val === "")
+                  );
 
-              <div className="action-row">
-                <button
-                  className="ghost-button"
-                  disabled={feedback !== "idle" || hintVisible}
-                  onClick={() => setHintVisible(true)}
-                  type="button"
-                >
-                  Letras
-                </button>
+                  return (
+                    <button
+                      key={index}
+                      type="button"
+                      disabled={feedback !== "idle" || isLocked}
+                      className={`letter-box ${isLocked ? "locked" : ""} ${isActive ? "active" : ""} ${val !== "" ? "filled" : ""}`}
+                      onClick={() => removeLetterAtIndex(index)}
+                    >
+                      {val.toUpperCase()}
+                      {isLocked && <span className="lock-icon">🔒</span>}
+                    </button>
+                  );
+                })}
+              </div>
+
+              <div className="letter-tiles-pool">
+                <div className="letter-tiles-grid">
+                  {tiles.map((tile, idx) => (
+                    <button
+                      key={tile.id}
+                      type="button"
+                      disabled={feedback !== "idle" || tile.used}
+                      className={`letter-tile ${tile.used ? "used" : ""}`}
+                      onClick={() => handleTileClick(idx)}
+                    >
+                      {tile.letter.toUpperCase()}
+                    </button>
+                  ))}
+                </div>
+
+                <div className="letter-tiles-actions">
+                  <button
+                    type="button"
+                    className="ghost-button action-btn backspace-btn"
+                    disabled={feedback !== "idle"}
+                    onClick={handleBackspace}
+                    title="Apagar última letra"
+                  >
+                    ⬅️ Apagar
+                  </button>
+                  <button
+                    type="button"
+                    className="ghost-button action-btn clear-btn"
+                    disabled={feedback !== "idle"}
+                    onClick={handleClear}
+                    title="Limpar tudo"
+                  >
+                    ❌ Limpar
+                  </button>
+                  {clueMode === "no-hint" && (
+                    <button
+                      type="button"
+                      className="ghost-button action-btn reshuffle-btn"
+                      disabled={feedback !== "idle"}
+                      onClick={handleReshuffle}
+                      title="Sortear novas letras"
+                    >
+                      🔄 Novas Letras
+                    </button>
+                  )}
+                  <button
+                    type="button"
+                    className="ghost-button primary action-btn submit-btn"
+                    disabled={feedback !== "idle" || guessedLetters.some((l) => l === "")}
+                    onClick={() => submitAnswer(false)}
+                  >
+                    Responder
+                  </button>
+                </div>
+              </div>
+
+              <div className="action-row" style={{ marginTop: "24px" }}>
                 <button className="ghost-button" disabled={feedback === "idle"} onClick={speakWord} type="button">
                   Ouvir
                 </button>
@@ -1239,14 +1642,6 @@ export default function Home() {
                   Próxima
                 </button>
               </div>
-
-              {hintVisible ? (
-                <div className="letter-hint" aria-label="Letras embaralhadas">
-                  {hintLetters.map((letter, index) => (
-                    <span key={`${letter}-${index}`}>{letter}</span>
-                  ))}
-                </div>
-              ) : null}
 
               {feedback !== "idle" ? (
                 <div className="feedback-box">
