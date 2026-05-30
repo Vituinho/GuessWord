@@ -71,6 +71,7 @@ type MultiplayerRoom = {
   code: string;
   level: Level;
   status: string;
+  round_seconds?: number;
   current_word_id?: number | null;
   players: MultiplayerPlayer[];
 };
@@ -164,6 +165,7 @@ function hydrateWord(word: ApiWordsResponse["data"][number]): VocabWord {
     id: word.id,
     word: word.word,
     definition: word.definition,
+    definition_pt: (word as any).definition_pt,
     example: word.example,
     example_with_blank: word.example_with_blank ?? blankExample(word.example, word.word),
     level: word.level,
@@ -296,14 +298,14 @@ function applyAttempt(
     progress.easeFactor = Math.min(3.2, progress.easeFactor + (progress.streakCorrect >= 2 ? 0.15 : 0.05));
     progress.intervalDays = nextInterval(progress);
     progress.nextReviewAt = addDays(now, progress.intervalDays);
-    progress.learned = progress.correctAttempts >= 3 && progress.streakCorrect >= 2;
+    progress.learned = progress.correctAttempts > 0;
   } else {
     progress.incorrectAttempts += 1;
     progress.streakCorrect = 0;
     progress.easeFactor = Math.max(1.3, progress.easeFactor - 0.25);
     progress.intervalDays = 0;
     progress.nextReviewAt = addMinutes(now, 10);
-    progress.learned = false;
+    progress.learned = progress.correctAttempts > 0;
   }
 
   const today = dateKey(now);
@@ -371,7 +373,24 @@ export default function Home() {
   const [clueMode, setClueMode] = useState<"hint" | "no-hint">("hint");
   const [guessedLetters, setGuessedLetters] = useState<string[]>([]);
   const [tiles, setTiles] = useState<Array<{ id: number; letter: string; used: boolean }>>([]);
+  const [submitAnimation, setSubmitAnimation] = useState<"correct" | "incorrect" | null>(null);
   const [guessedLettersTileMap, setGuessedLettersTileMap] = useState<Record<number, number>>({});
+  const [lang, setLang] = useState<"pt" | "en">(() => {
+    if (typeof window !== "undefined") {
+      const saved = window.localStorage.getItem("guessword-lang");
+      if (saved === "pt" || saved === "en") return saved;
+    }
+    return "pt";
+  });
+
+  const toggleLanguage = () => {
+    const nextLang = lang === "pt" ? "en" : "pt";
+    setLang(nextLang);
+    if (typeof window !== "undefined") {
+      window.localStorage.setItem("guessword-lang", nextLang);
+    }
+  };
+
   const [words, setWords] = useState<VocabWord[]>(fallbackWords);
   const [selectedLevel, setSelectedLevel] = useState<Level>("A1");
   const [mode, setMode] = useState<PracticeMode>("auto");
@@ -451,7 +470,8 @@ export default function Home() {
       
       const alphabet = "abcdefghijklmnopqrstuvwxyz";
       const randomLetters: string[] = [];
-      for (let i = 0; i < 14; i++) {
+      const tileCount = Math.max(8, Math.min(14, len + 4));
+      for (let i = 0; i < tileCount; i++) {
         const randChar = alphabet[Math.floor(Math.random() * 26)];
         randomLetters.push(randChar);
       }
@@ -465,7 +485,7 @@ export default function Home() {
   }, [setAnswer]);
 
   const handleTileClick = useCallback((tileIdx: number) => {
-    if (feedback !== "idle" || !currentWord) return;
+    if (feedback !== "idle" || !currentWord || submitAnimation !== null) return;
     const tile = tiles[tileIdx];
     if (tile.used) return;
     
@@ -489,10 +509,10 @@ export default function Home() {
         [firstEmpty]: tileIdx
       }));
     }
-  }, [guessedLetters, tiles, clueMode, feedback, currentWord, setAnswer]);
+  }, [guessedLetters, tiles, clueMode, feedback, currentWord, setAnswer, submitAnimation]);
 
   const handleBackspace = useCallback(() => {
-    if (feedback !== "idle" || !currentWord) return;
+    if (feedback !== "idle" || !currentWord || submitAnimation !== null) return;
     
     const lastFilled = [...guessedLetters].reverse().findIndex((l, revIdx) => {
       const idx = guessedLetters.length - 1 - revIdx;
@@ -520,10 +540,10 @@ export default function Home() {
         return nextMap;
       });
     }
-  }, [guessedLetters, guessedLettersTileMap, tiles, clueMode, feedback, currentWord, setAnswer]);
+  }, [guessedLetters, guessedLettersTileMap, tiles, clueMode, feedback, currentWord, setAnswer, submitAnimation]);
 
   const removeLetterAtIndex = useCallback((boxIdx: number) => {
-    if (feedback !== "idle" || !currentWord) return;
+    if (feedback !== "idle" || !currentWord || submitAnimation !== null) return;
     if (clueMode === "hint" && boxIdx === 0) return;
     
     const val = guessedLetters[boxIdx];
@@ -546,10 +566,10 @@ export default function Home() {
       delete nextMap[boxIdx];
       return nextMap;
     });
-  }, [guessedLetters, guessedLettersTileMap, tiles, clueMode, feedback, currentWord, setAnswer]);
+  }, [guessedLetters, guessedLettersTileMap, tiles, clueMode, feedback, currentWord, setAnswer, submitAnimation]);
 
   const handleClear = useCallback(() => {
-    if (feedback !== "idle" || !currentWord) return;
+    if (feedback !== "idle" || !currentWord || submitAnimation !== null) return;
     
     const len = currentWord.word.length;
     const wordLower = currentWord.word.toLowerCase();
@@ -567,14 +587,15 @@ export default function Home() {
     const nextTiles = tiles.map((t) => ({ ...t, used: false }));
     setTiles(nextTiles);
     setGuessedLettersTileMap({});
-  }, [currentWord, clueMode, tiles, feedback, setAnswer]);
+  }, [currentWord, clueMode, tiles, feedback, setAnswer, submitAnimation]);
 
   const handleReshuffle = useCallback(() => {
     if (feedback !== "idle" || !currentWord || clueMode !== "no-hint") return;
     
     const alphabet = "abcdefghijklmnopqrstuvwxyz";
     const randomLetters: string[] = [];
-    for (let i = 0; i < 14; i++) {
+    const tileCount = Math.max(8, Math.min(14, currentWord.word.length + 4));
+    for (let i = 0; i < tileCount; i++) {
       const randChar = alphabet[Math.floor(Math.random() * 26)];
       randomLetters.push(randChar);
     }
@@ -622,6 +643,87 @@ export default function Home() {
     }
   }, []);
 
+  const syncProgress = useCallback(async (session?: UserSession | null) => {
+    const user = session ?? userRef.current;
+    if (!user) return;
+
+    try {
+      const response = await fetch(`${API_BASE}/progress?client_id=${encodeURIComponent(user.clientId)}`, {
+        method: "GET",
+        headers: jsonHeaders(user),
+      });
+
+      if (response.ok) {
+        const payload = await response.json() as {
+          data: {
+            xp: number;
+            level: number;
+            current_streak: number;
+            best_streak: number;
+            attempts: number;
+            correct_attempts: number;
+            word_progress: Record<string, any>;
+            history: any[];
+          };
+        };
+
+        const progressData = payload.data;
+        const mappedWordProgress: Record<string, WordProgress> = {};
+
+        if (progressData.word_progress) {
+          Object.entries(progressData.word_progress).forEach(([wordId, p]: [string, any]) => {
+            mappedWordProgress[wordId] = {
+              attempts: p.attempts,
+              correctAttempts: p.correct_attempts,
+              incorrectAttempts: p.incorrect_attempts,
+              streakCorrect: p.streak_correct,
+              easeFactor: p.ease_factor,
+              intervalDays: p.interval_days,
+              learned: p.learned,
+              lastAnsweredAt: p.last_answered_at,
+              nextReviewAt: p.next_review_at,
+            };
+          });
+        }
+
+        const mappedHistory = (progressData.history ?? []).map((h: any) => ({
+          id: h.id.toString(),
+          word: h.word,
+          level: h.level,
+          answer: h.answer ?? "",
+          correct: h.correct,
+          score: h.score_delta ?? 0,
+          mode: (h.mode as PracticeMode) ?? "level",
+          studiedAt: h.studied_at,
+        }));
+
+        setStudyState((prev) => {
+          const newState = {
+            ...prev,
+            xp: progressData.xp,
+            level: progressData.level,
+            currentStreak: progressData.current_streak,
+            bestStreak: progressData.best_streak,
+            wordProgress: {
+              ...prev.wordProgress,
+              ...mappedWordProgress,
+            },
+            history: mappedHistory,
+            totalAttempts: progressData.attempts,
+            correctAttempts: progressData.correct_attempts,
+          };
+          studyStateRef.current = newState;
+          if (typeof window !== "undefined") {
+            window.localStorage.setItem(`guessword-state-${user.clientId}`, JSON.stringify(newState));
+          }
+          return newState;
+        });
+      }
+    } catch (err) {
+      console.error("Failed to sync progress:", err);
+    }
+  }, []);
+
   const finishLogin = useCallback((session: UserSession) => {
     window.localStorage.setItem(CLIENT_ID_KEY, session.clientId);
     window.localStorage.setItem(SESSION_KEY, JSON.stringify(session));
@@ -631,7 +733,8 @@ export default function Home() {
     setStudyState(restored);
     setLoginError("");
     void loadLeaderboard();
-  }, [loadLeaderboard]);
+    void syncProgress(session);
+  }, [loadLeaderboard, syncProgress]);
 
   useEffect(() => {
     const hydrateTimer = window.setTimeout(() => {
@@ -657,6 +760,7 @@ export default function Home() {
         const restored = safeStudyState(session.clientId);
         studyStateRef.current = restored;
         setStudyState(restored);
+        void syncProgress(session);
       } else {
         const empty = createEmptyStudyState(anonymousClientId);
         studyStateRef.current = empty;
@@ -761,7 +865,11 @@ export default function Home() {
 
   const fetchRoom = useCallback(async (code: string) => {
     try {
-      const response = await fetch(`${API_BASE}/multiplayer/rooms/${code}`);
+      const user = userRef.current;
+      const url = user?.clientId
+        ? `${API_BASE}/multiplayer/rooms/${code}?client_id=${encodeURIComponent(user.clientId)}`
+        : `${API_BASE}/multiplayer/rooms/${code}`;
+      const response = await fetch(url);
 
       if (!response.ok) {
         return;
@@ -786,6 +894,31 @@ export default function Home() {
     return () => window.clearInterval(interval);
   }, [fetchRoom, multiplayerRoom]);
 
+  useEffect(() => {
+    if (!multiplayerRoom || !multiplayerRoom.current_word_id) {
+      return;
+    }
+
+    if (multiplayerRoom.players.length >= 2 && !gameStarted) {
+      setGameStarted(true);
+    }
+
+    const matchedWord = words.find((w) => w.id === multiplayerRoom.current_word_id);
+    if (!matchedWord) {
+      return;
+    }
+
+    if (currentWord?.id !== matchedWord.id) {
+      setCurrentWord(matchedWord);
+      setAnswer("");
+      setFeedback("idle");
+      setTimeLeft(multiplayerRoom.round_seconds ?? ROUND_SECONDS);
+      setHintVisible(false);
+      setHintLetters(scrambleWord(matchedWord.word));
+      initializeTilesAndBoxes(matchedWord.word, clueMode);
+    }
+  }, [multiplayerRoom?.current_word_id, multiplayerRoom?.players.length, words, currentWord?.id, clueMode, initializeTilesAndBoxes, gameStarted]);
+
   const syncAttempt = useCallback(
     async (word: VocabWord, submittedAnswer: string, seconds: number, hintsUsed: boolean) => {
       const user = userRef.current;
@@ -808,6 +941,81 @@ export default function Home() {
 
         if (response.ok) {
           void loadLeaderboard();
+
+          try {
+            const payload = (await response.json()) as {
+              data: {
+                correct: boolean;
+                correct_answer: string;
+                score_delta: number;
+                user_progress: {
+                  xp: number;
+                  level: number;
+                  current_streak: number;
+                  best_streak: number;
+                  attempts: number;
+                  correct_attempts: number;
+                  word_progress: Record<string, any>;
+                  history: any[];
+                };
+              };
+            };
+
+            const progressData = payload.data.user_progress;
+            if (progressData) {
+              const mappedWordProgress: Record<string, WordProgress> = {};
+              if (progressData.word_progress) {
+                Object.entries(progressData.word_progress).forEach(([wordId, p]: [string, any]) => {
+                  mappedWordProgress[wordId] = {
+                    attempts: p.attempts,
+                    correctAttempts: p.correct_attempts,
+                    incorrectAttempts: p.incorrect_attempts,
+                    streakCorrect: p.streak_correct,
+                    easeFactor: p.ease_factor,
+                    intervalDays: p.interval_days,
+                    learned: p.learned,
+                    lastAnsweredAt: p.last_answered_at,
+                    nextReviewAt: p.next_review_at,
+                  };
+                });
+              }
+
+              const mappedHistory = (progressData.history ?? []).map((h: any) => ({
+                id: h.id.toString(),
+                word: h.word,
+                level: h.level,
+                answer: h.answer ?? "",
+                correct: h.correct,
+                score: h.score_delta ?? 0,
+                mode: (h.mode as PracticeMode) ?? "level",
+                studiedAt: h.studied_at,
+              }));
+
+              setStudyState((prev) => {
+                const newState = {
+                  ...prev,
+                  xp: progressData.xp,
+                  level: progressData.level,
+                  currentStreak: progressData.current_streak,
+                  bestStreak: progressData.best_streak,
+                  wordProgress: {
+                    ...prev.wordProgress,
+                    ...mappedWordProgress,
+                  },
+                  history: mappedHistory,
+                  totalAttempts: progressData.attempts,
+                  correctAttempts: progressData.correct_attempts,
+                };
+                studyStateRef.current = newState;
+                if (typeof window !== "undefined" && user) {
+                  window.localStorage.setItem(`guessword-state-${user.clientId}`, JSON.stringify(newState));
+                }
+                return newState;
+              });
+            }
+          } catch (e) {
+            console.error("Error parsing syncAttempt response:", e);
+          }
         }
 
         if (response.ok && user && roomRef.current) {
@@ -839,12 +1047,18 @@ export default function Home() {
 
   const submitAnswer = useCallback(
     (timedOut = false) => {
-      if (!currentWord || feedback !== "idle" || !currentUser) {
+      if (!currentWord || feedback !== "idle" || !currentUser || submitAnimation !== null) {
         return;
       }
 
-      const submittedAnswer = timedOut ? "" : answer;
-      const correct = !timedOut && normalizeAnswer(submittedAnswer) === normalizeAnswer(currentWord.word);
+      if (timedOut) {
+        setFeedback("timeout");
+        void syncAttempt(currentWord, "", ROUND_SECONDS, hintVisible);
+        return;
+      }
+
+      const submittedAnswer = answer;
+      const correct = normalizeAnswer(submittedAnswer) === normalizeAnswer(currentWord.word);
       const seconds = ROUND_SECONDS - timeLeft;
       const nextCombo = correct ? combo + 1 : 0;
       const score = correct ? calculateScore(currentWord.level, seconds, hintVisible, nextCombo) : 0;
@@ -853,10 +1067,24 @@ export default function Home() {
       studyStateRef.current = nextState;
       setStudyState(nextState);
       setCombo(nextCombo);
-      setFeedback(timedOut ? "timeout" : correct ? "correct" : "incorrect");
-      void syncAttempt(currentWord, submittedAnswer, seconds, hintVisible);
+
+      if (correct) {
+        setSubmitAnimation("correct");
+        void syncAttempt(currentWord, submittedAnswer, seconds, hintVisible);
+        setTimeout(() => {
+          setSubmitAnimation(null);
+          beginRound();
+        }, 1000);
+      } else {
+        setSubmitAnimation("incorrect");
+        void syncAttempt(currentWord, submittedAnswer, seconds, hintVisible);
+        setTimeout(() => {
+          setSubmitAnimation(null);
+          setFeedback("incorrect");
+        }, 1000);
+      }
     },
-    [answer, combo, currentUser, currentWord, feedback, hintVisible, mode, syncAttempt, timeLeft],
+    [answer, combo, currentUser, currentWord, feedback, hintVisible, mode, syncAttempt, timeLeft, submitAnimation, beginRound],
   );
 
   useEffect(() => {
@@ -878,7 +1106,7 @@ export default function Home() {
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
-      if (!gameStarted || !currentWord) return;
+      if (!gameStarted || !currentWord || submitAnimation !== null) return;
 
       if (feedback !== "idle") {
         if (event.key === "Enter") {
@@ -954,6 +1182,7 @@ export default function Home() {
     guessedLettersTileMap,
     setAnswer,
     submitAnswer,
+    submitAnimation,
   ]);
 
   const passwordChecks = useMemo(
@@ -1367,6 +1596,15 @@ export default function Home() {
               {apiOnline ? "API online" : "Conectando"}
             </div>
           ) : null}
+          <button 
+            className="ghost-button compact language-toggle-btn" 
+            onClick={toggleLanguage} 
+            type="button"
+            title="Mudar idioma / Switch language"
+            style={{ display: "inline-flex", alignItems: "center", gap: "6px" }}
+          >
+            {lang === "pt" ? "🇧🇷 PT" : "🇺🇸 EN"}
+          </button>
           <button className="ghost-button compact" onClick={logout} type="button">
             Sair
           </button>
@@ -1528,7 +1766,24 @@ export default function Home() {
         </aside>
 
         <section className={`challenge-panel ${feedback}`} aria-live="polite">
-          {currentWord ? (
+          {multiplayerRoom && multiplayerRoom.players.length < 2 ? (
+            <div className="waiting-lobby">
+              <div className="waiting-lobby-content">
+                <div className="pulse-loader">
+                  <span />
+                  <span />
+                  <span />
+                </div>
+                <h2>Aguardando oponente...</h2>
+                <div className="room-code-badge">
+                  Código da sala: <span>{multiplayerRoom.code}</span>
+                </div>
+                <p className="waiting-desc">
+                  Compartilhe o código acima. O jogo começará automaticamente quando outro jogador entrar na sala!
+                </p>
+              </div>
+            </div>
+          ) : currentWord ? (
             <>
               <div className="round-meta">
                 <div>
@@ -1549,8 +1804,8 @@ export default function Home() {
               </div>
 
               <div className="definition-block">
-                <span>Definição</span>
-                <p>{currentWord.definition}</p>
+                <span>{lang === "pt" ? "Definição" : "Definition"}</span>
+                <p>{lang === "pt" ? (currentWord.definition_pt ?? currentWord.definition) : currentWord.definition}</p>
               </div>
 
               <div className="letter-boxes-row">
@@ -1563,12 +1818,18 @@ export default function Home() {
                       : (guessedLetters.slice(0, index).every((l) => l !== "") && val === "")
                   );
 
+                  const animClass = submitAnimation === "correct"
+                    ? "submit-correct"
+                    : submitAnimation === "incorrect"
+                    ? "submit-incorrect"
+                    : "";
+
                   return (
                     <button
                       key={index}
                       type="button"
-                      disabled={feedback !== "idle" || isLocked}
-                      className={`letter-box ${isLocked ? "locked" : ""} ${isActive ? "active" : ""} ${val !== "" ? "filled" : ""}`}
+                      disabled={feedback !== "idle" || isLocked || submitAnimation !== null}
+                      className={`letter-box ${isLocked ? "locked" : ""} ${isActive ? "active" : ""} ${val !== "" ? "filled" : ""} ${animClass}`}
                       onClick={() => removeLetterAtIndex(index)}
                     >
                       {val.toUpperCase()}
@@ -1584,7 +1845,7 @@ export default function Home() {
                     <button
                       key={tile.id}
                       type="button"
-                      disabled={feedback !== "idle" || tile.used}
+                      disabled={feedback !== "idle" || tile.used || submitAnimation !== null}
                       className={`letter-tile ${tile.used ? "used" : ""}`}
                       onClick={() => handleTileClick(idx)}
                     >
@@ -1597,7 +1858,7 @@ export default function Home() {
                   <button
                     type="button"
                     className="ghost-button action-btn backspace-btn"
-                    disabled={feedback !== "idle"}
+                    disabled={feedback !== "idle" || submitAnimation !== null}
                     onClick={handleBackspace}
                     title="Apagar última letra"
                   >
@@ -1606,7 +1867,7 @@ export default function Home() {
                   <button
                     type="button"
                     className="ghost-button action-btn clear-btn"
-                    disabled={feedback !== "idle"}
+                    disabled={feedback !== "idle" || submitAnimation !== null}
                     onClick={handleClear}
                     title="Limpar tudo"
                   >
@@ -1616,7 +1877,7 @@ export default function Home() {
                     <button
                       type="button"
                       className="ghost-button action-btn reshuffle-btn"
-                      disabled={feedback !== "idle"}
+                      disabled={feedback !== "idle" || submitAnimation !== null}
                       onClick={handleReshuffle}
                       title="Sortear novas letras"
                     >
@@ -1626,7 +1887,7 @@ export default function Home() {
                   <button
                     type="button"
                     className="ghost-button primary action-btn submit-btn"
-                    disabled={feedback !== "idle" || guessedLetters.some((l) => l === "")}
+                    disabled={feedback !== "idle" || guessedLetters.some((l) => l === "") || submitAnimation !== null}
                     onClick={() => submitAnswer(false)}
                   >
                     Responder
