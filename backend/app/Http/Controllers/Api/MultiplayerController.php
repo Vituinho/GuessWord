@@ -62,9 +62,22 @@ class MultiplayerController extends Controller
         return response()->json(['data' => $this->roomResource($room->fresh(['players', 'currentWord']))]);
     }
 
-    public function show(string $code): JsonResponse
+    public function show(Request $request, string $code): JsonResponse
     {
-        return response()->json(['data' => $this->roomResource($this->findRoom($code)->load(['players', 'currentWord']))]);
+        $room = $this->findRoom($code);
+        $clientId = $request->query('client_id');
+        if ($clientId) {
+            MultiplayerPlayer::where('multiplayer_room_id', $room->id)
+                ->where('client_id', $clientId)
+                ->update(['last_seen_at' => now()]);
+        }
+
+        // Prune players inactive for 15s
+        MultiplayerPlayer::where('multiplayer_room_id', $room->id)
+            ->where('last_seen_at', '<', now()->subSeconds(15))
+            ->delete();
+
+        return response()->json(['data' => $this->roomResource($room->fresh(['players', 'currentWord']))]);
     }
 
     public function attempt(Request $request, string $code): JsonResponse
@@ -99,6 +112,21 @@ class MultiplayerController extends Controller
 
         $player->last_seen_at = now();
         $player->save();
+
+        // Prune players inactive for 15s
+        MultiplayerPlayer::where('multiplayer_room_id', $room->id)
+            ->where('last_seen_at', '<', now()->subSeconds(15))
+            ->delete();
+
+        // Auto-rotate current_word_id on success or timeout
+        if ($correct || empty($validated['answer'])) {
+            $nextWordId = Word::where('level', $room->level)
+                ->where('id', '!=', $room->current_word_id)
+                ->inRandomOrder()
+                ->value('id') ?? $room->current_word_id;
+            $room->current_word_id = $nextWordId;
+            $room->save();
+        }
 
         return response()->json([
             'data' => [
