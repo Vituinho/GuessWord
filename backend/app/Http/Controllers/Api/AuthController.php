@@ -379,7 +379,7 @@ class AuthController extends Controller
 
     private function frontendAuthUrl(array $params): string
     {
-        $frontendUrl = rtrim((string) config('app.frontend_url', 'http://127.0.0.1:3000'), '/');
+        $frontendUrl = rtrim((string) config('app.frontend_url', 'https://guessword-pi.vercel.app'), '/');
 
         return $frontendUrl.'/#'.http_build_query($params, '', '&', PHP_QUERY_RFC3986);
     }
