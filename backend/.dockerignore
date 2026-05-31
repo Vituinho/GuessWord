@@ -1,0 +1,11 @@
+.git
+.github
+vendor
+node_modules
+.env
+.env.backup
+.phpunit.result.cache
+docker-compose.yml
+Dockerfile
+.dockerignore
+tests
