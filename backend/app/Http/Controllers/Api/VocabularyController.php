@@ -461,132 +461,44 @@ class VocabularyController extends Controller
         ];
     }
 
-    private function portugueseDefinition(Word $word): string
+    private function portugueseDefinition(Word $word): ?string
     {
-        $definitions = [
-            'apple' => 'Uma fruta redonda com casca vermelha, verde ou amarela.',
-            'book' => 'Um conjunto de páginas escritas que você lê.',
-            'city' => 'Uma cidade grande onde muitas pessoas vivem e trabalham.',
-            'family' => 'Um grupo de pessoas relacionadas entre si.',
-            'friend' => 'Uma pessoa que você gosta e conhece bem.',
-            'happy' => 'Sentir-se bem ou satisfeito.',
-            'listen' => 'Dar atenção a um som ou a alguém que fala.',
-            'morning' => 'A parte cedo do dia.',
-            'school' => 'Um lugar onde os alunos aprendem.',
-            'water' => 'Um líquido claro que as pessoas bebem.',
-            'chair' => 'Um assento para uma pessoa.',
-            'door' => 'Uma coisa que você abre para entrar ou sair de um cômodo.',
-            'food' => 'Coisas que pessoas ou animais comem.',
-            'house' => 'Um prédio onde as pessoas moram.',
-            'mother' => 'Uma parental feminina.',
-            'music' => 'Sons feitos por vozes ou instrumentos.',
-            'phone' => 'Um aparelho usado para ligar ou mandar mensagem.',
-            'picture' => 'Uma imagem, desenho ou fotografia.',
-            'table' => 'Um móvel com uma superfície plana.',
-            'work' => 'Um trabalho ou atividade que exige esforço.',
-            'borrow' => 'Usar algo e devolver depois.',
-            'careful' => 'Tomar cuidado para evitar erros ou perigo.',
-            'decide' => 'Escolher depois de pensar nas opções.',
-            'explain' => 'Fazer algo claro ou fácil de entender.',
-            'healthy' => 'Bom para o corpo ou não doente.',
-            'improve' => 'Ficar melhor ou fazer algo melhor.',
-            'mistake' => 'Algo que não está correto.',
-            'simple' => 'Fácil de entender ou fazer.',
-            'travel' => 'Ir de um lugar para outro.',
-            'weather' => 'A temperatura, vento, chuva ou sol do lado de fora.',
-            'arrive' => 'Chegar a um lugar.',
-            'choose' => 'Selecionar uma coisa entre várias opções.',
-            'describe' => 'Dizer como algo ou alguém é.',
-            'favorite' => 'Gostado mais do que os outros.',
-            'invite' => 'Pedir que alguém venha para um evento.',
-            'journey' => 'Uma viagem de um lugar a outro.',
-            'noisy' => 'Fazendo muito barulho.',
-            'protect' => 'Manter alguém ou algo seguro.',
-            'repair' => 'Consertar algo que está quebrado.',
-            'useful' => 'Útil ou prático.',
-            'achieve' => 'Conseguir fazer algo com esforço.',
-            'benefit' => 'Um efeito bom ou vantagem.',
-            'confident' => 'Sentir-se seguro sobre sua habilidade.',
-            'manage' => 'Controlar ou organizar algo com sucesso.',
-            'opinion' => 'O que alguém pensa ou acredita sobre algo.',
-            'prevent' => 'Impedir que algo aconteça.',
-            'reduce' => 'Tornar algo menor ou menos.',
-            'reliable' => 'Capaz de ser confiável ou dependente.',
-            'struggle' => 'Ter dificuldade para fazer algo.',
-            'support' => 'Ajudar alguém ou concordar com uma ideia.',
-            'approach' => 'Uma maneira de fazer ou pensar sobre algo.',
-            'balance' => 'Um estado em que diferentes coisas têm a quantidade certa.',
-            'compare' => 'Olhar duas coisas e ver semelhanças ou diferenças.',
-            'develop' => 'Crescer ou tornar-se mais avançado.',
-            'encourage' => 'Dar esperança ou confiança a alguém.',
-            'focus' => 'Dar atenção a uma coisa.',
-            'involve' => 'Incluir alguém ou algo.',
-            'likely' => 'Esperado de acontecer ou ser verdade.',
-            'recognize' => 'Conhecer alguém ou algo de antes.',
-            'suggest' => 'Oferecer uma ideia ou plano.',
-            'accomplish' => 'Completar algo com sucesso.',
-            'challenge' => 'Uma tarefa difícil que testa habilidade.',
-            'consequence' => 'Um resultado de uma ação ou situação.',
-            'estimate' => 'Adivinhar um valor com base nas informações disponíveis.',
-            'evidence' => 'Fatos ou sinais que mostram que algo é verdadeiro.',
-            'maintain' => 'Manter algo no mesmo nível ou condição.',
-            'negotiate' => 'Discutir para chegar a um acordo.',
-            'prioritize' => 'Decidir o que é mais importante.',
-            'remarkable' => 'Incomum ou impressionante de forma que as pessoas notam.',
-            'sustainable' => 'Capaz de continuar por muito tempo sem causar dano.',
-            'accurate' => 'Correto e sem erros.',
-            'adapt' => 'Mudar para se ajustar a uma nova situação.',
-            'convince' => 'Fazer alguém acreditar ou concordar.',
-            'evaluate' => 'Julgar o valor ou qualidade de algo.',
-            'framework' => 'Uma estrutura básica para ideias ou trabalho.',
-            'generate' => 'Produzir ou criar algo.',
-            'insight' => 'Uma compreensão clara de algo.',
-            'objective' => 'Um objetivo ou propósito.',
-            'resolve' => 'Resolver um problema ou dificuldade.',
-            'tension' => 'Uma sensação de estresse ou pressão.',
-            'ambiguous' => 'Tendo mais de um significado possível.',
-            'coherent' => 'Claro, lógico e fácil de entender.',
-            'compelling' => 'Muito interessante ou convincente.',
-            'concise' => 'Usar poucas palavras mantendo clareza.',
-            'deteriorate' => 'Ficar pior ao longo do tempo.',
-            'implement' => 'Colocar um plano ou sistema em ação.',
-            'leverage' => 'Usar algo de forma eficaz para obter um resultado.',
-            'mitigate' => 'Tornar um problema menos grave.',
-            'resilient' => 'Capaz de se recuperar rapidamente após dificuldade.',
-            'substantial' => 'Grande em quantidade, valor ou importância.',
-            'allocate' => 'Decidir como recursos ou tempo devem ser usados.',
-            'articulate' => 'Expressar uma ideia claramente.',
-            'constraint' => 'Um limite ou restrição.',
-            'cultivate' => 'Desenvolver uma habilidade ou hábito com cuidado.',
-            'diminish' => 'Ficar ou fazer algo menor.',
-            'formulate' => 'Criar ou preparar algo cuidadosamente.',
-            'inherent' => 'Existente como parte natural de algo.',
-            'pragmatic' => 'Focado em resultados práticos.',
-            'refine' => 'Melhorar algo fazendo pequenas mudanças.',
-            'scrutiny' => 'Exame cuidadoso e detalhado.',
-            'ephemeral' => 'Durar apenas por um curto período.',
-            'exacerbate' => 'Tornar uma situação ruim pior.',
-            'incongruous' => 'Estranho porque não se encaixa no ambiente.',
-            'meticulous' => 'Muito cuidadoso e atento aos detalhes.',
-            'nuance' => 'Uma pequena, mas importante diferença de significado.',
-            'paradigm' => 'Um modelo típico ou maneira de pensar sobre algo.',
-            'proliferation' => 'Um aumento rápido no número de algo.',
-            'scrutinize' => 'Examinar algo com muita atenção.',
-            'ubiquitous' => 'Presente ou encontrado em todos os lugares.',
-            'unequivocal' => 'Claro e sem deixar dúvida.',
-            'aberration' => 'Algo incomum que difere do normal.',
-            'conflate' => 'Combinar duas ideias como se fossem a mesma.',
-            'dissonance' => 'Falta de acordo ou harmonia.',
-            'intractable' => 'Muito difícil de controlar ou resolver.',
-            'labyrinthine' => 'Complicado e confuso como um labirinto.',
-            'obfuscate' => 'Tornar algo pouco claro ou difícil de entender.',
-            'perfunctory' => 'Feito rapidamente e sem cuidado real.',
-            'quintessential' => 'Representando o exemplo mais típico.',
-            'tacit' => 'Entendido sem ser dito diretamente.',
-            'vindicate' => 'Provar que alguém ou algo estava certo.',
-        ];
+        if ($word->definition_pt && trim($word->definition_pt) !== '' && $word->definition_pt !== $word->definition) {
+            return $word->definition_pt;
+        }
 
-        return $definitions[$word->word] ?? $word->definition;
+        $definition = $this->portugueseDefinitionsFromVocabulary()[$word->word] ?? null;
+
+        return $definition && $definition !== $word->definition ? $definition : null;
+    }
+
+    /**
+     * @return array<string, string>
+     */
+    private function portugueseDefinitionsFromVocabulary(): array
+    {
+        static $definitions = null;
+
+        if ($definitions !== null) {
+            return $definitions;
+        }
+
+        $vocabularyPath = base_path('../frontend/src/lib/vocabulary-data.json');
+
+        if (! is_file($vocabularyPath)) {
+            return $definitions = [];
+        }
+
+        $vocabulary = json_decode(file_get_contents($vocabularyPath), true, 512, JSON_THROW_ON_ERROR);
+        $definitions = [];
+
+        foreach ($vocabulary as $entry) {
+            if (! empty($entry['word']) && ! empty($entry['definition_pt'])) {
+                $definitions[$entry['word']] = $entry['definition_pt'];
+            }
+        }
+
+        return $definitions;
     }
 
     private function challengeResource(Word $word, ?WordProgress $progress): array

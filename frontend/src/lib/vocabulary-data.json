@@ -1,0 +1,4802 @@
+[
+  {
+    "word": "apple",
+    "definition": "A round fruit with red, green, or yellow skin.",
+    "example": "She packed an apple for lunch.",
+    "level": "A1",
+    "part_of_speech": "noun",
+    "definition_pt": "Uma fruta redonda com casca vermelha, verde ou amarela."
+  },
+  {
+    "word": "book",
+    "definition": "A set of written pages that you read.",
+    "example": "He opened the book before class.",
+    "level": "A1",
+    "part_of_speech": "noun",
+    "definition_pt": "Um conjunto de páginas escritas que você lê."
+  },
+  {
+    "word": "city",
+    "definition": "A large town where many people live and work.",
+    "example": "The city is busy in the morning.",
+    "level": "A1",
+    "part_of_speech": "noun",
+    "definition_pt": "Uma cidade grande onde muitas pessoas vivem e trabalham."
+  },
+  {
+    "word": "family",
+    "definition": "A group of people related to each other.",
+    "example": "My family eats dinner together.",
+    "level": "A1",
+    "part_of_speech": "noun",
+    "definition_pt": "Um grupo de pessoas relacionadas entre si."
+  },
+  {
+    "word": "friend",
+    "definition": "A person you like and know well.",
+    "example": "Her friend helped with the homework.",
+    "level": "A1",
+    "part_of_speech": "noun",
+    "definition_pt": "Uma pessoa que você gosta e conhece bem."
+  },
+  {
+    "word": "happy",
+    "definition": "Feeling good or pleased.",
+    "example": "The children were happy at the party.",
+    "level": "A1",
+    "part_of_speech": "adjective",
+    "definition_pt": "Sentir-se bem ou satisfeito."
+  },
+  {
+    "word": "listen",
+    "definition": "To give attention to a sound or speaker.",
+    "example": "Please listen to the question carefully.",
+    "level": "A1",
+    "part_of_speech": "verb",
+    "definition_pt": "Dar atenção a um som ou a alguém que fala."
+  },
+  {
+    "word": "morning",
+    "definition": "The early part of the day.",
+    "example": "I drink water every morning.",
+    "level": "A1",
+    "part_of_speech": "noun",
+    "definition_pt": "A parte cedo do dia."
+  },
+  {
+    "word": "school",
+    "definition": "A place where students learn.",
+    "example": "They walk to school at eight.",
+    "level": "A1",
+    "part_of_speech": "noun",
+    "definition_pt": "Um lugar onde os alunos aprendem."
+  },
+  {
+    "word": "water",
+    "definition": "A clear liquid that people drink.",
+    "example": "She drinks water after running.",
+    "level": "A1",
+    "part_of_speech": "noun",
+    "definition_pt": "Um líquido claro que as pessoas bebem."
+  },
+  {
+    "word": "chair",
+    "definition": "A seat for one person.",
+    "example": "The chair is next to the window.",
+    "level": "A1",
+    "part_of_speech": "noun",
+    "definition_pt": "Um assento para uma pessoa."
+  },
+  {
+    "word": "door",
+    "definition": "A thing you open to enter or leave a room.",
+    "example": "Please close the door quietly.",
+    "level": "A1",
+    "part_of_speech": "noun",
+    "definition_pt": "Uma coisa que você abre para entrar ou sair de um cômodo."
+  },
+  {
+    "word": "food",
+    "definition": "Things people or animals eat.",
+    "example": "The food smells good today.",
+    "level": "A1",
+    "part_of_speech": "noun",
+    "definition_pt": "Coisas que pessoas ou animais comem."
+  },
+  {
+    "word": "house",
+    "definition": "A building where people live.",
+    "example": "Their house has a small garden.",
+    "level": "A1",
+    "part_of_speech": "noun",
+    "definition_pt": "Um prédio onde as pessoas moram."
+  },
+  {
+    "word": "mother",
+    "definition": "A female parent.",
+    "example": "My mother works at the hospital.",
+    "level": "A1",
+    "part_of_speech": "noun",
+    "definition_pt": "Uma parental feminina."
+  },
+  {
+    "word": "music",
+    "definition": "Sounds made by voices or instruments.",
+    "example": "We listen to music after dinner.",
+    "level": "A1",
+    "part_of_speech": "noun",
+    "definition_pt": "Sons feitos por vozes ou instrumentos."
+  },
+  {
+    "word": "phone",
+    "definition": "A device used to call or message people.",
+    "example": "His phone is on the table.",
+    "level": "A1",
+    "part_of_speech": "noun",
+    "definition_pt": "Um aparelho usado para ligar ou mandar mensagem."
+  },
+  {
+    "word": "picture",
+    "definition": "An image, drawing, or photograph.",
+    "example": "She took a picture of the beach.",
+    "level": "A1",
+    "part_of_speech": "noun",
+    "definition_pt": "Uma imagem, desenho ou fotografia."
+  },
+  {
+    "word": "table",
+    "definition": "A piece of furniture with a flat top.",
+    "example": "Put the keys on the table.",
+    "level": "A1",
+    "part_of_speech": "noun",
+    "definition_pt": "Um móvel com uma superfície plana."
+  },
+  {
+    "word": "work",
+    "definition": "A job or activity that needs effort.",
+    "example": "He goes to work by bus.",
+    "level": "A1",
+    "part_of_speech": "noun",
+    "definition_pt": "Um trabalho ou atividade que exige esforço."
+  },
+  {
+    "word": "borrow",
+    "definition": "To use something and give it back later.",
+    "example": "Can I borrow your pen for a minute?",
+    "level": "A2",
+    "part_of_speech": "verb",
+    "definition_pt": "Usar algo e devolver depois."
+  },
+  {
+    "word": "careful",
+    "definition": "Taking time to avoid mistakes or danger.",
+    "example": "Be careful when you cross the street.",
+    "level": "A2",
+    "part_of_speech": "adjective",
+    "definition_pt": "Tomar cuidado para evitar erros ou perigo."
+  },
+  {
+    "word": "decide",
+    "definition": "To choose after thinking about options.",
+    "example": "We need to decide where to eat.",
+    "level": "A2",
+    "part_of_speech": "verb",
+    "definition_pt": "Escolher depois de pensar nas opções."
+  },
+  {
+    "word": "explain",
+    "definition": "To make something clear or easy to understand.",
+    "example": "The teacher will explain the rule again.",
+    "level": "A2",
+    "part_of_speech": "verb",
+    "definition_pt": "Fazer algo claro ou fácil de entender."
+  },
+  {
+    "word": "healthy",
+    "definition": "Good for your body or not sick.",
+    "example": "A healthy breakfast gives you energy.",
+    "level": "A2",
+    "part_of_speech": "adjective",
+    "definition_pt": "Bom para o corpo ou não doente."
+  },
+  {
+    "word": "improve",
+    "definition": "To become better or make something better.",
+    "example": "Daily practice can improve your English.",
+    "level": "A2",
+    "part_of_speech": "verb",
+    "definition_pt": "Ficar melhor ou fazer algo melhor."
+  },
+  {
+    "word": "mistake",
+    "definition": "Something that is not correct.",
+    "example": "I made a mistake in the last sentence.",
+    "level": "A2",
+    "part_of_speech": "noun",
+    "definition_pt": "Algo que não está correto."
+  },
+  {
+    "word": "simple",
+    "definition": "Easy to understand or do.",
+    "example": "The instructions are simple and clear.",
+    "level": "A2",
+    "part_of_speech": "adjective",
+    "definition_pt": "Fácil de entender ou fazer."
+  },
+  {
+    "word": "travel",
+    "definition": "To go from one place to another.",
+    "example": "They travel by train on weekends.",
+    "level": "A2",
+    "part_of_speech": "verb",
+    "definition_pt": "Ir de um lugar para outro."
+  },
+  {
+    "word": "weather",
+    "definition": "The temperature, wind, rain, or sun outside.",
+    "example": "The weather is colder today.",
+    "level": "A2",
+    "part_of_speech": "noun",
+    "definition_pt": "A temperatura, vento, chuva ou sol do lado de fora."
+  },
+  {
+    "word": "arrive",
+    "definition": "To reach a place.",
+    "example": "The train will arrive before noon.",
+    "level": "A2",
+    "part_of_speech": "verb",
+    "definition_pt": "Chegar a um lugar."
+  },
+  {
+    "word": "choose",
+    "definition": "To pick one thing from several options.",
+    "example": "You can choose a topic for homework.",
+    "level": "A2",
+    "part_of_speech": "verb",
+    "definition_pt": "Selecionar uma coisa entre várias opções."
+  },
+  {
+    "word": "describe",
+    "definition": "To say what something or someone is like.",
+    "example": "Can you describe your new apartment?",
+    "level": "A2",
+    "part_of_speech": "verb",
+    "definition_pt": "Dizer como algo ou alguém é."
+  },
+  {
+    "word": "favorite",
+    "definition": "Liked more than others.",
+    "example": "Blue is her favorite color.",
+    "level": "A2",
+    "part_of_speech": "adjective",
+    "definition_pt": "Gostado mais do que os outros."
+  },
+  {
+    "word": "invite",
+    "definition": "To ask someone to come to an event.",
+    "example": "They will invite us to the party.",
+    "level": "A2",
+    "part_of_speech": "verb",
+    "definition_pt": "Pedir que alguém venha para um evento."
+  },
+  {
+    "word": "journey",
+    "definition": "A trip from one place to another.",
+    "example": "The journey took three hours by car.",
+    "level": "A2",
+    "part_of_speech": "noun",
+    "definition_pt": "Uma viagem de um lugar a outro."
+  },
+  {
+    "word": "noisy",
+    "definition": "Making a lot of sound.",
+    "example": "The noisy street made it hard to sleep.",
+    "level": "A2",
+    "part_of_speech": "adjective",
+    "definition_pt": "Fazendo muito barulho."
+  },
+  {
+    "word": "protect",
+    "definition": "To keep someone or something safe.",
+    "example": "A coat can protect you from the rain.",
+    "level": "A2",
+    "part_of_speech": "verb",
+    "definition_pt": "Manter alguém ou algo seguro."
+  },
+  {
+    "word": "repair",
+    "definition": "To fix something that is broken.",
+    "example": "He will repair the bike this weekend.",
+    "level": "A2",
+    "part_of_speech": "verb",
+    "definition_pt": "Consertar algo que está quebrado."
+  },
+  {
+    "word": "useful",
+    "definition": "Helpful or practical.",
+    "example": "This map is useful in a new city.",
+    "level": "A2",
+    "part_of_speech": "adjective",
+    "definition_pt": "Útil ou prático."
+  },
+  {
+    "word": "achieve",
+    "definition": "To succeed in doing something after effort.",
+    "example": "She worked hard to achieve her goal.",
+    "level": "B1",
+    "part_of_speech": "verb",
+    "definition_pt": "Conseguir fazer algo com esforço."
+  },
+  {
+    "word": "benefit",
+    "definition": "A good effect or advantage.",
+    "example": "One benefit of reading is a larger vocabulary.",
+    "level": "B1",
+    "part_of_speech": "noun",
+    "definition_pt": "Um efeito bom ou vantagem."
+  },
+  {
+    "word": "confident",
+    "definition": "Feeling sure about your ability.",
+    "example": "He felt confident before the interview.",
+    "level": "B1",
+    "part_of_speech": "adjective",
+    "definition_pt": "Sentir-se seguro sobre sua habilidade."
+  },
+  {
+    "word": "manage",
+    "definition": "To control or organize something successfully.",
+    "example": "They manage the project with a small team.",
+    "level": "B1",
+    "part_of_speech": "verb",
+    "definition_pt": "Controlar ou organizar algo com sucesso."
+  },
+  {
+    "word": "opinion",
+    "definition": "What someone thinks or believes about something.",
+    "example": "In my opinion, the plan is realistic.",
+    "level": "B1",
+    "part_of_speech": "noun",
+    "definition_pt": "O que alguém pensa ou acredita sobre algo."
+  },
+  {
+    "word": "prevent",
+    "definition": "To stop something from happening.",
+    "example": "A helmet can prevent serious injury.",
+    "level": "B1",
+    "part_of_speech": "verb",
+    "definition_pt": "Impedir que algo aconteça."
+  },
+  {
+    "word": "reduce",
+    "definition": "To make something smaller or less.",
+    "example": "We should reduce the amount of waste.",
+    "level": "B1",
+    "part_of_speech": "verb",
+    "definition_pt": "Tornar algo menor ou menos."
+  },
+  {
+    "word": "reliable",
+    "definition": "Able to be trusted or depended on.",
+    "example": "This is a reliable source of information.",
+    "level": "B1",
+    "part_of_speech": "adjective",
+    "definition_pt": "Capaz de ser confiável ou dependente."
+  },
+  {
+    "word": "struggle",
+    "definition": "To have difficulty doing something.",
+    "example": "Many students struggle with pronunciation.",
+    "level": "B1",
+    "part_of_speech": "verb",
+    "definition_pt": "Ter dificuldade para fazer algo."
+  },
+  {
+    "word": "support",
+    "definition": "To help someone or agree with an idea.",
+    "example": "Her parents support her decision.",
+    "level": "B1",
+    "part_of_speech": "verb",
+    "definition_pt": "Ajudar alguém ou concordar com uma ideia."
+  },
+  {
+    "word": "approach",
+    "definition": "A way of doing or thinking about something.",
+    "example": "Her approach to study is very organized.",
+    "level": "B1",
+    "part_of_speech": "noun",
+    "definition_pt": "Uma maneira de fazer ou pensar sobre algo."
+  },
+  {
+    "word": "balance",
+    "definition": "A state where different things have the right amount.",
+    "example": "Good balance helps you study and rest.",
+    "level": "B1",
+    "part_of_speech": "noun",
+    "definition_pt": "Um estado em que diferentes coisas têm a quantidade certa."
+  },
+  {
+    "word": "compare",
+    "definition": "To look at two things and see similarities or differences.",
+    "example": "Compare the answers before you choose.",
+    "level": "B1",
+    "part_of_speech": "verb",
+    "definition_pt": "Olhar duas coisas e ver semelhanças ou diferenças."
+  },
+  {
+    "word": "develop",
+    "definition": "To grow or become more advanced.",
+    "example": "You can develop confidence through practice.",
+    "level": "B1",
+    "part_of_speech": "verb",
+    "definition_pt": "Crescer ou tornar-se mais avançado."
+  },
+  {
+    "word": "encourage",
+    "definition": "To give someone hope or confidence.",
+    "example": "Teachers encourage students to speak more.",
+    "level": "B1",
+    "part_of_speech": "verb",
+    "definition_pt": "Dar esperança ou confiança a alguém."
+  },
+  {
+    "word": "focus",
+    "definition": "To give attention to one thing.",
+    "example": "Focus on the words you often forget.",
+    "level": "B1",
+    "part_of_speech": "verb",
+    "definition_pt": "Dar atenção a uma coisa."
+  },
+  {
+    "word": "involve",
+    "definition": "To include someone or something.",
+    "example": "The task will involve reading and speaking.",
+    "level": "B1",
+    "part_of_speech": "verb",
+    "definition_pt": "Incluir alguém ou algo."
+  },
+  {
+    "word": "likely",
+    "definition": "Expected to happen or be true.",
+    "example": "A short review is likely to help.",
+    "level": "B1",
+    "part_of_speech": "adjective",
+    "definition_pt": "Esperado de acontecer ou ser verdade."
+  },
+  {
+    "word": "recognize",
+    "definition": "To know someone or something from before.",
+    "example": "I recognize this word from yesterday.",
+    "level": "B1",
+    "part_of_speech": "verb",
+    "definition_pt": "Conhecer alguém ou algo de antes."
+  },
+  {
+    "word": "suggest",
+    "definition": "To offer an idea or plan.",
+    "example": "I suggest a shorter practice session.",
+    "level": "B1",
+    "part_of_speech": "verb",
+    "definition_pt": "Oferecer uma ideia ou plano."
+  },
+  {
+    "word": "accomplish",
+    "definition": "To complete something successfully.",
+    "example": "The team hopes to accomplish the task today.",
+    "level": "B2",
+    "part_of_speech": "verb",
+    "definition_pt": "Completar algo com sucesso."
+  },
+  {
+    "word": "challenge",
+    "definition": "A difficult task that tests ability.",
+    "example": "Learning ten new words a day is a challenge.",
+    "level": "B2",
+    "part_of_speech": "noun",
+    "definition_pt": "Uma tarefa difícil que testa habilidade."
+  },
+  {
+    "word": "consequence",
+    "definition": "A result of an action or situation.",
+    "example": "The consequence of missing practice was clear.",
+    "level": "B2",
+    "part_of_speech": "noun",
+    "definition_pt": "Um resultado de uma ação ou situação."
+  },
+  {
+    "word": "estimate",
+    "definition": "To guess an amount based on available information.",
+    "example": "We estimate the lesson will take twenty minutes.",
+    "level": "B2",
+    "part_of_speech": "verb",
+    "definition_pt": "Adivinhar um valor com base nas informações disponíveis."
+  },
+  {
+    "word": "evidence",
+    "definition": "Facts or signs that show something is true.",
+    "example": "The report provides evidence for the claim.",
+    "level": "B2",
+    "part_of_speech": "noun",
+    "definition_pt": "Fatos ou sinais que mostram que algo é verdadeiro."
+  },
+  {
+    "word": "maintain",
+    "definition": "To keep something at the same level or condition.",
+    "example": "You need regular practice to maintain fluency.",
+    "level": "B2",
+    "part_of_speech": "verb",
+    "definition_pt": "Manter algo no mesmo nível ou condição."
+  },
+  {
+    "word": "negotiate",
+    "definition": "To discuss in order to reach an agreement.",
+    "example": "They negotiate the price before signing.",
+    "level": "B2",
+    "part_of_speech": "verb",
+    "definition_pt": "Discutir para chegar a um acordo."
+  },
+  {
+    "word": "prioritize",
+    "definition": "To decide what is most important.",
+    "example": "Students should prioritize the words they often miss.",
+    "level": "B2",
+    "part_of_speech": "verb",
+    "definition_pt": "Decidir o que é mais importante."
+  },
+  {
+    "word": "remarkable",
+    "definition": "Unusual or impressive in a way people notice.",
+    "example": "Her progress this month was remarkable.",
+    "level": "B2",
+    "part_of_speech": "adjective",
+    "definition_pt": "Incomum ou impressionante de forma que as pessoas notam."
+  },
+  {
+    "word": "sustainable",
+    "definition": "Able to continue for a long time without harm.",
+    "example": "A sustainable study routine is better than cramming.",
+    "level": "B2",
+    "part_of_speech": "adjective",
+    "definition_pt": "Capaz de continuar por muito tempo sem causar dano."
+  },
+  {
+    "word": "accurate",
+    "definition": "Correct and without mistakes.",
+    "example": "An accurate answer earns more points.",
+    "level": "B2",
+    "part_of_speech": "adjective",
+    "definition_pt": "Correto e sem erros."
+  },
+  {
+    "word": "adapt",
+    "definition": "To change in order to fit a new situation.",
+    "example": "Good learners adapt their routine over time.",
+    "level": "B2",
+    "part_of_speech": "verb",
+    "definition_pt": "Mudar para se ajustar a uma nova situação."
+  },
+  {
+    "word": "convince",
+    "definition": "To make someone believe or agree.",
+    "example": "The data can convince them to continue.",
+    "level": "B2",
+    "part_of_speech": "verb",
+    "definition_pt": "Fazer alguém acreditar ou concordar."
+  },
+  {
+    "word": "evaluate",
+    "definition": "To judge the value or quality of something.",
+    "example": "Evaluate your mistakes after each round.",
+    "level": "B2",
+    "part_of_speech": "verb",
+    "definition_pt": "Julgar o valor ou qualidade de algo."
+  },
+  {
+    "word": "framework",
+    "definition": "A basic structure for ideas or work.",
+    "example": "The framework helps organize the lesson.",
+    "level": "B2",
+    "part_of_speech": "noun",
+    "definition_pt": "Uma estrutura básica para ideias ou trabalho."
+  },
+  {
+    "word": "generate",
+    "definition": "To produce or create something.",
+    "example": "The app can generate a new challenge.",
+    "level": "B2",
+    "part_of_speech": "verb",
+    "definition_pt": "Produzir ou criar algo."
+  },
+  {
+    "word": "insight",
+    "definition": "A clear understanding of something.",
+    "example": "The feedback gave her insight into grammar.",
+    "level": "B2",
+    "part_of_speech": "noun",
+    "definition_pt": "Uma compreensão clara de algo."
+  },
+  {
+    "word": "objective",
+    "definition": "A goal or purpose.",
+    "example": "The objective is to remember words faster.",
+    "level": "B2",
+    "part_of_speech": "noun",
+    "definition_pt": "Um objetivo ou propósito."
+  },
+  {
+    "word": "resolve",
+    "definition": "To solve a problem or difficulty.",
+    "example": "They resolve confusion by checking examples.",
+    "level": "B2",
+    "part_of_speech": "verb",
+    "definition_pt": "Resolver um problema ou dificuldade."
+  },
+  {
+    "word": "tension",
+    "definition": "A feeling of stress or pressure.",
+    "example": "Time limits add tension to the game.",
+    "level": "B2",
+    "part_of_speech": "noun",
+    "definition_pt": "Uma sensação de estresse ou pressão."
+  },
+  {
+    "word": "ambiguous",
+    "definition": "Having more than one possible meaning.",
+    "example": "The ambiguous sentence confused the class.",
+    "level": "C1",
+    "part_of_speech": "adjective",
+    "definition_pt": "Tendo mais de um significado possível."
+  },
+  {
+    "word": "coherent",
+    "definition": "Clear, logical, and easy to understand.",
+    "example": "Her argument was coherent and persuasive.",
+    "level": "C1",
+    "part_of_speech": "adjective",
+    "definition_pt": "Claro, lógico e fácil de entender."
+  },
+  {
+    "word": "compelling",
+    "definition": "Very interesting or convincing.",
+    "example": "The speaker gave a compelling reason to continue.",
+    "level": "C1",
+    "part_of_speech": "adjective",
+    "definition_pt": "Muito interessante ou convincente."
+  },
+  {
+    "word": "concise",
+    "definition": "Using few words while staying clear.",
+    "example": "A concise answer is often more effective.",
+    "level": "C1",
+    "part_of_speech": "adjective",
+    "definition_pt": "Usar poucas palavras mantendo clareza."
+  },
+  {
+    "word": "deteriorate",
+    "definition": "To become worse over time.",
+    "example": "Without practice, pronunciation can deteriorate.",
+    "level": "C1",
+    "part_of_speech": "verb",
+    "definition_pt": "Ficar pior ao longo do tempo."
+  },
+  {
+    "word": "implement",
+    "definition": "To put a plan or system into action.",
+    "example": "The school will implement a new study plan.",
+    "level": "C1",
+    "part_of_speech": "verb",
+    "definition_pt": "Colocar um plano ou sistema em ação."
+  },
+  {
+    "word": "leverage",
+    "definition": "To use something effectively to get a result.",
+    "example": "You can leverage daily habits to learn faster.",
+    "level": "C1",
+    "part_of_speech": "verb",
+    "definition_pt": "Usar algo de forma eficaz para obter um resultado."
+  },
+  {
+    "word": "mitigate",
+    "definition": "To make a problem less serious.",
+    "example": "Short reviews can mitigate forgetting.",
+    "level": "C1",
+    "part_of_speech": "verb",
+    "definition_pt": "Tornar um problema menos grave."
+  },
+  {
+    "word": "resilient",
+    "definition": "Able to recover quickly after difficulty.",
+    "example": "A resilient learner keeps going after mistakes.",
+    "level": "C1",
+    "part_of_speech": "adjective",
+    "definition_pt": "Capaz de se recuperar rapidamente após dificuldade."
+  },
+  {
+    "word": "substantial",
+    "definition": "Large in amount, value, or importance.",
+    "example": "She made substantial progress in six weeks.",
+    "level": "C1",
+    "part_of_speech": "adjective",
+    "definition_pt": "Grande em quantidade, valor ou importância."
+  },
+  {
+    "word": "allocate",
+    "definition": "To decide how resources or time should be used.",
+    "example": "Allocate ten minutes to review difficult words.",
+    "level": "C1",
+    "part_of_speech": "verb",
+    "definition_pt": "Decidir como recursos ou tempo devem ser usados."
+  },
+  {
+    "word": "articulate",
+    "definition": "To express an idea clearly.",
+    "example": "She can articulate complex ideas in English.",
+    "level": "C1",
+    "part_of_speech": "verb",
+    "definition_pt": "Expressar uma ideia claramente."
+  },
+  {
+    "word": "constraint",
+    "definition": "A limit or restriction.",
+    "example": "A time constraint can sharpen your focus.",
+    "level": "C1",
+    "part_of_speech": "noun",
+    "definition_pt": "Um limite ou restrição."
+  },
+  {
+    "word": "cultivate",
+    "definition": "To develop a skill or habit carefully.",
+    "example": "Cultivate curiosity when you meet new words.",
+    "level": "C1",
+    "part_of_speech": "verb",
+    "definition_pt": "Desenvolver uma habilidade ou hábito com cuidado."
+  },
+  {
+    "word": "diminish",
+    "definition": "To become or make something smaller.",
+    "example": "Regular review can diminish repeated mistakes.",
+    "level": "C1",
+    "part_of_speech": "verb",
+    "definition_pt": "Ficar ou fazer algo menor."
+  },
+  {
+    "word": "formulate",
+    "definition": "To create or prepare something carefully.",
+    "example": "Formulate a sentence before you answer.",
+    "level": "C1",
+    "part_of_speech": "verb",
+    "definition_pt": "Criar ou preparar algo cuidadosamente."
+  },
+  {
+    "word": "inherent",
+    "definition": "Existing as a natural part of something.",
+    "example": "There is inherent uncertainty in translation.",
+    "level": "C1",
+    "part_of_speech": "adjective",
+    "definition_pt": "Existente como parte natural de algo."
+  },
+  {
+    "word": "pragmatic",
+    "definition": "Focused on practical results.",
+    "example": "A pragmatic plan fits your real schedule.",
+    "level": "C1",
+    "part_of_speech": "adjective",
+    "definition_pt": "Focado em resultados práticos."
+  },
+  {
+    "word": "refine",
+    "definition": "To improve something by making small changes.",
+    "example": "Refine your answer after reading the clue.",
+    "level": "C1",
+    "part_of_speech": "verb",
+    "definition_pt": "Melhorar algo fazendo pequenas mudanças."
+  },
+  {
+    "word": "scrutiny",
+    "definition": "Careful and detailed examination.",
+    "example": "Every example sentence received scrutiny.",
+    "level": "C1",
+    "part_of_speech": "noun",
+    "definition_pt": "Exame cuidadoso e detalhado."
+  },
+  {
+    "word": "ephemeral",
+    "definition": "Lasting for only a short time.",
+    "example": "Motivation can be ephemeral without a clear routine.",
+    "level": "C2",
+    "part_of_speech": "adjective",
+    "definition_pt": "Durar apenas por um curto período."
+  },
+  {
+    "word": "exacerbate",
+    "definition": "To make a bad situation worse.",
+    "example": "Skipping review can exacerbate memory gaps.",
+    "level": "C2",
+    "part_of_speech": "verb",
+    "definition_pt": "Tornar uma situação ruim pior."
+  },
+  {
+    "word": "incongruous",
+    "definition": "Strange because it does not fit with its surroundings.",
+    "example": "The formal phrase felt incongruous in casual speech.",
+    "level": "C2",
+    "part_of_speech": "adjective",
+    "definition_pt": "Estranho porque não se encaixa no ambiente."
+  },
+  {
+    "word": "meticulous",
+    "definition": "Very careful and attentive to detail.",
+    "example": "A meticulous learner checks each pronunciation.",
+    "level": "C2",
+    "part_of_speech": "adjective",
+    "definition_pt": "Muito cuidadoso e atento aos detalhes."
+  },
+  {
+    "word": "nuance",
+    "definition": "A small but important difference in meaning.",
+    "example": "The nuance between the two verbs is subtle.",
+    "level": "C2",
+    "part_of_speech": "noun",
+    "definition_pt": "Uma pequena, mas importante diferença de significado."
+  },
+  {
+    "word": "paradigm",
+    "definition": "A typical model or way of thinking about something.",
+    "example": "Spaced repetition changed the paradigm of memorization.",
+    "level": "C2",
+    "part_of_speech": "noun",
+    "definition_pt": "Um modelo típico ou maneira de pensar sobre algo."
+  },
+  {
+    "word": "proliferation",
+    "definition": "A rapid increase in the number of something.",
+    "example": "The proliferation of apps gives learners many choices.",
+    "level": "C2",
+    "part_of_speech": "noun",
+    "definition_pt": "Um aumento rápido no número de algo."
+  },
+  {
+    "word": "scrutinize",
+    "definition": "To examine something very carefully.",
+    "example": "Advanced students scrutinize word choice in essays.",
+    "level": "C2",
+    "part_of_speech": "verb",
+    "definition_pt": "Examinar algo com muita atenção."
+  },
+  {
+    "word": "ubiquitous",
+    "definition": "Present or found everywhere.",
+    "example": "English words are ubiquitous in technology.",
+    "level": "C2",
+    "part_of_speech": "adjective",
+    "definition_pt": "Presente ou encontrado em todos os lugares."
+  },
+  {
+    "word": "unequivocal",
+    "definition": "Clear and leaving no doubt.",
+    "example": "The feedback was unequivocal after the wrong answer.",
+    "level": "C2",
+    "part_of_speech": "adjective",
+    "definition_pt": "Claro e sem deixar dúvida."
+  },
+  {
+    "word": "aberration",
+    "definition": "Something unusual that differs from what is normal.",
+    "example": "One low score was an aberration in her record.",
+    "level": "C2",
+    "part_of_speech": "noun",
+    "definition_pt": "Algo incomum que difere do normal."
+  },
+  {
+    "word": "conflate",
+    "definition": "To combine two ideas as if they were the same.",
+    "example": "Writers sometimes conflate similar concepts.",
+    "level": "C2",
+    "part_of_speech": "verb",
+    "definition_pt": "Combinar duas ideias como se fossem a mesma."
+  },
+  {
+    "word": "dissonance",
+    "definition": "A lack of agreement or harmony.",
+    "example": "The phrase created dissonance in the paragraph.",
+    "level": "C2",
+    "part_of_speech": "noun",
+    "definition_pt": "Falta de acordo ou harmonia."
+  },
+  {
+    "word": "intractable",
+    "definition": "Very difficult to control or solve.",
+    "example": "The intractable error required deeper analysis.",
+    "level": "C2",
+    "part_of_speech": "adjective",
+    "definition_pt": "Muito difícil de controlar ou resolver."
+  },
+  {
+    "word": "labyrinthine",
+    "definition": "Complicated and confusing like a maze.",
+    "example": "The labyrinthine explanation lost the audience.",
+    "level": "C2",
+    "part_of_speech": "adjective",
+    "definition_pt": "Complicado e confuso como um labirinto."
+  },
+  {
+    "word": "obfuscate",
+    "definition": "To make something unclear or hard to understand.",
+    "example": "Do not obfuscate a simple argument.",
+    "level": "C2",
+    "part_of_speech": "verb",
+    "definition_pt": "Tornar algo pouco claro ou difícil de entender."
+  },
+  {
+    "word": "perfunctory",
+    "definition": "Done quickly and without real care.",
+    "example": "A perfunctory review rarely fixes weak vocabulary.",
+    "level": "C2",
+    "part_of_speech": "adjective",
+    "definition_pt": "Feito rapidamente e sem cuidado real."
+  },
+  {
+    "word": "quintessential",
+    "definition": "Representing the most typical example.",
+    "example": "That sentence is a quintessential formal opening.",
+    "level": "C2",
+    "part_of_speech": "adjective",
+    "definition_pt": "Representando o exemplo mais típico."
+  },
+  {
+    "word": "tacit",
+    "definition": "Understood without being directly said.",
+    "example": "The tacit rule was clear from context.",
+    "level": "C2",
+    "part_of_speech": "adjective",
+    "definition_pt": "Entendido sem ser dito diretamente."
+  },
+  {
+    "word": "vindicate",
+    "definition": "To prove that someone or something was right.",
+    "example": "The final score can vindicate steady practice.",
+    "level": "C2",
+    "part_of_speech": "verb",
+    "definition_pt": "Provar que alguém ou algo estava certo."
+  },
+  {
+    "word": "baby",
+    "definition": "A very young child.",
+    "example": "The baby is sleeping in the crib.",
+    "level": "A1",
+    "part_of_speech": "noun",
+    "definition_pt": "Um bebê ou criança muito nova."
+  },
+  {
+    "word": "ball",
+    "definition": "A round object used in games.",
+    "example": "He kicked the ball into the net.",
+    "level": "A1",
+    "part_of_speech": "noun",
+    "definition_pt": "Um objeto redondo usado em jogos."
+  },
+  {
+    "word": "bank",
+    "definition": "A place where people keep money.",
+    "example": "She goes to the bank to save money.",
+    "level": "A1",
+    "part_of_speech": "noun",
+    "definition_pt": "Um lugar onde as pessoas guardam dinheiro."
+  },
+  {
+    "word": "bath",
+    "definition": "An act of washing the body.",
+    "example": "He takes a hot bath every evening.",
+    "level": "A1",
+    "part_of_speech": "noun",
+    "definition_pt": "O ato de lavar o corpo."
+  },
+  {
+    "word": "beer",
+    "definition": "An alcoholic drink made from grain.",
+    "example": "He ordered a cold beer at the bar.",
+    "level": "A1",
+    "part_of_speech": "noun",
+    "definition_pt": "Uma bebida alcoólica feita de grãos."
+  },
+  {
+    "word": "bird",
+    "definition": "An animal with feathers and wings.",
+    "example": "A small bird sang on the tree branch.",
+    "level": "A1",
+    "part_of_speech": "noun",
+    "definition_pt": "Um animal com penas e asas."
+  },
+  {
+    "word": "blue",
+    "definition": "A color like the clear sky.",
+    "example": "She wore a beautiful blue dress.",
+    "level": "A1",
+    "part_of_speech": "adjective",
+    "definition_pt": "Uma cor como a do céu limpo."
+  },
+  {
+    "word": "boat",
+    "definition": "A small vehicle for traveling on water.",
+    "example": "They rented a small boat on the lake.",
+    "level": "A1",
+    "part_of_speech": "noun",
+    "definition_pt": "Um pequeno veículo para navegar na água."
+  },
+  {
+    "word": "body",
+    "definition": "The physical structure of a person.",
+    "example": "Exercise is good for your body.",
+    "level": "A1",
+    "part_of_speech": "noun",
+    "definition_pt": "A estrutura física de uma pessoa."
+  },
+  {
+    "word": "busy",
+    "definition": "Having a lot of things to do.",
+    "example": "The doctor is very busy today.",
+    "level": "A1",
+    "part_of_speech": "adjective",
+    "definition_pt": "Com muitas coisas para fazer."
+  },
+  {
+    "word": "cake",
+    "definition": "A sweet baked food.",
+    "example": "She made a chocolate cake for his birthday.",
+    "level": "A1",
+    "part_of_speech": "noun",
+    "definition_pt": "Um alimento doce assado."
+  },
+  {
+    "word": "card",
+    "definition": "A small piece of stiff paper.",
+    "example": "He wrote a birthday card for his mom.",
+    "level": "A1",
+    "part_of_speech": "noun",
+    "definition_pt": "Um pequeno pedaço de papel rígido."
+  },
+  {
+    "word": "cat",
+    "definition": "A small domesticated animal.",
+    "example": "The cat is sleeping on the sofa.",
+    "level": "A1",
+    "part_of_speech": "noun",
+    "definition_pt": "Um pequeno animal doméstico."
+  },
+  {
+    "word": "cold",
+    "definition": "Having a low temperature.",
+    "example": "The water is too cold to swim in.",
+    "level": "A1",
+    "part_of_speech": "adjective",
+    "definition_pt": "Que tem uma temperatura baixa."
+  },
+  {
+    "word": "coat",
+    "definition": "An outer piece of clothing.",
+    "example": "Put on your coat before going outside.",
+    "level": "A1",
+    "part_of_speech": "noun",
+    "definition_pt": "Uma peça de roupa externa."
+  },
+  {
+    "word": "cup",
+    "definition": "A small container used for drinking.",
+    "example": "She drank a cup of hot tea.",
+    "level": "A1",
+    "part_of_speech": "noun",
+    "definition_pt": "Um pequeno recipiente usado para beber."
+  },
+  {
+    "word": "dark",
+    "definition": "With little or no light.",
+    "example": "The street was dark at midnight.",
+    "level": "A1",
+    "part_of_speech": "adjective",
+    "definition_pt": "Com pouca ou nenhuma luz."
+  },
+  {
+    "word": "date",
+    "definition": "A specific day of the month.",
+    "example": "What is the date today?",
+    "level": "A1",
+    "part_of_speech": "noun",
+    "definition_pt": "Um dia específico do mês."
+  },
+  {
+    "word": "day",
+    "definition": "A period of twenty-four hours.",
+    "example": "It is a beautiful day today.",
+    "level": "A1",
+    "part_of_speech": "noun",
+    "definition_pt": "Um período de vinte e quatro horas."
+  },
+  {
+    "word": "dog",
+    "definition": "A common animal kept as a pet.",
+    "example": "The dog barked at the stranger.",
+    "level": "A1",
+    "part_of_speech": "noun",
+    "definition_pt": "Um animal comum mantido como animal de estimação."
+  },
+  {
+    "word": "draw",
+    "definition": "To make a picture with a pen.",
+    "example": "Children love to draw pictures of animals.",
+    "level": "A1",
+    "part_of_speech": "verb",
+    "definition_pt": "Fazer um desenho com uma caneta ou lápis."
+  },
+  {
+    "word": "drink",
+    "definition": "To take liquid into the mouth.",
+    "example": "Please drink some water.",
+    "level": "A1",
+    "part_of_speech": "verb",
+    "definition_pt": "Levar líquido à boca."
+  },
+  {
+    "word": "easy",
+    "definition": "Not difficult to do.",
+    "example": "The exam was very easy.",
+    "level": "A1",
+    "part_of_speech": "adjective",
+    "definition_pt": "Não difícil de fazer."
+  },
+  {
+    "word": "egg",
+    "definition": "An oval object produced by a bird.",
+    "example": "She fried an egg for breakfast.",
+    "level": "A1",
+    "part_of_speech": "noun",
+    "definition_pt": "Um objeto oval produzido por uma ave."
+  },
+  {
+    "word": "eye",
+    "definition": "The organ of sight.",
+    "example": "She closed her eye during the movie.",
+    "level": "A1",
+    "part_of_speech": "noun",
+    "definition_pt": "O órgão da visão."
+  },
+  {
+    "word": "face",
+    "definition": "The front part of the head.",
+    "example": "She washed her face with warm water.",
+    "level": "A1",
+    "part_of_speech": "noun",
+    "definition_pt": "A parte frontal da cabeça."
+  },
+  {
+    "word": "fire",
+    "definition": "Heat and light from burning.",
+    "example": "They sat close to the warm fire.",
+    "level": "A1",
+    "part_of_speech": "noun",
+    "definition_pt": "Calor e luz provenientes da queima."
+  },
+  {
+    "word": "fish",
+    "definition": "An animal that lives in water.",
+    "example": "We saw many fish in the river.",
+    "level": "A1",
+    "part_of_speech": "noun",
+    "definition_pt": "Um animal que vive na água."
+  },
+  {
+    "word": "game",
+    "definition": "An activity played for fun.",
+    "example": "They played a fun game after dinner.",
+    "level": "A1",
+    "part_of_speech": "noun",
+    "definition_pt": "Uma atividade jogada por diversão."
+  },
+  {
+    "word": "girl",
+    "definition": "A female child.",
+    "example": "The little girl wore a red hat.",
+    "level": "A1",
+    "part_of_speech": "noun",
+    "definition_pt": "Uma criança do sexo feminino."
+  },
+  {
+    "word": "hair",
+    "definition": "The fine threads on the head.",
+    "example": "She has long brown hair.",
+    "level": "A1",
+    "part_of_speech": "noun",
+    "definition_pt": "Os fios finos na cabeça."
+  },
+  {
+    "word": "hand",
+    "definition": "The part of the arm below the wrist.",
+    "example": "He held the cup with his left hand.",
+    "level": "A1",
+    "part_of_speech": "noun",
+    "definition_pt": "A parte do braço abaixo do pulso."
+  },
+  {
+    "word": "head",
+    "definition": "The upper part of the body.",
+    "example": "Wear a helmet to protect your head.",
+    "level": "A1",
+    "part_of_speech": "noun",
+    "definition_pt": "A parte superior do corpo."
+  },
+  {
+    "word": "hot",
+    "definition": "Having a high temperature.",
+    "example": "The soup is very hot today.",
+    "level": "A1",
+    "part_of_speech": "adjective",
+    "definition_pt": "Com temperatura elevada."
+  },
+  {
+    "word": "kind",
+    "definition": "Friendly and generous.",
+    "example": "She was very kind to the tourist.",
+    "level": "A1",
+    "part_of_speech": "adjective",
+    "definition_pt": "Amigável e generoso."
+  },
+  {
+    "word": "land",
+    "definition": "The solid part of the earth.",
+    "example": "The plane landed safely on dry land.",
+    "level": "A1",
+    "part_of_speech": "noun",
+    "definition_pt": "A parte sólida da terra."
+  },
+  {
+    "word": "life",
+    "definition": "The period of being alive.",
+    "example": "He wants to live a peaceful life.",
+    "level": "A1",
+    "part_of_speech": "noun",
+    "definition_pt": "O período de estar vivo."
+  },
+  {
+    "word": "love",
+    "definition": "A strong feeling of affection.",
+    "example": "They showed great love for their pets.",
+    "level": "A1",
+    "part_of_speech": "noun",
+    "definition_pt": "Um forte sentimento de afeto."
+  },
+  {
+    "word": "milk",
+    "definition": "A white liquid produced by cows.",
+    "example": "He drinks a glass of milk daily.",
+    "level": "A1",
+    "part_of_speech": "noun",
+    "definition_pt": "Um líquido branco produzido por vacas."
+  },
+  {
+    "word": "name",
+    "definition": "A word by which a person is known.",
+    "example": "Please write your name here.",
+    "level": "A1",
+    "part_of_speech": "noun",
+    "definition_pt": "Uma palavra pela qual uma pessoa é conhecida."
+  },
+  {
+    "word": "nice",
+    "definition": "Pleasant or attractive.",
+    "example": "It is nice to meet you today.",
+    "level": "A1",
+    "part_of_speech": "adjective",
+    "definition_pt": "Agradável ou atraente."
+  },
+  {
+    "word": "paper",
+    "definition": "Material used for writing.",
+    "example": "He wrote the note on a piece of paper.",
+    "level": "A1",
+    "part_of_speech": "noun",
+    "definition_pt": "Material usado para escrever."
+  },
+  {
+    "word": "rain",
+    "definition": "Water falling from the sky.",
+    "example": "The heavy rain stopped after an hour.",
+    "level": "A1",
+    "part_of_speech": "noun",
+    "definition_pt": "Água caindo do céu."
+  },
+  {
+    "word": "road",
+    "definition": "A route for vehicles and people.",
+    "example": "They walked along the quiet country road.",
+    "level": "A1",
+    "part_of_speech": "noun",
+    "definition_pt": "Uma rota para veículos e pessoas."
+  },
+  {
+    "word": "shoe",
+    "definition": "A covering for the foot.",
+    "example": "He tied his shoe before running.",
+    "level": "A1",
+    "part_of_speech": "noun",
+    "definition_pt": "Uma cobertura para o pé."
+  },
+  {
+    "word": "song",
+    "definition": "A short piece of music with words.",
+    "example": "She sang a beautiful song at school.",
+    "level": "A1",
+    "part_of_speech": "noun",
+    "definition_pt": "Uma pequena peça musical com palavras."
+  },
+  {
+    "word": "star",
+    "definition": "A tiny bright point in the night sky.",
+    "example": "She looked at the brightest star in the sky.",
+    "level": "A1",
+    "part_of_speech": "noun",
+    "definition_pt": "Um pequeno ponto brilhante no céu noturno."
+  },
+  {
+    "word": "tree",
+    "definition": "A tall plant with a trunk.",
+    "example": "An old oak tree grows near their house.",
+    "level": "A1",
+    "part_of_speech": "noun",
+    "definition_pt": "Uma planta alta com um tronco."
+  },
+  {
+    "word": "wind",
+    "definition": "A natural movement of the air.",
+    "example": "The cold wind blew the leaves away.",
+    "level": "A1",
+    "part_of_speech": "noun",
+    "definition_pt": "Um movimento natural do ar."
+  },
+  {
+    "word": "year",
+    "definition": "A period of 365 days.",
+    "example": "We travel to the beach once a year.",
+    "level": "A1",
+    "part_of_speech": "noun",
+    "definition_pt": "Um período de 365 dias."
+  },
+  {
+    "word": "angry",
+    "definition": "Feeling strong displeasure.",
+    "example": "He was angry about the flight delay.",
+    "level": "A2",
+    "part_of_speech": "adjective",
+    "definition_pt": "Sentir forte desagrado ou irritação."
+  },
+  {
+    "word": "beach",
+    "definition": "Sandy shore by the ocean.",
+    "example": "They spent the day at the sandy beach.",
+    "level": "A2",
+    "part_of_speech": "noun",
+    "definition_pt": "Costa arenosa junto ao oceano."
+  },
+  {
+    "word": "bread",
+    "definition": "Baked food made of flour and water.",
+    "example": "She bought a fresh loaf of bread.",
+    "level": "A2",
+    "part_of_speech": "noun",
+    "definition_pt": "Alimento assado feito de farinha e água."
+  },
+  {
+    "word": "camel",
+    "definition": "A large animal with humps.",
+    "example": "The camel walked slowly across the desert.",
+    "level": "A2",
+    "part_of_speech": "noun",
+    "definition_pt": "Um animal grande com corcovas."
+  },
+  {
+    "word": "candy",
+    "definition": "Sweet food made with sugar.",
+    "example": "The child bought some colorful candy.",
+    "level": "A2",
+    "part_of_speech": "noun",
+    "definition_pt": "Alimento doce feito com açúcar."
+  },
+  {
+    "word": "cheap",
+    "definition": "Low in price or cost.",
+    "example": "The tickets were surprisingly cheap.",
+    "level": "A2",
+    "part_of_speech": "adjective",
+    "definition_pt": "Baixo em preço ou custo."
+  },
+  {
+    "word": "clean",
+    "definition": "Free from dirt or marks.",
+    "example": "Please keep your room tidy and clean.",
+    "level": "A2",
+    "part_of_speech": "adjective",
+    "definition_pt": "Livre de sujeira ou marcas."
+  },
+  {
+    "word": "cloud",
+    "definition": "A white mass in the sky.",
+    "example": "A white cloud covered the warm sun.",
+    "level": "A2",
+    "part_of_speech": "noun",
+    "definition_pt": "Uma massa branca no céu."
+  },
+  {
+    "word": "count",
+    "definition": "To determine the number of items.",
+    "example": "He can count from one to ten.",
+    "level": "A2",
+    "part_of_speech": "verb",
+    "definition_pt": "Determinar o número de itens."
+  },
+  {
+    "word": "cry",
+    "definition": "To shed tears due to sadness.",
+    "example": "The sad movie made her cry a lot.",
+    "level": "A2",
+    "part_of_speech": "verb",
+    "definition_pt": "Derramar lágrimas devido à tristeza."
+  },
+  {
+    "word": "dance",
+    "definition": "To move to music.",
+    "example": "They love to dance at parties.",
+    "level": "A2",
+    "part_of_speech": "verb",
+    "definition_pt": "Mover-se ao ritmo da música."
+  },
+  {
+    "word": "dirty",
+    "definition": "Not clean or covered in mud.",
+    "example": "He washed his dirty hands with soap.",
+    "level": "A2",
+    "part_of_speech": "adjective",
+    "definition_pt": "Não limpo ou coberto de lama."
+  },
+  {
+    "word": "dream",
+    "definition": "Thoughts occurring during sleep.",
+    "example": "She had a strange dream last night.",
+    "level": "A2",
+    "part_of_speech": "noun",
+    "definition_pt": "Pensamentos que ocorrem durante o sono."
+  },
+  {
+    "word": "dress",
+    "definition": "A one-piece garment for females.",
+    "example": "She wore a yellow dress to the dinner.",
+    "level": "A2",
+    "part_of_speech": "noun",
+    "definition_pt": "Uma peça de vestuário de peça única para mulheres."
+  },
+  {
+    "word": "early",
+    "definition": "Before the usual or expected time.",
+    "example": "He arrived early for the meeting.",
+    "level": "A2",
+    "part_of_speech": "adjective",
+    "definition_pt": "Antes do horário habitual ou esperado."
+  },
+  {
+    "word": "earth",
+    "definition": "The planet on which we live.",
+    "example": "The earth rotates around the sun.",
+    "level": "A2",
+    "part_of_speech": "noun",
+    "definition_pt": "O planeta no qual vivemos."
+  },
+  {
+    "word": "enjoy",
+    "definition": "To take pleasure in something.",
+    "example": "They enjoy listening to classical music.",
+    "level": "A2",
+    "part_of_speech": "verb",
+    "definition_pt": "Sentir prazer em alguma coisa."
+  },
+  {
+    "word": "fight",
+    "definition": "To engage in battle or physical struggle.",
+    "example": "The two brothers always fight over toys.",
+    "level": "A2",
+    "part_of_speech": "verb",
+    "definition_pt": "Envolver-se em batalha ou luta física."
+  },
+  {
+    "word": "fruit",
+    "definition": "Sweet product of a plant.",
+    "example": "Fresh fruit is part of a healthy diet.",
+    "level": "A2",
+    "part_of_speech": "noun",
+    "definition_pt": "Produto doce de uma planta."
+  },
+  {
+    "word": "glass",
+    "definition": "A hard, transparent material.",
+    "example": "She filled the glass with orange juice.",
+    "level": "A2",
+    "part_of_speech": "noun",
+    "definition_pt": "Um material duro e transparente."
+  },
+  {
+    "word": "grass",
+    "definition": "Green vegetation in lawns.",
+    "example": "We sat on the green grass in the park.",
+    "level": "A2",
+    "part_of_speech": "noun",
+    "definition_pt": "Vegetação verde nos gramados."
+  },
+  {
+    "word": "green",
+    "definition": "A color like grass.",
+    "example": "The leaves turn green in spring.",
+    "level": "A2",
+    "part_of_speech": "adjective",
+    "definition_pt": "Uma cor como a da grama."
+  },
+  {
+    "word": "heart",
+    "definition": "The organ that pumps blood.",
+    "example": "His heart beat fast after running.",
+    "level": "A2",
+    "part_of_speech": "noun",
+    "definition_pt": "O órgão que bombeia o sangue."
+  },
+  {
+    "word": "heavy",
+    "definition": "Having great weight.",
+    "example": "This heavy box is difficult to lift.",
+    "level": "A2",
+    "part_of_speech": "adjective",
+    "definition_pt": "Que tem grande peso."
+  },
+  {
+    "word": "horse",
+    "definition": "A large animal used for riding.",
+    "example": "He rode a beautiful white horse.",
+    "level": "A2",
+    "part_of_speech": "noun",
+    "definition_pt": "Um animal grande usado para montaria."
+  },
+  {
+    "word": "knife",
+    "definition": "A tool used for cutting.",
+    "example": "Use a sharp knife to cut the bread.",
+    "level": "A2",
+    "part_of_speech": "noun",
+    "definition_pt": "Uma ferramenta usada para cortar."
+  },
+  {
+    "word": "laugh",
+    "definition": "To make sounds of amusement.",
+    "example": "The funny joke made everyone laugh.",
+    "level": "A2",
+    "part_of_speech": "verb",
+    "definition_pt": "Fazer sons de divertimento."
+  },
+  {
+    "word": "light",
+    "definition": "The natural agent that stimulates sight.",
+    "example": "The bright light hurt his eyes.",
+    "level": "A2",
+    "part_of_speech": "noun",
+    "definition_pt": "O agente natural que estimula a visão."
+  },
+  {
+    "word": "lunch",
+    "definition": "A meal eaten in the middle of the day.",
+    "example": "We had a quick lunch at the cafe.",
+    "level": "A2",
+    "part_of_speech": "noun",
+    "definition_pt": "Uma refeição feita no meio do dia."
+  },
+  {
+    "word": "month",
+    "definition": "One of the twelve periods of a year.",
+    "example": "She will start her new job next month.",
+    "level": "A2",
+    "part_of_speech": "noun",
+    "definition_pt": "Um dos doze períodos de um ano."
+  },
+  {
+    "word": "neck",
+    "definition": "Part of body connecting head and shoulders.",
+    "example": "She wore a silver scarf around her neck.",
+    "level": "A2",
+    "part_of_speech": "noun",
+    "definition_pt": "Parte do corpo que conecta a cabeça e os ombros."
+  },
+  {
+    "word": "onion",
+    "definition": "A round vegetable with a strong smell.",
+    "example": "He chopped an onion for the soup.",
+    "level": "A2",
+    "part_of_speech": "noun",
+    "definition_pt": "Um vegetal redondo com cheiro forte."
+  },
+  {
+    "word": "park",
+    "definition": "A public green area.",
+    "example": "They walked their dog in the park.",
+    "level": "A2",
+    "part_of_speech": "noun",
+    "definition_pt": "Uma área verde pública."
+  },
+  {
+    "word": "plant",
+    "definition": "A living thing that grows in earth.",
+    "example": "She watered the plant on the balcony.",
+    "level": "A2",
+    "part_of_speech": "noun",
+    "definition_pt": "Um ser vivo que cresce na terra."
+  },
+  {
+    "word": "plate",
+    "definition": "A flat dish for food.",
+    "example": "He put the cake on a small plate.",
+    "level": "A2",
+    "part_of_speech": "noun",
+    "definition_pt": "Um prato plano para comida."
+  },
+  {
+    "word": "pocket",
+    "definition": "A small pouch in clothing.",
+    "example": "He put his keys in his pocket.",
+    "level": "A2",
+    "part_of_speech": "noun",
+    "definition_pt": "Uma pequena bolsa em roupas."
+  },
+  {
+    "word": "quick",
+    "definition": "Moving or doing something fast.",
+    "example": "They made a quick decision to leave.",
+    "level": "A2",
+    "part_of_speech": "adjective",
+    "definition_pt": "Mover-se ou fazer algo rápido."
+  },
+  {
+    "word": "quiet",
+    "definition": "Making very little noise.",
+    "example": "The library is a very quiet place.",
+    "level": "A2",
+    "part_of_speech": "adjective",
+    "definition_pt": "Fazendo muito pouco barulho."
+  },
+  {
+    "word": "river",
+    "definition": "A large natural stream of water.",
+    "example": "They caught fish in the deep river.",
+    "level": "A2",
+    "part_of_speech": "noun",
+    "definition_pt": "Um grande fluxo natural de água."
+  },
+  {
+    "word": "salt",
+    "definition": "White substance used to flavor food.",
+    "example": "Add a pinch of salt to the sauce.",
+    "level": "A2",
+    "part_of_speech": "noun",
+    "definition_pt": "Substância branca usada para dar sabor aos alimentos."
+  },
+  {
+    "word": "sleep",
+    "definition": "A natural state of rest.",
+    "example": "You need eight hours of sleep daily.",
+    "level": "A2",
+    "part_of_speech": "verb",
+    "definition_pt": "Um estado natural de descanso."
+  },
+  {
+    "word": "slow",
+    "definition": "Not moving or acting quickly.",
+    "example": "The train was very slow today.",
+    "level": "A2",
+    "part_of_speech": "adjective",
+    "definition_pt": "Não se mover ou agir rapidamente."
+  },
+  {
+    "word": "small",
+    "definition": "Little in size or amount.",
+    "example": "They live in a small apartment.",
+    "level": "A2",
+    "part_of_speech": "adjective",
+    "definition_pt": "Pequeno em tamanho ou quantidade."
+  },
+  {
+    "word": "smoke",
+    "definition": "Cloud produced by burning.",
+    "example": "Grey smoke rose from the chimney.",
+    "level": "A2",
+    "part_of_speech": "noun",
+    "definition_pt": "Nuvem produzida pela queima."
+  },
+  {
+    "word": "snow",
+    "definition": "Frozen rain falling in flakes.",
+    "example": "White snow covered the streets.",
+    "level": "A2",
+    "part_of_speech": "noun",
+    "definition_pt": "Chuva congelada caindo em flocos."
+  },
+  {
+    "word": "spoon",
+    "definition": "A tool used for eating soup.",
+    "example": "She stirred her coffee with a spoon.",
+    "level": "A2",
+    "part_of_speech": "noun",
+    "definition_pt": "Uma ferramenta usada para comer sopa."
+  },
+  {
+    "word": "sport",
+    "definition": "A physical activity or game.",
+    "example": "Tennis is her favorite sport.",
+    "level": "A2",
+    "part_of_speech": "noun",
+    "definition_pt": "Uma atividade física ou jogo."
+  },
+  {
+    "word": "stone",
+    "definition": "A small piece of rock.",
+    "example": "He threw a small stone into the pond.",
+    "level": "A2",
+    "part_of_speech": "noun",
+    "definition_pt": "Um pequeno pedaço de rocha."
+  },
+  {
+    "word": "train",
+    "definition": "A series of connected railway carriages.",
+    "example": "We caught the train at nine o'clock.",
+    "level": "A2",
+    "part_of_speech": "noun",
+    "definition_pt": "Uma série de vagões de ferrovia conectados."
+  },
+  {
+    "word": "valley",
+    "definition": "Low area of land between hills.",
+    "example": "The small village lies in a green valley.",
+    "level": "A2",
+    "part_of_speech": "noun",
+    "definition_pt": "Área baixa de terra entre colinas."
+  },
+  {
+    "word": "accent",
+    "definition": "A distinctive way of pronouncing a language.",
+    "example": "He speaks English with a strong French accent.",
+    "level": "B1",
+    "part_of_speech": "noun",
+    "definition_pt": "Uma forma distinta de pronunciar um idioma."
+  },
+  {
+    "word": "active",
+    "definition": "Engaging or ready to engage in physically energetic pursuits.",
+    "example": "Despite her age, she is still very active.",
+    "level": "B1",
+    "part_of_speech": "adjective",
+    "definition_pt": "Envolver-se em atividades energeticamente físicas."
+  },
+  {
+    "word": "advice",
+    "definition": "Guidance or recommendations offered.",
+    "example": "He asked his teacher for advice on studying.",
+    "level": "B1",
+    "part_of_speech": "noun",
+    "definition_pt": "Orientação ou recomendações oferecidas."
+  },
+  {
+    "word": "afraid",
+    "definition": "Feeling fear or anxiety.",
+    "example": "She is afraid of spiders and dark rooms.",
+    "level": "B1",
+    "part_of_speech": "adjective",
+    "definition_pt": "Sentir medo ou ansiedade."
+  },
+  {
+    "word": "agency",
+    "definition": "A business representing others.",
+    "example": "They booked their trip through a travel agency.",
+    "level": "B1",
+    "part_of_speech": "noun",
+    "definition_pt": "Uma empresa que representa outros."
+  },
+  {
+    "word": "amount",
+    "definition": "A quantity of something.",
+    "example": "We spent a large amount of time planning.",
+    "level": "B1",
+    "part_of_speech": "noun",
+    "definition_pt": "Uma quantidade de alguma coisa."
+  },
+  {
+    "word": "border",
+    "definition": "The boundary between two countries.",
+    "example": "They crossed the border into Spain.",
+    "level": "B1",
+    "part_of_speech": "noun",
+    "definition_pt": "A fronteira entre dois países."
+  },
+  {
+    "word": "brain",
+    "definition": "The organ of thought inside the head.",
+    "example": "Reading exercises the human brain.",
+    "level": "B1",
+    "part_of_speech": "noun",
+    "definition_pt": "O órgão do pensamento dentro da cabeça."
+  },
+  {
+    "word": "breeze",
+    "definition": "A gentle and pleasant wind.",
+    "example": "A cool breeze blew from the sea.",
+    "level": "B1",
+    "part_of_speech": "noun",
+    "definition_pt": "Um vento suave e agradável."
+  },
+  {
+    "word": "bridge",
+    "definition": "A structure built over a river.",
+    "example": "The bridge connects the two sides of the city.",
+    "level": "B1",
+    "part_of_speech": "noun",
+    "definition_pt": "Uma estrutura construída sobre um rio."
+  },
+  {
+    "word": "camera",
+    "definition": "A device for taking photographs.",
+    "example": "He bought a high-quality digital camera.",
+    "level": "B1",
+    "part_of_speech": "noun",
+    "definition_pt": "Um dispositivo para tirar fotografias."
+  },
+  {
+    "word": "candle",
+    "definition": "A cylinder of wax with a central wick.",
+    "example": "She lit a scented candle in the living room.",
+    "level": "B1",
+    "part_of_speech": "noun",
+    "definition_pt": "Um cilindro de cera com um pavio central."
+  },
+  {
+    "word": "career",
+    "definition": "A profession followed for a significant period.",
+    "example": "He built a successful career in education.",
+    "level": "B1",
+    "part_of_speech": "noun",
+    "definition_pt": "Uma profissão seguida por um período significativo."
+  },
+  {
+    "word": "castle",
+    "definition": "A large fortified building.",
+    "example": "An ancient stone castle stood on the hill.",
+    "level": "B1",
+    "part_of_speech": "noun",
+    "definition_pt": "Um grande edifício fortificado."
+  },
+  {
+    "word": "chance",
+    "definition": "A possibility of something happening.",
+    "example": "There is a good chance it will rain tonight.",
+    "level": "B1",
+    "part_of_speech": "noun",
+    "definition_pt": "Uma possibilidade de algo acontecer."
+  },
+  {
+    "word": "choice",
+    "definition": "An act of choosing between options.",
+    "example": "You have a choice between coffee or tea.",
+    "level": "B1",
+    "part_of_speech": "noun",
+    "definition_pt": "O ato de escolher entre opções."
+  },
+  {
+    "word": "clever",
+    "definition": "Quick to understand or learn.",
+    "example": "The clever student solved the puzzle quickly.",
+    "level": "B1",
+    "part_of_speech": "adjective",
+    "definition_pt": "Rápido para entender ou aprender."
+  },
+  {
+    "word": "corner",
+    "definition": "The place where two streets meet.",
+    "example": "The bakery is on the corner of the street.",
+    "level": "B1",
+    "part_of_speech": "noun",
+    "definition_pt": "O lugar onde duas ruas se encontram."
+  },
+  {
+    "word": "cousin",
+    "definition": "A child of one's uncle or aunt.",
+    "example": "I invited my favorite cousin to the dinner.",
+    "level": "B1",
+    "part_of_speech": "noun",
+    "definition_pt": "O filho de um tio ou tia."
+  },
+  {
+    "word": "danger",
+    "definition": "The possibility of suffering harm.",
+    "example": "There is danger in driving on icy roads.",
+    "level": "B1",
+    "part_of_speech": "noun",
+    "definition_pt": "A possibilidade de sofrer danos."
+  },
+  {
+    "word": "degree",
+    "definition": "An academic qualification.",
+    "example": "She earned a degree in computer science.",
+    "level": "B1",
+    "part_of_speech": "noun",
+    "definition_pt": "Uma qualificação acadêmica."
+  },
+  {
+    "word": "desert",
+    "definition": "A dry, sandy area of land.",
+    "example": "Very few plants grow in the hot desert.",
+    "level": "B1",
+    "part_of_speech": "noun",
+    "definition_pt": "Uma área de terra seca e arenosa."
+  },
+  {
+    "word": "detail",
+    "definition": "An individual fact or item.",
+    "example": "Please describe the plan in detail.",
+    "level": "B1",
+    "part_of_speech": "noun",
+    "definition_pt": "Um fato ou item individual."
+  },
+  {
+    "word": "dinner",
+    "definition": "The main meal of the day, eaten in the evening.",
+    "example": "They invited us to dinner at their house.",
+    "level": "B1",
+    "part_of_speech": "noun",
+    "definition_pt": "A principal refeição do dia, comida à noite."
+  },
+  {
+    "word": "double",
+    "definition": "Consisting of two equal things.",
+    "example": "They booked a room with a double bed.",
+    "level": "B1",
+    "part_of_speech": "adjective",
+    "definition_pt": "Consistir em duas coisas iguais."
+  },
+  {
+    "word": "driver",
+    "definition": "A person who operates a vehicle.",
+    "example": "The bus driver was polite and helpful.",
+    "level": "B1",
+    "part_of_speech": "noun",
+    "definition_pt": "Uma pessoa que opera um veículo."
+  },
+  {
+    "word": "empty",
+    "definition": "Containing nothing or vacant.",
+    "example": "The box was completely empty inside.",
+    "level": "B1",
+    "part_of_speech": "adjective",
+    "definition_pt": "Que não contém nada ou está vago."
+  },
+  {
+    "word": "engine",
+    "definition": "A machine that converts power into motion.",
+    "example": "The car engine stopped working in the cold.",
+    "level": "B1",
+    "part_of_speech": "noun",
+    "definition_pt": "Uma máquina que converte energia em movimento."
+  },
+  {
+    "word": "escape",
+    "definition": "To get free from danger.",
+    "example": "The prisoners tried to escape at night.",
+    "level": "B1",
+    "part_of_speech": "verb",
+    "definition_pt": "Libertar-se do perigo."
+  },
+  {
+    "word": "event",
+    "definition": "A planned public or social occasion.",
+    "example": "The charity concert was a successful event.",
+    "level": "B1",
+    "part_of_speech": "noun",
+    "definition_pt": "Uma ocasião social ou pública planejada."
+  },
+  {
+    "word": "expert",
+    "definition": "A person with special knowledge.",
+    "example": "She is a leading expert in marine biology.",
+    "level": "B1",
+    "part_of_speech": "noun",
+    "definition_pt": "Uma pessoa com conhecimento especial."
+  },
+  {
+    "word": "factor",
+    "definition": "An influence that contributes to a result.",
+    "example": "Time was the main factor in our failure.",
+    "level": "B1",
+    "part_of_speech": "noun",
+    "definition_pt": "Uma influência que contribui para um resultado."
+  },
+  {
+    "word": "flight",
+    "definition": "A journey made through the air.",
+    "example": "Their flight to Lisbon was delayed by fog.",
+    "level": "B1",
+    "part_of_speech": "noun",
+    "definition_pt": "Uma viagem realizada pelo ar."
+  },
+  {
+    "word": "forest",
+    "definition": "A large area covered with trees.",
+    "example": "We went hiking in the deep forest.",
+    "level": "B1",
+    "part_of_speech": "noun",
+    "definition_pt": "Uma grande área coberta de árvores."
+  },
+  {
+    "word": "future",
+    "definition": "A period of time following the present.",
+    "example": "No one can predict the absolute future.",
+    "level": "B1",
+    "part_of_speech": "noun",
+    "definition_pt": "Um período de tempo posterior ao presente."
+  },
+  {
+    "word": "garden",
+    "definition": "A piece of ground next to a house for growing plants.",
+    "example": "She planted red roses in her garden.",
+    "level": "B1",
+    "part_of_speech": "noun",
+    "definition_pt": "Um pedaço de terra junto a uma casa para cultivar plantas."
+  },
+  {
+    "word": "growth",
+    "definition": "The process of increasing in size.",
+    "example": "The company recorded strong economic growth.",
+    "level": "B1",
+    "part_of_speech": "noun",
+    "definition_pt": "O processo de aumento de tamanho."
+  },
+  {
+    "word": "height",
+    "definition": "The measurement from base to top.",
+    "example": "He measured the height of the door frame.",
+    "level": "B1",
+    "part_of_speech": "noun",
+    "definition_pt": "A medição da base ao topo."
+  },
+  {
+    "word": "hidden",
+    "definition": "Kept out of sight or concealed.",
+    "example": "They found a hidden path in the woods.",
+    "level": "B1",
+    "part_of_speech": "adjective",
+    "definition_pt": "Mantido fora de vista ou oculto."
+  },
+  {
+    "word": "hungry",
+    "definition": "Feeling a need for food.",
+    "example": "The kids were very hungry after swimming.",
+    "level": "B1",
+    "part_of_speech": "adjective",
+    "definition_pt": "Sentir necessidade de alimento."
+  },
+  {
+    "word": "insect",
+    "definition": "A small creature with six legs.",
+    "example": "A colorful insect landed on the leaf.",
+    "level": "B1",
+    "part_of_speech": "noun",
+    "definition_pt": "Uma pequena criatura com seis pernas."
+  },
+  {
+    "word": "island",
+    "definition": "A piece of land surrounded by water.",
+    "example": "They sailed to a beautiful tropical island.",
+    "level": "B1",
+    "part_of_speech": "noun",
+    "definition_pt": "Um pedaço de terra cercado por água."
+  },
+  {
+    "word": "market",
+    "definition": "A regular gathering for buying and selling.",
+    "example": "We bought fresh vegetables at the local market.",
+    "level": "B1",
+    "part_of_speech": "noun",
+    "definition_pt": "Um encontro regular para compra e venda."
+  },
+  {
+    "word": "nature",
+    "definition": "The phenomena of the physical world.",
+    "example": "He enjoys spending quiet time in nature.",
+    "level": "B1",
+    "part_of_speech": "noun",
+    "definition_pt": "Os fenômenos do mundo físico."
+  },
+  {
+    "word": "option",
+    "definition": "A thing that is or may be chosen.",
+    "example": "Giving up is not a viable option.",
+    "level": "B1",
+    "part_of_speech": "noun",
+    "definition_pt": "Uma coisa que é ou pode ser escolhida."
+  },
+  {
+    "word": "parent",
+    "definition": "A father or mother.",
+    "example": "Every parent wants the best for their child.",
+    "level": "B1",
+    "part_of_speech": "noun",
+    "definition_pt": "Um pai ou uma mãe."
+  },
+  {
+    "word": "pencil",
+    "definition": "An instrument for writing or drawing.",
+    "example": "He sketched the portrait with a pencil.",
+    "level": "B1",
+    "part_of_speech": "noun",
+    "definition_pt": "Um instrumento para escrever ou desenhar."
+  },
+  {
+    "word": "reason",
+    "definition": "A cause or explanation for an event.",
+    "example": "Give me one good reason to believe you.",
+    "level": "B1",
+    "part_of_speech": "noun",
+    "definition_pt": "Uma causa ou explicação para um evento."
+  },
+  {
+    "word": "shadow",
+    "definition": "A dark area produced by blocking light.",
+    "example": "The tree cast a long shadow on the lawn.",
+    "level": "B1",
+    "part_of_speech": "noun",
+    "definition_pt": "Uma área escura produzida pelo bloqueio da luz."
+  },
+  {
+    "word": "sudden",
+    "definition": "Occurring or done quickly and unexpectedly.",
+    "example": "A sudden noise startled the sleeping baby.",
+    "level": "B1",
+    "part_of_speech": "adjective",
+    "definition_pt": "Ocorrer ou ser feito de forma rápida e inesperada."
+  },
+  {
+    "word": "acquire",
+    "definition": "To buy or obtain an asset.",
+    "example": "She worked hard to acquire new skills.",
+    "level": "B2",
+    "part_of_speech": "verb",
+    "definition_pt": "Comprar ou obter um ativo."
+  },
+  {
+    "word": "adjust",
+    "definition": "To alter slightly to achieve fit.",
+    "example": "He had to adjust the seat to drive comfortably.",
+    "level": "B2",
+    "part_of_speech": "verb",
+    "definition_pt": "Alterar ligeiramente para alcançar ajuste."
+  },
+  {
+    "word": "analyze",
+    "definition": "To examine methodically.",
+    "example": "We need to analyze the laboratory results.",
+    "level": "B2",
+    "part_of_speech": "verb",
+    "definition_pt": "Examinar metodicamente."
+  },
+  {
+    "word": "annual",
+    "definition": "Occurring once every year.",
+    "example": "The annual report is published in January.",
+    "level": "B2",
+    "part_of_speech": "adjective",
+    "definition_pt": "Que ocorre uma vez a cada ano."
+  },
+  {
+    "word": "asset",
+    "definition": "A useful or valuable quality or thing.",
+    "example": "Fluency in English is a major asset in business.",
+    "level": "B2",
+    "part_of_speech": "noun",
+    "definition_pt": "Uma qualidade ou coisa útil ou valiosa."
+  },
+  {
+    "word": "capture",
+    "definition": "To record or express accurately.",
+    "example": "The photo managed to capture her beautiful smile.",
+    "level": "B2",
+    "part_of_speech": "verb",
+    "definition_pt": "Registrar ou expressar com precisão."
+  },
+  {
+    "word": "catalog",
+    "definition": "A complete list of items in systematic order.",
+    "example": "He searched the library catalog for the book.",
+    "level": "B2",
+    "part_of_speech": "noun",
+    "definition_pt": "Uma lista completa de itens em ordem sistemática."
+  },
+  {
+    "word": "citizen",
+    "definition": "A legally recognized subject of a state.",
+    "example": "He is a proud citizen of Portugal.",
+    "level": "B2",
+    "part_of_speech": "noun",
+    "definition_pt": "Um sujeito legalmente reconhecido de um estado."
+  },
+  {
+    "word": "classic",
+    "definition": "Judged over time to be of the highest quality.",
+    "example": "He bought a classic black leather jacket.",
+    "level": "B2",
+    "part_of_speech": "adjective",
+    "definition_pt": "Julgado ao longo do tempo como sendo de alta qualidade."
+  },
+  {
+    "word": "climate",
+    "definition": "The weather conditions prevailing in an area.",
+    "example": "The region is known for its mild climate.",
+    "level": "B2",
+    "part_of_speech": "noun",
+    "definition_pt": "As condições climáticas prevalecentes em uma área."
+  },
+  {
+    "word": "closure",
+    "definition": "A feeling of resolution or conclusion.",
+    "example": "The apology gave her a sense of final closure.",
+    "level": "B2",
+    "part_of_speech": "noun",
+    "definition_pt": "Uma sensação de resolução ou conclusão."
+  },
+  {
+    "word": "cluster",
+    "definition": "A group of similar things positioned closely.",
+    "example": "A small cluster of stars appeared in the night sky.",
+    "level": "B2",
+    "part_of_speech": "noun",
+    "definition_pt": "Um grupo de coisas semelhantes posicionadas próximas."
+  },
+  {
+    "word": "collect",
+    "definition": "To bring things together.",
+    "example": "They collect rare coins from around the world.",
+    "level": "B2",
+    "part_of_speech": "verb",
+    "definition_pt": "Reunir coisas."
+  },
+  {
+    "word": "columns",
+    "definition": "Vertical divisions of a page or text.",
+    "example": "The newspaper layout has three neat columns.",
+    "level": "B2",
+    "part_of_speech": "noun",
+    "definition_pt": "Divisões verticais de uma página ou texto."
+  },
+  {
+    "word": "combat",
+    "definition": "To take action to reduce or prevent.",
+    "example": "New measures were introduced to combat drug crime.",
+    "level": "B2",
+    "part_of_speech": "verb",
+    "definition_pt": "Tomar medidas para reduzir ou prevenir."
+  },
+  {
+    "word": "command",
+    "definition": "An authoritative directive or order.",
+    "example": "The soldiers obeyed the captain's firm command.",
+    "level": "B2",
+    "part_of_speech": "noun",
+    "definition_pt": "Uma diretiva ou ordem de autoridade."
+  },
+  {
+    "word": "complex",
+    "definition": "Consisting of many different and connected parts.",
+    "example": "The puzzle had a very complex design.",
+    "level": "B2",
+    "part_of_speech": "adjective",
+    "definition_pt": "Consistir em muitas partes diferentes e conectadas."
+  },
+  {
+    "word": "conduct",
+    "definition": "To organize and carry out an activity.",
+    "example": "We need to conduct a thorough research survey.",
+    "level": "B2",
+    "part_of_speech": "verb",
+    "definition_pt": "Organizar e realizar uma atividade."
+  },
+  {
+    "word": "consent",
+    "definition": "Permission for something to happen.",
+    "example": "No operations are performed without patient consent.",
+    "level": "B2",
+    "part_of_speech": "noun",
+    "definition_pt": "Permissão para que algo aconteça."
+  },
+  {
+    "word": "context",
+    "definition": "The circumstances that form the setting for an event.",
+    "example": "You must look at the quote in context.",
+    "level": "B2",
+    "part_of_speech": "noun",
+    "definition_pt": "As circunstâncias que formam o cenário de um evento."
+  },
+  {
+    "word": "crucial",
+    "definition": "Of great importance or decisive.",
+    "example": "Good coordination is crucial for the team's victory.",
+    "level": "B2",
+    "part_of_speech": "adjective",
+    "definition_pt": "De grande importância ou decisivo."
+  },
+  {
+    "word": "current",
+    "definition": "Belonging to the present time.",
+    "example": "What is your current physical address?",
+    "level": "B2",
+    "part_of_speech": "adjective",
+    "definition_pt": "Pertencente ao momento presente."
+  },
+  {
+    "word": "custom",
+    "definition": "A traditional way of behaving.",
+    "example": "It is a local custom to exchange gifts.",
+    "level": "B2",
+    "part_of_speech": "noun",
+    "definition_pt": "Uma forma tradicional de se comportar."
+  },
+  {
+    "word": "decade",
+    "definition": "A period of ten years.",
+    "example": "The technology has changed rapidly over the decade.",
+    "level": "B2",
+    "part_of_speech": "noun",
+    "definition_pt": "Um período de dez anos."
+  },
+  {
+    "word": "decline",
+    "definition": "To become smaller, fewer, or less.",
+    "example": "The demand for coal continues to decline.",
+    "level": "B2",
+    "part_of_speech": "verb",
+    "definition_pt": "Tornar-se menor, menor número ou menos."
+  },
+  {
+    "word": "defend",
+    "definition": "To protect from harm or danger.",
+    "example": "The soldiers fought bravely to defend the fortress.",
+    "level": "B2",
+    "part_of_speech": "verb",
+    "definition_pt": "Proteger de danos ou perigos."
+  },
+  {
+    "word": "defense",
+    "definition": "Action taken to protect against attack.",
+    "example": "A strong defense is essential in football.",
+    "level": "B2",
+    "part_of_speech": "noun",
+    "definition_pt": "Ação tomada para se proteger contra ataques."
+  },
+  {
+    "word": "deficit",
+    "definition": "An excess of expenditure over income.",
+    "example": "The national budget deficit rose this fiscal year.",
+    "level": "B2",
+    "part_of_speech": "noun",
+    "definition_pt": "Um excesso de despesas sobre as receitas."
+  },
+  {
+    "word": "density",
+    "definition": "The degree of compactness of a substance.",
+    "example": "The population density in Tokyo is extremely high.",
+    "level": "B2",
+    "part_of_speech": "noun",
+    "definition_pt": "O grau de compactação de uma substância."
+  },
+  {
+    "word": "deposit",
+    "definition": "A sum of money paid into a bank account.",
+    "example": "He made a cash deposit of one hundred dollars.",
+    "level": "B2",
+    "part_of_speech": "noun",
+    "definition_pt": "Uma soma em dinheiro paga em uma conta bancária."
+  },
+  {
+    "word": "derive",
+    "definition": "To obtain something from a specific source.",
+    "example": "Many English words derive from ancient Latin.",
+    "level": "B2",
+    "part_of_speech": "verb",
+    "definition_pt": "Obter algo de uma fonte específica."
+  },
+  {
+    "word": "dessert",
+    "definition": "Sweet food eaten at the end of a meal.",
+    "example": "We ordered apple pie for our dessert.",
+    "level": "B2",
+    "part_of_speech": "noun",
+    "definition_pt": "Alimento doce comido ao final de uma refeição."
+  },
+  {
+    "word": "detect",
+    "definition": "To discover or identify the presence of.",
+    "example": "The radar can detect small aircraft.",
+    "level": "B2",
+    "part_of_speech": "verb",
+    "definition_pt": "Descobrir ou identificar a presença de."
+  },
+  {
+    "word": "device",
+    "definition": "An instrument made for a particular purpose.",
+    "example": "This handheld device is highly practical.",
+    "level": "B2",
+    "part_of_speech": "noun",
+    "definition_pt": "Um instrumento fabricado para um propósito específico."
+  },
+  {
+    "word": "diary",
+    "definition": "A book in which one keeps a daily record.",
+    "example": "She kept a personal diary during her travels.",
+    "level": "B2",
+    "part_of_speech": "noun",
+    "definition_pt": "Um livro no qual se mantém um registro diário."
+  },
+  {
+    "word": "digital",
+    "definition": "Expressed in numerical digits, especially binary.",
+    "example": "We live in an increasingly digital world.",
+    "level": "B2",
+    "part_of_speech": "adjective",
+    "definition_pt": "Expresso em dígitos numéricos, especialmente binários."
+  },
+  {
+    "word": "dilemma",
+    "definition": "A difficult situation or choice.",
+    "example": "Having two job offers was an pleasant dilemma.",
+    "level": "B2",
+    "part_of_speech": "noun",
+    "definition_pt": "Uma situação ou escolha difícil."
+  },
+  {
+    "word": "dismiss",
+    "definition": "To decide that something is not important.",
+    "example": "Do not dismiss the idea without trying it.",
+    "level": "B2",
+    "part_of_speech": "verb",
+    "definition_pt": "Decidir que algo não é importante."
+  },
+  {
+    "word": "display",
+    "definition": "To show or exhibit publicly.",
+    "example": "The museum will display the ancient relics.",
+    "level": "B2",
+    "part_of_speech": "verb",
+    "definition_pt": "Mostrar ou exibir publicamente."
+  },
+  {
+    "word": "diverse",
+    "definition": "Showing a great deal of variety.",
+    "example": "The university attracts a highly diverse student group.",
+    "level": "B2",
+    "part_of_speech": "adjective",
+    "definition_pt": "Que apresenta grande variedade."
+  },
+  {
+    "word": "dynamic",
+    "definition": "Characterized by constant change or progress.",
+    "example": "Market forces demand dynamic corporate strategies.",
+    "level": "B2",
+    "part_of_speech": "adjective",
+    "definition_pt": "Caracterizado por constante mudança ou progresso."
+  },
+  {
+    "word": "edition",
+    "definition": "A particular version of a published text.",
+    "example": "She bought the latest edition of the dictionary.",
+    "level": "B2",
+    "part_of_speech": "noun",
+    "definition_pt": "Uma versão específica de um texto publicado."
+  },
+  {
+    "word": "elastic",
+    "definition": "Able to resume normal shape after stretching.",
+    "example": "The waist of these trousers is fully elastic.",
+    "level": "B2",
+    "part_of_speech": "adjective",
+    "definition_pt": "Capaz de recuperar a forma normal depois de esticar."
+  },
+  {
+    "word": "element",
+    "definition": "An essential part of something.",
+    "example": "Trust is a key element of any friendship.",
+    "level": "B2",
+    "part_of_speech": "noun",
+    "definition_pt": "Uma parte essencial de alguma coisa."
+  },
+  {
+    "word": "elegant",
+    "definition": "Graceful and stylish in appearance.",
+    "example": "She wore an elegant black gown.",
+    "level": "B2",
+    "part_of_speech": "adjective",
+    "definition_pt": "Gracioso e estiloso na aparência."
+  },
+  {
+    "word": "emerald",
+    "definition": "A bright green precious stone.",
+    "example": "Her necklace featured a large shining emerald.",
+    "level": "B2",
+    "part_of_speech": "noun",
+    "definition_pt": "Uma pedra preciosa verde brilhante."
+  },
+  {
+    "word": "emerge",
+    "definition": "To become apparent or prominent.",
+    "example": "New details emerge as the inquiry proceeds.",
+    "level": "B2",
+    "part_of_speech": "verb",
+    "definition_pt": "Tornar-se aparente ou proeminente."
+  },
+  {
+    "word": "emotion",
+    "definition": "A strong feeling such as joy.",
+    "example": "His voice trembled with strong emotion.",
+    "level": "B2",
+    "part_of_speech": "noun",
+    "definition_pt": "Um sentimento forte como alegria."
+  },
+  {
+    "word": "empire",
+    "definition": "A large group of states ruled by a single monarch.",
+    "example": "He read a book on the ancient Roman Empire.",
+    "level": "B2",
+    "part_of_speech": "noun",
+    "definition_pt": "Um grande grupo de estados governados por um único monarca."
+  },
+  {
+    "word": "faculty",
+    "definition": "An inherent mental or physical power.",
+    "example": "He retained his mental faculty until a late age.",
+    "level": "B2",
+    "part_of_speech": "noun",
+    "definition_pt": "Uma capacidade mental ou física inerente."
+  },
+  {
+    "word": "abstract",
+    "definition": "Existing in thought but not having physical existence.",
+    "example": "Truth and beauty are highly abstract concepts.",
+    "level": "C1",
+    "part_of_speech": "adjective",
+    "definition_pt": "Existente no pensamento, mas sem existência física."
+  },
+  {
+    "word": "acoustic",
+    "definition": "Relating to sound or hearing.",
+    "example": "The hall is known for its excellent acoustic design.",
+    "level": "C1",
+    "part_of_speech": "adjective",
+    "definition_pt": "Relativo ao som ou à audição."
+  },
+  {
+    "word": "acute",
+    "definition": "Severe or intense in a high degree.",
+    "example": "There is an acute shortage of clean water.",
+    "level": "C1",
+    "part_of_speech": "adjective",
+    "definition_pt": "Grave ou intenso em alto grau."
+  },
+  {
+    "word": "adjacent",
+    "definition": "Next to or adjoining something else.",
+    "example": "Their house is adjacent to the green park.",
+    "level": "C1",
+    "part_of_speech": "adjective",
+    "definition_pt": "Próximo ou contíguo a algo mais."
+  },
+  {
+    "word": "advocate",
+    "definition": "A person who publicly supports a cause.",
+    "example": "She is a passionate advocate for child education.",
+    "level": "C1",
+    "part_of_speech": "noun",
+    "definition_pt": "Uma pessoa que apoia publicamente uma causa."
+  },
+  {
+    "word": "alliance",
+    "definition": "A union or association formed for mutual benefit.",
+    "example": "The two countries formed a defensive alliance.",
+    "level": "C1",
+    "part_of_speech": "noun",
+    "definition_pt": "Uma união ou associação formada para benefício mútuo."
+  },
+  {
+    "word": "alloy",
+    "definition": "A metal made by combining two or more metallic elements.",
+    "example": "Brass is an alloy of copper and zinc.",
+    "level": "C1",
+    "part_of_speech": "noun",
+    "definition_pt": "Um metal feito pela combinação de dois ou mais elementos metálicos."
+  },
+  {
+    "word": "amateur",
+    "definition": "A person who engages in a pursuit on an unpaid basis.",
+    "example": "The play was performed by a talented amateur group.",
+    "level": "C1",
+    "part_of_speech": "noun",
+    "definition_pt": "Uma pessoa que se dedica a uma atividade de forma não remunerada."
+  },
+  {
+    "word": "analogy",
+    "definition": "A comparison between one thing and another.",
+    "example": "The teacher used a simple analogy to explain gravity.",
+    "level": "C1",
+    "part_of_speech": "noun",
+    "definition_pt": "Uma comparação entre uma coisa e outra."
+  },
+  {
+    "word": "analyst",
+    "definition": "A person who conducts methodical analysis.",
+    "example": "He works as a financial analyst at a large bank.",
+    "level": "C1",
+    "part_of_speech": "noun",
+    "definition_pt": "Uma pessoa que realiza análises metódicas."
+  },
+  {
+    "word": "ancestor",
+    "definition": "A person from whom one is descended.",
+    "example": "Her ancestor arrived in this country a century ago.",
+    "level": "C1",
+    "part_of_speech": "noun",
+    "definition_pt": "Uma pessoa da qual se descende."
+  },
+  {
+    "word": "anomaly",
+    "definition": "Something that deviates from what is standard.",
+    "example": "The high temperature in winter was an anomaly.",
+    "level": "C1",
+    "part_of_speech": "noun",
+    "definition_pt": "Algo que se desvia do que é padrão."
+  },
+  {
+    "word": "approval",
+    "definition": "The belief that someone or something is good.",
+    "example": "The project received the board's official approval.",
+    "level": "C1",
+    "part_of_speech": "noun",
+    "definition_pt": "A crença de que alguém ou algo é bom."
+  },
+  {
+    "word": "arbitrary",
+    "definition": "Based on random choice rather than reason.",
+    "example": "The rules seemed completely arbitrary and unfair.",
+    "level": "C1",
+    "part_of_speech": "adjective",
+    "definition_pt": "Baseado em escolha aleatória em vez de razão."
+  },
+  {
+    "word": "archive",
+    "definition": "A collection of historical documents.",
+    "example": "The ancient treaties are kept in the state archive.",
+    "level": "C1",
+    "part_of_speech": "noun",
+    "definition_pt": "Uma coleção de documentos históricos."
+  },
+  {
+    "word": "aroma",
+    "definition": "A pleasant and distinctive smell.",
+    "example": "The delicious aroma of fresh coffee filled the kitchen.",
+    "level": "C1",
+    "part_of_speech": "noun",
+    "definition_pt": "Um cheiro agradável e característico."
+  },
+  {
+    "word": "artifact",
+    "definition": "An object made by a human being of historical interest.",
+    "example": "They discovered a rare gold artifact in the cave.",
+    "level": "C1",
+    "part_of_speech": "noun",
+    "definition_pt": "Um objeto feito por um ser humano de interesse histórico."
+  },
+  {
+    "word": "boundary",
+    "definition": "A line that marks the limit of an area.",
+    "example": "The river forms a natural boundary between counties.",
+    "level": "C1",
+    "part_of_speech": "noun",
+    "definition_pt": "Uma linha que marca o limite de uma área."
+  },
+  {
+    "word": "breach",
+    "definition": "An act of breaking a law or agreement.",
+    "example": "Selling the data was a clear breach of contract.",
+    "level": "C1",
+    "part_of_speech": "noun",
+    "definition_pt": "O ato de quebrar uma lei ou acordo."
+  },
+  {
+    "word": "brilliant",
+    "definition": "Exceptionally clever or talented.",
+    "example": "The young scientist proposed a brilliant solution.",
+    "level": "C1",
+    "part_of_speech": "adjective",
+    "definition_pt": "Excepcionalmente inteligente ou talentoso."
+  },
+  {
+    "word": "browse",
+    "definition": "To survey goods or information casually.",
+    "example": "I love to browse in old bookstores on weekends.",
+    "level": "C1",
+    "part_of_speech": "verb",
+    "definition_pt": "Examinar bens ou informações de forma casual."
+  },
+  {
+    "word": "calendar",
+    "definition": "A chart showing the days and months.",
+    "example": "Mark the date of the exam on your calendar.",
+    "level": "C1",
+    "part_of_speech": "noun",
+    "definition_pt": "Um gráfico que mostra os dias e meses."
+  },
+  {
+    "word": "capsule",
+    "definition": "A small gelatinous case enclosing medicine.",
+    "example": "She took a vitamin capsule after her breakfast.",
+    "level": "C1",
+    "part_of_speech": "noun",
+    "definition_pt": "Um pequeno invólucro gelatinoso que encerra o medicamento."
+  },
+  {
+    "word": "casual",
+    "definition": "Relaxed and unconcerned.",
+    "example": "His casual attitude towards studies was worrying.",
+    "level": "C1",
+    "part_of_speech": "adjective",
+    "definition_pt": "Relaxado e despreocupado."
+  },
+  {
+    "word": "catalyst",
+    "definition": "An event or person that causes change.",
+    "example": "The new law was a catalyst for economic growth.",
+    "level": "C1",
+    "part_of_speech": "noun",
+    "definition_pt": "Um evento ou pessoa que provoca mudanças."
+  },
+  {
+    "word": "caution",
+    "definition": "Care taken to avoid danger or mistakes.",
+    "example": "Drive with extreme caution in heavy rain.",
+    "level": "C1",
+    "part_of_speech": "noun",
+    "definition_pt": "Cuidado tomado para evitar perigos ou erros."
+  },
+  {
+    "word": "cavity",
+    "definition": "An empty space within a solid object.",
+    "example": "The dentist filled a deep cavity in his tooth.",
+    "level": "C1",
+    "part_of_speech": "noun",
+    "definition_pt": "Um espaço vazio dentro de um objeto sólido."
+  },
+  {
+    "word": "ceramic",
+    "definition": "Clay baked at high temperatures.",
+    "example": "She bought a beautiful handmade ceramic vase.",
+    "level": "C1",
+    "part_of_speech": "noun",
+    "definition_pt": "Argila cozida a altas temperaturas."
+  },
+  {
+    "word": "chaotic",
+    "definition": "In a state of complete confusion.",
+    "example": "The traffic was chaotic after the power outage.",
+    "level": "C1",
+    "part_of_speech": "adjective",
+    "definition_pt": "Em um estado de completa confusão."
+  },
+  {
+    "word": "chronic",
+    "definition": "Persisting for a long time.",
+    "example": "He suffers from a painful chronic back illness.",
+    "level": "C1",
+    "part_of_speech": "adjective",
+    "definition_pt": "Que persiste por muito tempo."
+  },
+  {
+    "word": "circuit",
+    "definition": "A complete path for electrical current.",
+    "example": "A broken wire caused a short circuit.",
+    "level": "C1",
+    "part_of_speech": "noun",
+    "definition_pt": "Um caminho completo para a corrente elétrica."
+  },
+  {
+    "word": "citation",
+    "definition": "A reference to a scholarly source.",
+    "example": "The essay lacked even a single academic citation.",
+    "level": "C1",
+    "part_of_speech": "noun",
+    "definition_pt": "Uma referência a uma fonte acadêmica."
+  },
+  {
+    "word": "clarify",
+    "definition": "To make a statement less confusing.",
+    "example": "The manager called a meeting to clarify the policy.",
+    "level": "C1",
+    "part_of_speech": "verb",
+    "definition_pt": "Tornar uma afirmação menos confusa."
+  },
+  {
+    "word": "cognitive",
+    "definition": "Relating to intellectual activity.",
+    "example": "Puzzles help maintain healthy cognitive skills.",
+    "level": "C1",
+    "part_of_speech": "adjective",
+    "definition_pt": "Relativo à atividade intelectual."
+  },
+  {
+    "word": "compact",
+    "definition": "Closely and neatly packed together.",
+    "example": "They bought a small compact car for city driving.",
+    "level": "C1",
+    "part_of_speech": "adjective",
+    "definition_pt": "Próximos e organizadamente compactados."
+  },
+  {
+    "word": "compile",
+    "definition": "To assemble information from various sources.",
+    "example": "We need to compile a comprehensive database.",
+    "level": "C1",
+    "part_of_speech": "verb",
+    "definition_pt": "Reunir informações de várias fontes."
+  },
+  {
+    "word": "comprise",
+    "definition": "To consist of or be made up of.",
+    "example": "The committee will comprise ten senior members.",
+    "level": "C1",
+    "part_of_speech": "verb",
+    "definition_pt": "Consistir em ou ser composto por."
+  },
+  {
+    "word": "concede",
+    "definition": "To admit that something is true after denying it.",
+    "example": "The candidate refused to concede the close election.",
+    "level": "C1",
+    "part_of_speech": "verb",
+    "definition_pt": "Admitir que algo é verdadeiro após negá-lo."
+  },
+  {
+    "word": "concrete",
+    "definition": "Existing in a material or physical form.",
+    "example": "We need concrete evidence before making arrests.",
+    "level": "C1",
+    "part_of_speech": "adjective",
+    "definition_pt": "Existente em forma material ou física."
+  },
+  {
+    "word": "condone",
+    "definition": "To accept and allow bad behavior.",
+    "example": "The school does not condone violence of any kind.",
+    "level": "C1",
+    "part_of_speech": "verb",
+    "definition_pt": "Aceitar e permitir mau comportamento."
+  },
+  {
+    "word": "conduit",
+    "definition": "A channel for conveying fluid or cables.",
+    "example": "The cables are protected inside a metal conduit.",
+    "level": "C1",
+    "part_of_speech": "noun",
+    "definition_pt": "Um canal para transporte de fluidos ou cabos."
+  },
+  {
+    "word": "confine",
+    "definition": "To keep or restrict within limits.",
+    "example": "Please confine your comments to the agenda topic.",
+    "level": "C1",
+    "part_of_speech": "verb",
+    "definition_pt": "Manter ou restringir dentro de limites."
+  },
+  {
+    "word": "conflict",
+    "definition": "A serious disagreement or argument.",
+    "example": "The two countries are in a bitter border conflict.",
+    "level": "C1",
+    "part_of_speech": "noun",
+    "definition_pt": "Um desentendimento ou discussão séria."
+  },
+  {
+    "word": "conform",
+    "definition": "To comply with rules or standards.",
+    "example": "All products must conform to safety regulations.",
+    "level": "C1",
+    "part_of_speech": "verb",
+    "definition_pt": "Cumprir regras ou padrões."
+  },
+  {
+    "word": "confront",
+    "definition": "To face up to and deal with a problem.",
+    "example": "We must confront these severe challenges directly.",
+    "level": "C1",
+    "part_of_speech": "verb",
+    "definition_pt": "Encarar e lidar com um problema."
+  },
+  {
+    "word": "convey",
+    "definition": "To communicate a message or transport something.",
+    "example": "Please convey my warm regards to your parents.",
+    "level": "C1",
+    "part_of_speech": "verb",
+    "definition_pt": "Comunicar uma mensagem ou transportar algo."
+  },
+  {
+    "word": "conserve",
+    "definition": "To protect something from harm or decay.",
+    "example": "We need to conserve water during dry summers.",
+    "level": "C1",
+    "part_of_speech": "verb",
+    "definition_pt": "Proteger algo contra danos ou deterioração."
+  },
+  {
+    "word": "consist",
+    "definition": "To be composed or made up of.",
+    "example": "Healthy diets consist of vegetables and grains.",
+    "level": "C1",
+    "part_of_speech": "verb",
+    "definition_pt": "Ser composto ou constituído por."
+  },
+  {
+    "word": "consoles",
+    "definition": "Devices used for playing video games.",
+    "example": "Modern gaming consoles offer high-definition graphics.",
+    "level": "C1",
+    "part_of_speech": "noun",
+    "definition_pt": "Dispositivos usados para jogar videogame."
+  },
+  {
+    "word": "conspire",
+    "definition": "To make secret plans jointly to commit a crime.",
+    "example": "They conspired to steal the famous painting.",
+    "level": "C1",
+    "part_of_speech": "verb",
+    "definition_pt": "Fazer planos secretos conjuntamente para cometer um crime."
+  },
+  {
+    "word": "absolute",
+    "definition": "Complete and unconditional.",
+    "example": "The monarch ruled with absolute power.",
+    "level": "C2",
+    "part_of_speech": "adjective",
+    "definition_pt": "Completo e incondicional."
+  },
+  {
+    "word": "abyss",
+    "definition": "A deep or seemingly bottomless chasm.",
+    "example": "The climber stared down into the dark abyss.",
+    "level": "C2",
+    "part_of_speech": "noun",
+    "definition_pt": "Um abismo profundo ou aparentemente sem fundo."
+  },
+  {
+    "word": "acumen",
+    "definition": "The ability to make good judgments.",
+    "example": "His business acumen led the startup to success.",
+    "level": "C2",
+    "part_of_speech": "noun",
+    "definition_pt": "A habilidade de tomar boas decisões rapidamente."
+  },
+  {
+    "word": "adverse",
+    "definition": "Preventing success or development.",
+    "example": "The flight was cancelled due to adverse weather.",
+    "level": "C2",
+    "part_of_speech": "adjective",
+    "definition_pt": "Que impede o sucesso ou desenvolvimento."
+  },
+  {
+    "word": "adhere",
+    "definition": "To stick to a surface or follow a rule strictly.",
+    "example": "All members must adhere to the club's regulations.",
+    "level": "C2",
+    "part_of_speech": "verb",
+    "definition_pt": "Aderir a uma superfície ou seguir rigidamente uma regra."
+  },
+  {
+    "word": "affinity",
+    "definition": "A natural liking or sympathy for someone.",
+    "example": "She has a special affinity for classical art.",
+    "level": "C2",
+    "part_of_speech": "noun",
+    "definition_pt": "Uma simpatia ou afeição natural por alguém ou algo."
+  },
+  {
+    "word": "agile",
+    "definition": "Able to move quickly and easily.",
+    "example": "The agile gymnast performed a perfect flip.",
+    "level": "C2",
+    "part_of_speech": "adjective",
+    "definition_pt": "Capaz de se mover de forma rápida e fácil."
+  },
+  {
+    "word": "alchemy",
+    "definition": "A seemingly magical process of transformation.",
+    "example": "The chef's skill was a form of culinary alchemy.",
+    "level": "C2",
+    "part_of_speech": "noun",
+    "definition_pt": "Um processo aparentemente mágico de transformação."
+  },
+  {
+    "word": "alias",
+    "definition": "A false identity used by a criminal.",
+    "example": "The spy traveled under a clever alias.",
+    "level": "C2",
+    "part_of_speech": "noun",
+    "definition_pt": "Uma identidade falsa usada por um criminoso."
+  },
+  {
+    "word": "allude",
+    "definition": "To suggest or call attention to indirectly.",
+    "example": "The speaker did not allude to the scandal.",
+    "level": "C2",
+    "part_of_speech": "verb",
+    "definition_pt": "Sugerir ou chamar a atenção indiretamente."
+  },
+  {
+    "word": "aloof",
+    "definition": "Not friendly or willing to take part.",
+    "example": "He stood aloof from the arguing crowd.",
+    "level": "C2",
+    "part_of_speech": "adjective",
+    "definition_pt": "Não amigável ou que não quer participar."
+  },
+  {
+    "word": "altitude",
+    "definition": "The height of an object above sea level.",
+    "example": "The plane flew at a high altitude.",
+    "level": "C2",
+    "part_of_speech": "noun",
+    "definition_pt": "A altura de um objeto acima do nível do mar."
+  },
+  {
+    "word": "altruism",
+    "definition": "Disinterested and selfless concern for others.",
+    "example": "Her charity work was an act of pure altruism.",
+    "level": "C2",
+    "part_of_speech": "noun",
+    "definition_pt": "Preocupação desinteressada e altruísta pelos outros."
+  },
+  {
+    "word": "ambient",
+    "definition": "Relating to the immediate surroundings.",
+    "example": "We enjoyed the warm ambient light of the room.",
+    "level": "C2",
+    "part_of_speech": "adjective",
+    "definition_pt": "Relativo aos arredores imediatos."
+  },
+  {
+    "word": "amenity",
+    "definition": "A desirable or useful feature of a place.",
+    "example": "The luxury hotel offered every modern amenity.",
+    "level": "C2",
+    "part_of_speech": "noun",
+    "definition_pt": "Uma característica desejável ou útil de um lugar."
+  },
+  {
+    "word": "amity",
+    "definition": "A friendly relationship.",
+    "example": "The treaty was signed in a spirit of amity.",
+    "level": "C2",
+    "part_of_speech": "noun",
+    "definition_pt": "Uma relação amigável."
+  },
+  {
+    "word": "amnesty",
+    "definition": "An official pardon for political offenses.",
+    "example": "The government declared amnesty for all rebels.",
+    "level": "C2",
+    "part_of_speech": "noun",
+    "definition_pt": "Um perdão oficial por crimes políticos."
+  },
+  {
+    "word": "anarchy",
+    "definition": "A state of disorder due to absence of authority.",
+    "example": "The collapse of the police led to total anarchy.",
+    "level": "C2",
+    "part_of_speech": "noun",
+    "definition_pt": "Estado de desordem devido à ausência de autoridade."
+  },
+  {
+    "word": "anatomy",
+    "definition": "The bodily structure of humans.",
+    "example": "Doctors study human anatomy for many years.",
+    "level": "C2",
+    "part_of_speech": "noun",
+    "definition_pt": "A estrutura corporal de humanos ou outros organismos."
+  },
+  {
+    "word": "anchor",
+    "definition": "A heavy metal device used to secure a ship.",
+    "example": "They dropped the anchor in the quiet bay.",
+    "level": "C2",
+    "part_of_speech": "noun",
+    "definition_pt": "Um dispositivo pesado de metal usado para prender um navio."
+  },
+  {
+    "word": "angular",
+    "definition": "Having sharp corners or angles.",
+    "example": "The modern building featured a bold angular design.",
+    "level": "C2",
+    "part_of_speech": "adjective",
+    "definition_pt": "Que apresenta cantos afiados ou ângulos."
+  },
+  {
+    "word": "antidote",
+    "definition": "A medicine taken to counteract a poison.",
+    "example": "Doctors searched for a rapid antidote to the venom.",
+    "level": "C2",
+    "part_of_speech": "noun",
+    "definition_pt": "Um medicamento tomado para neutralizar um veneno."
+  },
+  {
+    "word": "apex",
+    "definition": "The highest point of something.",
+    "example": "The eagle built its nest at the mountain apex.",
+    "level": "C2",
+    "part_of_speech": "noun",
+    "definition_pt": "O ponto mais alto de alguma coisa."
+  },
+  {
+    "word": "apathy",
+    "definition": "A lack of interest or enthusiasm.",
+    "example": "Widespread student apathy concerned the principal.",
+    "level": "C2",
+    "part_of_speech": "noun",
+    "definition_pt": "Falta de interesse ou entusiasmo."
+  },
+  {
+    "word": "applaud",
+    "definition": "To show strong approval publicly.",
+    "example": "We applaud the government's brave decision.",
+    "level": "C2",
+    "part_of_speech": "verb",
+    "definition_pt": "Mostrar forte aprovação publicamente."
+  },
+  {
+    "word": "archaic",
+    "definition": "Very old or old-fashioned.",
+    "example": "The school abandoned its archaic dress code rules.",
+    "level": "C2",
+    "part_of_speech": "adjective",
+    "definition_pt": "Muito antigo ou fora de moda."
+  },
+  {
+    "word": "arena",
+    "definition": "A place for sports or public events.",
+    "example": "Thousands of fans gathered in the sports arena.",
+    "level": "C2",
+    "part_of_speech": "noun",
+    "definition_pt": "Um lugar para esportes ou eventos públicos."
+  },
+  {
+    "word": "artisan",
+    "definition": "A worker skilled in a skilled trade.",
+    "example": "The artisan crafted beautiful wooden furniture.",
+    "level": "C2",
+    "part_of_speech": "noun",
+    "definition_pt": "Um trabalhador habilidoso em um ofício especializado."
+  },
+  {
+    "word": "ascend",
+    "definition": "To go or climb up.",
+    "example": "They watched the hot air balloon ascend slowly.",
+    "level": "C2",
+    "part_of_speech": "verb",
+    "definition_pt": "Ir ou subir."
+  },
+  {
+    "word": "ascent",
+    "definition": "An instance of rising or climbing up.",
+    "example": "The mountain ascent took five exhausting hours.",
+    "level": "C2",
+    "part_of_speech": "noun",
+    "definition_pt": "Um exemplo de subida ou escalada."
+  },
+  {
+    "word": "aspire",
+    "definition": "To direct one's hopes towards achieving.",
+    "example": "Young athletes aspire to win Olympic medals.",
+    "level": "C2",
+    "part_of_speech": "verb",
+    "definition_pt": "Direcionar as esperanças para alcançar algo."
+  },
+  {
+    "word": "assert",
+    "definition": "To state a fact confidently and forcefully.",
+    "example": "The lawyer continued to assert her client's innocence.",
+    "level": "C2",
+    "part_of_speech": "verb",
+    "definition_pt": "Declarar um fato de forma confiante e enérgica."
+  },
+  {
+    "word": "asthma",
+    "definition": "A condition marked by breathing difficulty.",
+    "example": "Cold weather can trigger a painful asthma attack.",
+    "level": "C2",
+    "part_of_speech": "noun",
+    "definition_pt": "Condição caracterizada por dificuldade respiratória."
+  },
+  {
+    "word": "asylum",
+    "definition": "Protection granted by a nation to refugees.",
+    "example": "They fled the war and requested political asylum.",
+    "level": "C2",
+    "part_of_speech": "noun",
+    "definition_pt": "Proteção concedida por uma nação a refugiados."
+  },
+  {
+    "word": "atlas",
+    "definition": "A book of maps or charts.",
+    "example": "He opened the old atlas to locate the island.",
+    "level": "C2",
+    "part_of_speech": "noun",
+    "definition_pt": "Um livro de mapas ou gráficos."
+  },
+  {
+    "word": "atom",
+    "definition": "The basic unit of a chemical element.",
+    "example": "A water molecule has two hydrogen atoms.",
+    "level": "C2",
+    "part_of_speech": "noun",
+    "definition_pt": "A unidade básica de um elemento químico."
+  },
+  {
+    "word": "audit",
+    "definition": "An official inspection of accounts.",
+    "example": "The tax department ordered an official audit.",
+    "level": "C2",
+    "part_of_speech": "noun",
+    "definition_pt": "Uma inspeção oficial de contas."
+  },
+  {
+    "word": "aura",
+    "definition": "A distinctive atmosphere surrounding a person.",
+    "example": "The old library has a quiet, majestic aura.",
+    "level": "C2",
+    "part_of_speech": "noun",
+    "definition_pt": "Uma atmosfera distinta que cerca uma pessoa."
+  },
+  {
+    "word": "aurora",
+    "definition": "A natural light display in the polar sky.",
+    "example": "They traveled north to photograph the aurora.",
+    "level": "C2",
+    "part_of_speech": "noun",
+    "definition_pt": "Exibição de luz natural no céu polar."
+  },
+  {
+    "word": "austere",
+    "definition": "Severe or strict in manner or appearance.",
+    "example": "The monk lived a quiet, austere life in the hills.",
+    "level": "C2",
+    "part_of_speech": "adjective",
+    "definition_pt": "Grave ou rigoroso na atitude ou aparência."
+  },
+  {
+    "word": "authentic",
+    "definition": "Of undisputed origin or genuine.",
+    "example": "They served authentic Italian pizza at the dinner.",
+    "level": "C2",
+    "part_of_speech": "adjective",
+    "definition_pt": "De origem indiscutível ou genuíno."
+  },
+  {
+    "word": "autonomy",
+    "definition": "The right of self-government.",
+    "example": "The region requested greater political autonomy.",
+    "level": "C2",
+    "part_of_speech": "noun",
+    "definition_pt": "O direito de autogoverno."
+  },
+  {
+    "word": "avalanche",
+    "definition": "A mass of snow sliding down a mountain.",
+    "example": "The skiers escaped a dangerous snow avalanche.",
+    "level": "C2",
+    "part_of_speech": "noun",
+    "definition_pt": "Massa de neve deslizando montanha abaixo."
+  },
+  {
+    "word": "axiom",
+    "definition": "A statement accepted as established truth.",
+    "example": "The geometric proof was based on a simple axiom.",
+    "level": "C2",
+    "part_of_speech": "noun",
+    "definition_pt": "Uma afirmação aceita como verdade estabelecida."
+  },
+  {
+    "word": "axis",
+    "definition": "An imaginary line about which a body rotates.",
+    "example": "The earth rotates on its tilted axis daily.",
+    "level": "C2",
+    "part_of_speech": "noun",
+    "definition_pt": "Linha imaginária sobre a qual um corpo gira."
+  },
+  {
+    "word": "azure",
+    "definition": "Bright blue in color like a cloudless sky.",
+    "example": "The warm ocean water was a brilliant azure.",
+    "level": "C2",
+    "part_of_speech": "adjective",
+    "definition_pt": "Cor azul brilhante como um céu sem nuvens."
+  },
+  {
+    "word": "backup",
+    "definition": "A copy of files to protect against loss.",
+    "example": "Always keep a secure backup of your files.",
+    "level": "C2",
+    "part_of_speech": "noun",
+    "definition_pt": "Cópia de arquivos para proteção contra perda."
+  },
+  {
+    "word": "baffle",
+    "definition": "To totally confuse or perplex.",
+    "example": "The complex puzzle managed to baffle the expert.",
+    "level": "C2",
+    "part_of_speech": "verb",
+    "definition_pt": "Confundir ou perplexar totalmente."
+  },
+  {
+    "word": "banish",
+    "definition": "To send someone away as official punishment.",
+    "example": "The king decided to banish the rebel leader.",
+    "level": "C2",
+    "part_of_speech": "verb",
+    "definition_pt": "Enviar alguém embora como punição oficial."
+  },
+  {
+    "word": "barren",
+    "definition": "Land too poor to produce vegetation.",
+    "example": "They crossed the dry, barren mountain landscape.",
+    "level": "C2",
+    "part_of_speech": "adjective",
+    "definition_pt": "Terra muito pobre para produzir vegetação."
+  },
+  {
+    "word": "bag",
+    "definition": "A container used to carry things.",
+    "definition_pt": "Um recipiente usado para carregar coisas.",
+    "example": "She put her keys in the bag.",
+    "level": "A1",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "bed",
+    "definition": "A piece of furniture used for sleeping.",
+    "definition_pt": "Um móvel usado para dormir.",
+    "example": "The bed is next to the wall.",
+    "level": "A1",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "boy",
+    "definition": "A male child.",
+    "definition_pt": "Uma criança do sexo masculino.",
+    "example": "The boy rides a bike after school.",
+    "level": "A1",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "car",
+    "definition": "A road vehicle with four wheels.",
+    "definition_pt": "Um veículo de estrada com quatro rodas.",
+    "example": "Their car is parked outside.",
+    "level": "A1",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "clock",
+    "definition": "A device that shows the time.",
+    "definition_pt": "Um aparelho que mostra as horas.",
+    "example": "The clock says it is nine.",
+    "level": "A1",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "color",
+    "definition": "The way something looks, such as red or blue.",
+    "definition_pt": "A aparência de algo, como vermelho ou azul.",
+    "example": "What color is your new shirt?",
+    "level": "A1",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "cook",
+    "definition": "To prepare food with heat.",
+    "definition_pt": "Preparar comida usando calor.",
+    "example": "I cook rice for dinner.",
+    "level": "A1",
+    "part_of_speech": "verb"
+  },
+  {
+    "word": "desk",
+    "definition": "A table used for writing or working.",
+    "definition_pt": "Uma mesa usada para escrever ou trabalhar.",
+    "example": "Her notebook is on the desk.",
+    "level": "A1",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "father",
+    "definition": "A male parent.",
+    "definition_pt": "Um pai.",
+    "example": "My father makes breakfast on Sunday.",
+    "level": "A1",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "key",
+    "definition": "A small object used to open a lock.",
+    "definition_pt": "Um pequeno objeto usado para abrir uma fechadura.",
+    "example": "He lost the key to the door.",
+    "level": "A1",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "leg",
+    "definition": "One of the parts of the body used for standing.",
+    "definition_pt": "Uma das partes do corpo usadas para ficar em pé.",
+    "example": "She hurt her leg during the game.",
+    "level": "A1",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "man",
+    "definition": "An adult male person.",
+    "definition_pt": "Uma pessoa adulta do sexo masculino.",
+    "example": "The man waits at the bus stop.",
+    "level": "A1",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "meat",
+    "definition": "Food from an animal.",
+    "definition_pt": "Alimento vindo de um animal.",
+    "example": "They eat meat with vegetables.",
+    "level": "A1",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "money",
+    "definition": "Coins or notes used to buy things.",
+    "definition_pt": "Moedas ou notas usadas para comprar coisas.",
+    "example": "She saved money for a trip.",
+    "level": "A1",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "night",
+    "definition": "The dark part of the day.",
+    "definition_pt": "A parte escura do dia.",
+    "example": "The stars are bright at night.",
+    "level": "A1",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "pen",
+    "definition": "A tool used for writing with ink.",
+    "definition_pt": "Uma ferramenta usada para escrever com tinta.",
+    "example": "He wrote his name with a pen.",
+    "level": "A1",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "red",
+    "definition": "A color like blood or a tomato.",
+    "definition_pt": "Uma cor como a do sangue ou de um tomate.",
+    "example": "She chose the red cup.",
+    "level": "A1",
+    "part_of_speech": "adjective"
+  },
+  {
+    "word": "sea",
+    "definition": "A large area of salty water.",
+    "definition_pt": "Uma grande área de água salgada.",
+    "example": "The sea is calm today.",
+    "level": "A1",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "shirt",
+    "definition": "A piece of clothing for the upper body.",
+    "definition_pt": "Uma peça de roupa para a parte superior do corpo.",
+    "example": "He wore a clean shirt to work.",
+    "level": "A1",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "shop",
+    "definition": "A place where people buy things.",
+    "definition_pt": "Um lugar onde as pessoas compram coisas.",
+    "example": "The shop opens at ten.",
+    "level": "A1",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "sister",
+    "definition": "A girl or woman with the same parents as you.",
+    "definition_pt": "Uma menina ou mulher que tem os mesmos pais que você.",
+    "example": "My sister likes music.",
+    "level": "A1",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "sun",
+    "definition": "The star that gives Earth light and heat.",
+    "definition_pt": "A estrela que dá luz e calor à Terra.",
+    "example": "The sun is high in the sky.",
+    "level": "A1",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "tea",
+    "definition": "A hot drink made with leaves.",
+    "definition_pt": "Uma bebida quente feita com folhas.",
+    "example": "She drinks tea in the morning.",
+    "level": "A1",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "walk",
+    "definition": "To move on foot.",
+    "definition_pt": "Mover-se a pé.",
+    "example": "They walk to the park every day.",
+    "level": "A1",
+    "part_of_speech": "verb"
+  },
+  {
+    "word": "white",
+    "definition": "A very light color like snow.",
+    "definition_pt": "Uma cor muito clara como a neve.",
+    "example": "The wall is white.",
+    "level": "A1",
+    "part_of_speech": "adjective"
+  },
+  {
+    "word": "window",
+    "definition": "An opening in a wall with glass.",
+    "definition_pt": "Uma abertura em uma parede com vidro.",
+    "example": "Open the window for fresh air.",
+    "level": "A1",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "woman",
+    "definition": "An adult female person.",
+    "definition_pt": "Uma pessoa adulta do sexo feminino.",
+    "example": "The woman reads a book.",
+    "level": "A1",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "word",
+    "definition": "A unit of language with meaning.",
+    "definition_pt": "Uma unidade de idioma com significado.",
+    "example": "This word is easy to spell.",
+    "level": "A1",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "box",
+    "definition": "A container with flat sides.",
+    "definition_pt": "Um recipiente com lados planos.",
+    "example": "The box is full of toys.",
+    "level": "A1",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "bus",
+    "definition": "A large road vehicle that carries passengers.",
+    "definition_pt": "Um veículo grande de estrada que transporta passageiros.",
+    "example": "The bus stops near my house.",
+    "level": "A1",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "airport",
+    "definition": "A place where planes take off and land.",
+    "definition_pt": "Um lugar onde aviões decolam e pousam.",
+    "example": "We arrived at the airport early.",
+    "level": "A2",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "blanket",
+    "definition": "A warm cover used on a bed.",
+    "definition_pt": "Uma cobertura quente usada na cama.",
+    "example": "He pulled the blanket over his shoulders.",
+    "level": "A2",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "bottle",
+    "definition": "A container for liquids.",
+    "definition_pt": "Um recipiente para líquidos.",
+    "example": "She filled the bottle with water.",
+    "level": "A2",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "breakfast",
+    "definition": "The first meal of the day.",
+    "definition_pt": "A primeira refeição do dia.",
+    "example": "Breakfast is ready at seven.",
+    "level": "A2",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "broken",
+    "definition": "Damaged and not working correctly.",
+    "definition_pt": "Danificado e sem funcionar corretamente.",
+    "example": "The broken chair needs repair.",
+    "level": "A2",
+    "part_of_speech": "adjective"
+  },
+  {
+    "word": "company",
+    "definition": "A business organization.",
+    "definition_pt": "Uma organização empresarial.",
+    "example": "Her company sells school supplies.",
+    "level": "A2",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "customer",
+    "definition": "A person who buys goods or services.",
+    "definition_pt": "Uma pessoa que compra produtos ou serviços.",
+    "example": "The customer paid by card.",
+    "level": "A2",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "deliver",
+    "definition": "To take something to a person or place.",
+    "definition_pt": "Levar algo até uma pessoa ou lugar.",
+    "example": "They deliver food in the evening.",
+    "level": "A2",
+    "part_of_speech": "verb"
+  },
+  {
+    "word": "enough",
+    "definition": "As much as needed.",
+    "definition_pt": "Tanto quanto é necessário.",
+    "example": "We have enough chairs for everyone.",
+    "level": "A2",
+    "part_of_speech": "adjective"
+  },
+  {
+    "word": "factory",
+    "definition": "A building where goods are made.",
+    "definition_pt": "Um prédio onde produtos são fabricados.",
+    "example": "The factory makes shoes.",
+    "level": "A2",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "famous",
+    "definition": "Known by many people.",
+    "definition_pt": "Conhecido por muitas pessoas.",
+    "example": "The famous singer visited our city.",
+    "level": "A2",
+    "part_of_speech": "adjective"
+  },
+  {
+    "word": "habit",
+    "definition": "Something you do regularly.",
+    "definition_pt": "Algo que você faz regularmente.",
+    "example": "Reading before bed is a good habit.",
+    "level": "A2",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "holiday",
+    "definition": "A day or period without work or school.",
+    "definition_pt": "Um dia ou período sem trabalho ou escola.",
+    "example": "They planned a holiday by the sea.",
+    "level": "A2",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "kitchen",
+    "definition": "A room where food is cooked.",
+    "definition_pt": "Um cômodo onde a comida é preparada.",
+    "example": "The kitchen smells like bread.",
+    "level": "A2",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "language",
+    "definition": "A system of words used to communicate.",
+    "definition_pt": "Um sistema de palavras usado para se comunicar.",
+    "example": "English is a useful language.",
+    "level": "A2",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "library",
+    "definition": "A place where people read or borrow books.",
+    "definition_pt": "Um lugar onde as pessoas leem ou pegam livros emprestados.",
+    "example": "She studies at the library after class.",
+    "level": "A2",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "medicine",
+    "definition": "A substance used to treat illness.",
+    "definition_pt": "Uma substância usada para tratar doenças.",
+    "example": "Take this medicine after lunch.",
+    "level": "A2",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "meeting",
+    "definition": "A planned time for people to talk together.",
+    "definition_pt": "Um momento planejado para pessoas conversarem juntas.",
+    "example": "The meeting starts at three.",
+    "level": "A2",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "neighbor",
+    "definition": "A person who lives near you.",
+    "definition_pt": "Uma pessoa que mora perto de você.",
+    "example": "Our neighbor has a friendly dog.",
+    "level": "A2",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "office",
+    "definition": "A room or building where people work.",
+    "definition_pt": "Uma sala ou prédio onde as pessoas trabalham.",
+    "example": "He left his bag at the office.",
+    "level": "A2",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "polite",
+    "definition": "Showing good manners.",
+    "definition_pt": "Que demonstra boas maneiras.",
+    "example": "The polite student thanked the teacher.",
+    "level": "A2",
+    "part_of_speech": "adjective"
+  },
+  {
+    "word": "receipt",
+    "definition": "A piece of paper that shows you paid.",
+    "definition_pt": "Um papel que mostra que você pagou.",
+    "example": "Keep the receipt after buying the phone.",
+    "level": "A2",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "schedule",
+    "definition": "A plan that shows times for activities.",
+    "definition_pt": "Um plano que mostra horários de atividades.",
+    "example": "Check the schedule before the meeting.",
+    "level": "A2",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "search",
+    "definition": "To look carefully for something.",
+    "definition_pt": "Procurar algo com cuidado.",
+    "example": "They search for the missing key.",
+    "level": "A2",
+    "part_of_speech": "verb"
+  },
+  {
+    "word": "ticket",
+    "definition": "A paper or digital pass for travel or an event.",
+    "definition_pt": "Um passe em papel ou digital para viagem ou evento.",
+    "example": "I bought a ticket for the train.",
+    "level": "A2",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "towel",
+    "definition": "A cloth used for drying.",
+    "definition_pt": "Um tecido usado para secar.",
+    "example": "She packed a towel for the beach.",
+    "level": "A2",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "visitor",
+    "definition": "A person who comes to see a place or person.",
+    "definition_pt": "Uma pessoa que vem ver um lugar ou outra pessoa.",
+    "example": "The visitor waited at the front desk.",
+    "level": "A2",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "wallet",
+    "definition": "A small case for money and cards.",
+    "definition_pt": "Uma pequena carteira para dinheiro e cartões.",
+    "example": "He kept the ticket in his wallet.",
+    "level": "A2",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "weekend",
+    "definition": "Saturday and Sunday.",
+    "definition_pt": "Sábado e domingo.",
+    "example": "We visit family on the weekend.",
+    "level": "A2",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "yesterday",
+    "definition": "The day before today.",
+    "definition_pt": "O dia anterior a hoje.",
+    "example": "Yesterday was colder than today.",
+    "level": "A2",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "access",
+    "definition": "The ability or right to use something.",
+    "definition_pt": "A capacidade ou o direito de usar algo.",
+    "example": "Students need access to the online course.",
+    "level": "B1",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "arrange",
+    "definition": "To plan or organize something.",
+    "definition_pt": "Planejar ou organizar algo.",
+    "example": "We can arrange a meeting for Friday.",
+    "level": "B1",
+    "part_of_speech": "verb"
+  },
+  {
+    "word": "behavior",
+    "definition": "The way a person acts.",
+    "definition_pt": "A maneira como uma pessoa age.",
+    "example": "His behavior improved after the discussion.",
+    "level": "B1",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "community",
+    "definition": "A group of people living or working together.",
+    "definition_pt": "Um grupo de pessoas que vivem ou trabalham juntas.",
+    "example": "The community built a new library.",
+    "level": "B1",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "concern",
+    "definition": "A worry or something important to someone.",
+    "definition_pt": "Uma preocupação ou algo importante para alguém.",
+    "example": "Safety is our main concern.",
+    "level": "B1",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "create",
+    "definition": "To make something new.",
+    "definition_pt": "Fazer algo novo.",
+    "example": "They create short videos for class.",
+    "level": "B1",
+    "part_of_speech": "verb"
+  },
+  {
+    "word": "decision",
+    "definition": "A choice made after thinking.",
+    "definition_pt": "Uma escolha feita depois de pensar.",
+    "example": "Her decision surprised the team.",
+    "level": "B1",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "education",
+    "definition": "The process of teaching and learning.",
+    "definition_pt": "O processo de ensinar e aprender.",
+    "example": "Education can change a person's future.",
+    "level": "B1",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "effort",
+    "definition": "Hard work used to do something.",
+    "definition_pt": "Trabalho ou energia usados para fazer algo.",
+    "example": "The project required real effort.",
+    "level": "B1",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "environment",
+    "definition": "The natural world or surroundings.",
+    "definition_pt": "O mundo natural ou o ambiente ao redor.",
+    "example": "Plastic waste harms the environment.",
+    "level": "B1",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "experience",
+    "definition": "Knowledge gained by doing or seeing things.",
+    "definition_pt": "Conhecimento adquirido ao fazer ou ver coisas.",
+    "example": "Travel gives people valuable experience.",
+    "level": "B1",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "familiar",
+    "definition": "Known or easy to recognize.",
+    "definition_pt": "Conhecido ou fácil de reconhecer.",
+    "example": "This song sounds familiar.",
+    "level": "B1",
+    "part_of_speech": "adjective"
+  },
+  {
+    "word": "goal",
+    "definition": "Something you want to achieve.",
+    "definition_pt": "Algo que você quer alcançar.",
+    "example": "Her goal is to speak confidently.",
+    "level": "B1",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "identify",
+    "definition": "To recognize or name someone or something.",
+    "definition_pt": "Reconhecer ou nomear alguém ou algo.",
+    "example": "Can you identify the problem?",
+    "level": "B1",
+    "part_of_speech": "verb"
+  },
+  {
+    "word": "method",
+    "definition": "A planned way of doing something.",
+    "definition_pt": "Uma maneira planejada de fazer algo.",
+    "example": "This method helps students remember words.",
+    "level": "B1",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "opportunity",
+    "definition": "A chance to do something useful or good.",
+    "definition_pt": "Uma chance de fazer algo útil ou bom.",
+    "example": "The course is an opportunity to improve.",
+    "level": "B1",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "particular",
+    "definition": "Specific and not general.",
+    "definition_pt": "Específico e não geral.",
+    "example": "Is there a particular topic you prefer?",
+    "level": "B1",
+    "part_of_speech": "adjective"
+  },
+  {
+    "word": "prepare",
+    "definition": "To get ready for something.",
+    "definition_pt": "Preparar-se para algo.",
+    "example": "They prepare carefully for the exam.",
+    "level": "B1",
+    "part_of_speech": "verb"
+  },
+  {
+    "word": "process",
+    "definition": "A series of actions that produce a result.",
+    "definition_pt": "Uma série de ações que produz um resultado.",
+    "example": "Learning is a gradual process.",
+    "level": "B1",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "relationship",
+    "definition": "The connection between people or things.",
+    "definition_pt": "A conexão entre pessoas ou coisas.",
+    "example": "Trust is important in any relationship.",
+    "level": "B1",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "require",
+    "definition": "To need something.",
+    "definition_pt": "Precisar de algo.",
+    "example": "Some jobs require good communication.",
+    "level": "B1",
+    "part_of_speech": "verb"
+  },
+  {
+    "word": "result",
+    "definition": "Something that happens because of an action.",
+    "definition_pt": "Algo que acontece por causa de uma ação.",
+    "example": "The result of the test was positive.",
+    "level": "B1",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "risk",
+    "definition": "The chance that something bad may happen.",
+    "definition_pt": "A chance de algo ruim acontecer.",
+    "example": "There is a risk of heavy rain tonight.",
+    "level": "B1",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "service",
+    "definition": "Work done to help a customer or user.",
+    "definition_pt": "Trabalho feito para ajudar um cliente ou usuário.",
+    "example": "The hotel offers excellent service.",
+    "level": "B1",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "solution",
+    "definition": "An answer to a problem.",
+    "definition_pt": "Uma resposta para um problema.",
+    "example": "We found a simple solution.",
+    "level": "B1",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "source",
+    "definition": "The place where something comes from.",
+    "definition_pt": "O lugar de onde algo vem.",
+    "example": "Check the source before sharing news.",
+    "level": "B1",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "successful",
+    "definition": "Achieving the result that was wanted.",
+    "definition_pt": "Que alcança o resultado desejado.",
+    "example": "The event was successful because everyone helped.",
+    "level": "B1",
+    "part_of_speech": "adjective"
+  },
+  {
+    "word": "topic",
+    "definition": "A subject that people discuss or study.",
+    "definition_pt": "Um assunto que as pessoas discutem ou estudam.",
+    "example": "Today's topic is travel.",
+    "level": "B1",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "value",
+    "definition": "The importance or usefulness of something.",
+    "definition_pt": "A importância ou utilidade de algo.",
+    "example": "Practice has great value for learners.",
+    "level": "B1",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "volunteer",
+    "definition": "A person who works without being paid.",
+    "definition_pt": "Uma pessoa que trabalha sem receber pagamento.",
+    "example": "A volunteer helped visitors find seats.",
+    "level": "B1",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "assumption",
+    "definition": "Something accepted as true without proof.",
+    "definition_pt": "Algo aceito como verdadeiro sem prova.",
+    "example": "The plan was based on a wrong assumption.",
+    "level": "B2",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "capacity",
+    "definition": "The ability to do or hold something.",
+    "definition_pt": "A capacidade de fazer ou conter algo.",
+    "example": "The hall has capacity for two hundred people.",
+    "level": "B2",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "collaborate",
+    "definition": "To work together with others.",
+    "definition_pt": "Trabalhar em conjunto com outras pessoas.",
+    "example": "The teams collaborate on research projects.",
+    "level": "B2",
+    "part_of_speech": "verb"
+  },
+  {
+    "word": "compound",
+    "definition": "Made of two or more parts.",
+    "definition_pt": "Feito de duas ou mais partes.",
+    "example": "The report described a compound problem.",
+    "level": "B2",
+    "part_of_speech": "adjective"
+  },
+  {
+    "word": "consult",
+    "definition": "To ask for information or advice.",
+    "definition_pt": "Pedir informação ou conselho.",
+    "example": "You should consult a specialist.",
+    "level": "B2",
+    "part_of_speech": "verb"
+  },
+  {
+    "word": "criteria",
+    "definition": "Standards used to judge or decide something.",
+    "definition_pt": "Padrões usados para julgar ou decidir algo.",
+    "example": "The criteria for success were clear.",
+    "level": "B2",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "demonstrate",
+    "definition": "To show clearly by giving proof or examples.",
+    "definition_pt": "Mostrar claramente com provas ou exemplos.",
+    "example": "The results demonstrate steady progress.",
+    "level": "B2",
+    "part_of_speech": "verb"
+  },
+  {
+    "word": "emphasize",
+    "definition": "To give special importance to something.",
+    "definition_pt": "Dar importância especial a algo.",
+    "example": "Teachers emphasize regular practice.",
+    "level": "B2",
+    "part_of_speech": "verb"
+  },
+  {
+    "word": "expand",
+    "definition": "To become larger or make something larger.",
+    "definition_pt": "Ficar maior ou tornar algo maior.",
+    "example": "Reading can expand your vocabulary.",
+    "level": "B2",
+    "part_of_speech": "verb"
+  },
+  {
+    "word": "facilitate",
+    "definition": "To make an action or process easier.",
+    "definition_pt": "Tornar uma ação ou processo mais fácil.",
+    "example": "Clear rules facilitate teamwork.",
+    "level": "B2",
+    "part_of_speech": "verb"
+  },
+  {
+    "word": "implication",
+    "definition": "A possible effect or meaning of something.",
+    "definition_pt": "Um possível efeito ou significado de algo.",
+    "example": "The decision has an important implication.",
+    "level": "B2",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "integrate",
+    "definition": "To combine parts into a whole.",
+    "definition_pt": "Combinar partes em um todo.",
+    "example": "The app can integrate audio with practice.",
+    "level": "B2",
+    "part_of_speech": "verb"
+  },
+  {
+    "word": "justify",
+    "definition": "To give a good reason for something.",
+    "definition_pt": "Dar uma boa razão para algo.",
+    "example": "Can you justify your choice?",
+    "level": "B2",
+    "part_of_speech": "verb"
+  },
+  {
+    "word": "mechanism",
+    "definition": "A system or process that makes something work.",
+    "definition_pt": "Um sistema ou processo que faz algo funcionar.",
+    "example": "Feedback is a useful learning mechanism.",
+    "level": "B2",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "outcome",
+    "definition": "The final result of a process or event.",
+    "definition_pt": "O resultado final de um processo ou evento.",
+    "example": "The outcome depends on consistent effort.",
+    "level": "B2",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "perspective",
+    "definition": "A particular way of thinking about something.",
+    "definition_pt": "Uma maneira particular de pensar sobre algo.",
+    "example": "Her perspective changed after the trip.",
+    "level": "B2",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "policy",
+    "definition": "A set of rules or plans followed by a group.",
+    "definition_pt": "Um conjunto de regras ou planos seguido por um grupo.",
+    "example": "The school changed its phone policy.",
+    "level": "B2",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "procedure",
+    "definition": "An official or usual way of doing something.",
+    "definition_pt": "Uma maneira oficial ou habitual de fazer algo.",
+    "example": "Follow the procedure before submitting forms.",
+    "level": "B2",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "proportion",
+    "definition": "A part or share of a whole.",
+    "definition_pt": "Uma parte ou parcela de um todo.",
+    "example": "A large proportion of students passed.",
+    "level": "B2",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "reinforce",
+    "definition": "To make an idea, skill, or structure stronger.",
+    "definition_pt": "Tornar uma ideia, habilidade ou estrutura mais forte.",
+    "example": "Daily review can reinforce memory.",
+    "level": "B2",
+    "part_of_speech": "verb"
+  },
+  {
+    "word": "revenue",
+    "definition": "Money that a business or organization receives.",
+    "definition_pt": "Dinheiro que uma empresa ou organização recebe.",
+    "example": "The new product increased revenue.",
+    "level": "B2",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "sequence",
+    "definition": "A set of things in a particular order.",
+    "definition_pt": "Um conjunto de coisas em uma ordem específica.",
+    "example": "Put the steps in the correct sequence.",
+    "level": "B2",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "strategy",
+    "definition": "A planned way to achieve a goal.",
+    "definition_pt": "Uma forma planejada de alcançar um objetivo.",
+    "example": "Her study strategy is practical.",
+    "level": "B2",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "transform",
+    "definition": "To change something completely.",
+    "definition_pt": "Mudar algo completamente.",
+    "example": "Practice can transform weak habits.",
+    "level": "B2",
+    "part_of_speech": "verb"
+  },
+  {
+    "word": "validate",
+    "definition": "To confirm that something is correct or useful.",
+    "definition_pt": "Confirmar que algo está correto ou é útil.",
+    "example": "The test can validate the new method.",
+    "level": "B2",
+    "part_of_speech": "verb"
+  },
+  {
+    "word": "variable",
+    "definition": "Something that can change in amount or value.",
+    "definition_pt": "Algo que pode mudar em quantidade ou valor.",
+    "example": "Time is an important variable in the score.",
+    "level": "B2",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "welfare",
+    "definition": "The health, safety, and happiness of people.",
+    "definition_pt": "A saúde, segurança e felicidade das pessoas.",
+    "example": "The policy protects student welfare.",
+    "level": "B2",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "sector",
+    "definition": "A part of an economy, area, or activity.",
+    "definition_pt": "Uma parte de uma economia, área ou atividade.",
+    "example": "The technology sector is growing quickly.",
+    "level": "B2",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "resource",
+    "definition": "A useful supply or source of help.",
+    "definition_pt": "Um recurso útil ou fonte de ajuda.",
+    "example": "The website is a valuable resource.",
+    "level": "B2",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "function",
+    "definition": "The purpose or job of something.",
+    "definition_pt": "O propósito ou trabalho de algo.",
+    "example": "The function of the timer is simple.",
+    "level": "B2",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "alleviate",
+    "definition": "To make pain or a problem less severe.",
+    "definition_pt": "Tornar uma dor ou problema menos grave.",
+    "example": "Clear guidance can alleviate confusion.",
+    "level": "C1",
+    "part_of_speech": "verb"
+  },
+  {
+    "word": "anticipate",
+    "definition": "To expect something and prepare for it.",
+    "definition_pt": "Esperar algo e preparar-se para isso.",
+    "example": "Good planners anticipate possible delays.",
+    "level": "C1",
+    "part_of_speech": "verb"
+  },
+  {
+    "word": "ascertain",
+    "definition": "To find out something with certainty.",
+    "definition_pt": "Descobrir algo com certeza.",
+    "example": "Researchers tried to ascertain the cause.",
+    "level": "C1",
+    "part_of_speech": "verb"
+  },
+  {
+    "word": "benchmark",
+    "definition": "A standard used for comparison.",
+    "definition_pt": "Um padrão usado para comparação.",
+    "example": "The first test became a useful benchmark.",
+    "level": "C1",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "contingency",
+    "definition": "A future event that may happen but is uncertain.",
+    "definition_pt": "Um evento futuro que pode acontecer, mas é incerto.",
+    "example": "The team prepared a contingency plan.",
+    "level": "C1",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "delineate",
+    "definition": "To describe or mark the exact limits of something.",
+    "definition_pt": "Descrever ou marcar os limites exatos de algo.",
+    "example": "The report will delineate each responsibility.",
+    "level": "C1",
+    "part_of_speech": "verb"
+  },
+  {
+    "word": "discrepancy",
+    "definition": "A difference between two things that should match.",
+    "definition_pt": "Uma diferença entre duas coisas que deveriam coincidir.",
+    "example": "They found a discrepancy in the accounts.",
+    "level": "C1",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "empirical",
+    "definition": "Based on observation or experience rather than theory.",
+    "definition_pt": "Baseado em observação ou experiência, não apenas teoria.",
+    "example": "The claim requires empirical evidence.",
+    "level": "C1",
+    "part_of_speech": "adjective"
+  },
+  {
+    "word": "exhaustive",
+    "definition": "Including all possibilities or details.",
+    "definition_pt": "Que inclui todas as possibilidades ou detalhes.",
+    "example": "The team made an exhaustive review.",
+    "level": "C1",
+    "part_of_speech": "adjective"
+  },
+  {
+    "word": "feasible",
+    "definition": "Possible and practical to do.",
+    "definition_pt": "Possível e prático de realizar.",
+    "example": "A shorter schedule is more feasible.",
+    "level": "C1",
+    "part_of_speech": "adjective"
+  },
+  {
+    "word": "fluctuate",
+    "definition": "To change often from one level to another.",
+    "definition_pt": "Mudar frequentemente de um nível para outro.",
+    "example": "Prices fluctuate during the year.",
+    "level": "C1",
+    "part_of_speech": "verb"
+  },
+  {
+    "word": "hierarchy",
+    "definition": "A system where people or things are ranked.",
+    "definition_pt": "Um sistema em que pessoas ou coisas são classificadas.",
+    "example": "The company has a clear hierarchy.",
+    "level": "C1",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "indispensable",
+    "definition": "Absolutely necessary.",
+    "definition_pt": "Absolutamente necessário.",
+    "example": "Good notes are indispensable for review.",
+    "level": "C1",
+    "part_of_speech": "adjective"
+  },
+  {
+    "word": "intricate",
+    "definition": "Very detailed and complicated.",
+    "definition_pt": "Muito detalhado e complicado.",
+    "example": "The intricate design impressed everyone.",
+    "level": "C1",
+    "part_of_speech": "adjective"
+  },
+  {
+    "word": "mandate",
+    "definition": "An official order or authority to act.",
+    "definition_pt": "Uma ordem oficial ou autoridade para agir.",
+    "example": "The agency received a mandate to reform rules.",
+    "level": "C1",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "methodology",
+    "definition": "A system of methods used in a field of study.",
+    "definition_pt": "Um sistema de métodos usado em uma área de estudo.",
+    "example": "The methodology was explained in detail.",
+    "level": "C1",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "notion",
+    "definition": "An idea or belief about something.",
+    "definition_pt": "Uma ideia ou crença sobre algo.",
+    "example": "The notion of perfect memory is unrealistic.",
+    "level": "C1",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "paramount",
+    "definition": "More important than anything else.",
+    "definition_pt": "Mais importante do que qualquer outra coisa.",
+    "example": "User safety is paramount.",
+    "level": "C1",
+    "part_of_speech": "adjective"
+  },
+  {
+    "word": "preliminary",
+    "definition": "Coming before the main action or event.",
+    "definition_pt": "Que vem antes da ação ou evento principal.",
+    "example": "The preliminary results look promising.",
+    "level": "C1",
+    "part_of_speech": "adjective"
+  },
+  {
+    "word": "rationale",
+    "definition": "The reason or logic behind a decision.",
+    "definition_pt": "A razão ou lógica por trás de uma decisão.",
+    "example": "She explained the rationale for the change.",
+    "level": "C1",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "robust",
+    "definition": "Strong and able to work well under pressure.",
+    "definition_pt": "Forte e capaz de funcionar bem sob pressão.",
+    "example": "The system needs a robust design.",
+    "level": "C1",
+    "part_of_speech": "adjective"
+  },
+  {
+    "word": "salient",
+    "definition": "Most noticeable or important.",
+    "definition_pt": "Mais perceptível ou importante.",
+    "example": "The salient detail was easy to miss.",
+    "level": "C1",
+    "part_of_speech": "adjective"
+  },
+  {
+    "word": "systematic",
+    "definition": "Done according to a clear and ordered plan.",
+    "definition_pt": "Feito de acordo com um plano claro e ordenado.",
+    "example": "A systematic review found several errors.",
+    "level": "C1",
+    "part_of_speech": "adjective"
+  },
+  {
+    "word": "tangible",
+    "definition": "Real and able to be shown or touched.",
+    "definition_pt": "Real e capaz de ser mostrado ou tocado.",
+    "example": "The program produced tangible benefits.",
+    "level": "C1",
+    "part_of_speech": "adjective"
+  },
+  {
+    "word": "undermine",
+    "definition": "To weaken something gradually.",
+    "definition_pt": "Enfraquecer algo gradualmente.",
+    "example": "Poor communication can undermine trust.",
+    "level": "C1",
+    "part_of_speech": "verb"
+  },
+  {
+    "word": "viable",
+    "definition": "Able to work successfully.",
+    "definition_pt": "Capaz de funcionar com sucesso.",
+    "example": "The proposal is viable with more funding.",
+    "level": "C1",
+    "part_of_speech": "adjective"
+  },
+  {
+    "word": "volatility",
+    "definition": "The quality of changing quickly and unpredictably.",
+    "definition_pt": "A qualidade de mudar rapidamente e de forma imprevisível.",
+    "example": "Market volatility affected the budget.",
+    "level": "C1",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "warranted",
+    "definition": "Justified or necessary in a situation.",
+    "definition_pt": "Justificado ou necessário em uma situação.",
+    "example": "Further investigation is warranted.",
+    "level": "C1",
+    "part_of_speech": "adjective"
+  },
+  {
+    "word": "yield",
+    "definition": "To produce a result or amount.",
+    "definition_pt": "Produzir um resultado ou quantidade.",
+    "example": "The experiment may yield useful data.",
+    "level": "C1",
+    "part_of_speech": "verb"
+  },
+  {
+    "word": "incentive",
+    "definition": "Something that encourages a person to act.",
+    "definition_pt": "Algo que incentiva uma pessoa a agir.",
+    "example": "A bonus can be a strong incentive.",
+    "level": "C1",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "abstruse",
+    "definition": "Difficult to understand.",
+    "definition_pt": "Difícil de entender.",
+    "example": "The abstruse theory confused the audience.",
+    "level": "C2",
+    "part_of_speech": "adjective"
+  },
+  {
+    "word": "acrimony",
+    "definition": "Bitter anger in speech or behavior.",
+    "definition_pt": "Amargura ou raiva intensa em fala ou comportamento.",
+    "example": "The debate ended in acrimony.",
+    "level": "C2",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "anachronism",
+    "definition": "Something placed in the wrong historical time.",
+    "definition_pt": "Algo colocado no período histórico errado.",
+    "example": "The modern watch was an anachronism in the film.",
+    "level": "C2",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "apocryphal",
+    "definition": "Widely told but probably not true.",
+    "definition_pt": "Muito contado, mas provavelmente não verdadeiro.",
+    "example": "The apocryphal story spread for years.",
+    "level": "C2",
+    "part_of_speech": "adjective"
+  },
+  {
+    "word": "assiduous",
+    "definition": "Showing great care and steady effort.",
+    "definition_pt": "Que demonstra muito cuidado e esforço constante.",
+    "example": "Her assiduous research impressed the panel.",
+    "level": "C2",
+    "part_of_speech": "adjective"
+  },
+  {
+    "word": "bellicose",
+    "definition": "Willing to fight or argue.",
+    "definition_pt": "Disposto a lutar ou discutir.",
+    "example": "The bellicose speech alarmed diplomats.",
+    "level": "C2",
+    "part_of_speech": "adjective"
+  },
+  {
+    "word": "candor",
+    "definition": "The quality of being honest and direct.",
+    "definition_pt": "A qualidade de ser honesto e direto.",
+    "example": "The manager spoke with unusual candor.",
+    "level": "C2",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "capricious",
+    "definition": "Changing suddenly and unpredictably.",
+    "definition_pt": "Que muda de forma súbita e imprevisível.",
+    "example": "The capricious weather delayed the climb.",
+    "level": "C2",
+    "part_of_speech": "adjective"
+  },
+  {
+    "word": "circumspect",
+    "definition": "Careful to avoid risks or mistakes.",
+    "definition_pt": "Cuidadoso para evitar riscos ou erros.",
+    "example": "The lawyer gave a circumspect reply.",
+    "level": "C2",
+    "part_of_speech": "adjective"
+  },
+  {
+    "word": "conjecture",
+    "definition": "An opinion based on incomplete information.",
+    "definition_pt": "Uma opinião baseada em informações incompletas.",
+    "example": "The theory remains conjecture without data.",
+    "level": "C2",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "deleterious",
+    "definition": "Causing harm or damage.",
+    "definition_pt": "Que causa dano ou prejuízo.",
+    "example": "The chemical had a deleterious effect.",
+    "level": "C2",
+    "part_of_speech": "adjective"
+  },
+  {
+    "word": "didactic",
+    "definition": "Intended to teach, sometimes too forcefully.",
+    "definition_pt": "Destinado a ensinar, às vezes de forma excessiva.",
+    "example": "The novel has a didactic tone.",
+    "level": "C2",
+    "part_of_speech": "adjective"
+  },
+  {
+    "word": "enigma",
+    "definition": "A person or thing that is mysterious.",
+    "definition_pt": "Uma pessoa ou coisa misteriosa.",
+    "example": "The ancient symbol remained an enigma.",
+    "level": "C2",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "equivocate",
+    "definition": "To speak unclearly to avoid the truth.",
+    "definition_pt": "Falar de modo ambíguo para evitar a verdade.",
+    "example": "The official tried to equivocate under pressure.",
+    "level": "C2",
+    "part_of_speech": "verb"
+  },
+  {
+    "word": "esoteric",
+    "definition": "Understood by only a small group with special knowledge.",
+    "definition_pt": "Entendido apenas por um pequeno grupo com conhecimento especial.",
+    "example": "The article used esoteric terminology.",
+    "level": "C2",
+    "part_of_speech": "adjective"
+  },
+  {
+    "word": "fastidious",
+    "definition": "Very attentive to small details and hard to please.",
+    "definition_pt": "Muito atento a pequenos detalhes e difícil de agradar.",
+    "example": "The fastidious editor checked every comma.",
+    "level": "C2",
+    "part_of_speech": "adjective"
+  },
+  {
+    "word": "fortuitous",
+    "definition": "Happening by chance, often luckily.",
+    "definition_pt": "Que acontece por acaso, muitas vezes com sorte.",
+    "example": "A fortuitous meeting changed her career.",
+    "level": "C2",
+    "part_of_speech": "adjective"
+  },
+  {
+    "word": "gregarious",
+    "definition": "Sociable and enjoying the company of others.",
+    "definition_pt": "Sociável e que gosta da companhia de outras pessoas.",
+    "example": "His gregarious nature helped him network.",
+    "level": "C2",
+    "part_of_speech": "adjective"
+  },
+  {
+    "word": "hegemony",
+    "definition": "Dominance by one group or country over others.",
+    "definition_pt": "Domínio de um grupo ou país sobre outros.",
+    "example": "The empire sought regional hegemony.",
+    "level": "C2",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "impecunious",
+    "definition": "Having little or no money.",
+    "definition_pt": "Com pouco ou nenhum dinheiro.",
+    "example": "The impecunious artist lived simply.",
+    "level": "C2",
+    "part_of_speech": "adjective"
+  },
+  {
+    "word": "laconic",
+    "definition": "Using very few words.",
+    "definition_pt": "Que usa pouquíssimas palavras.",
+    "example": "His laconic answer ended the discussion.",
+    "level": "C2",
+    "part_of_speech": "adjective"
+  },
+  {
+    "word": "magnanimous",
+    "definition": "Generous and forgiving toward others.",
+    "definition_pt": "Generoso e disposto a perdoar os outros.",
+    "example": "The winner was magnanimous in victory.",
+    "level": "C2",
+    "part_of_speech": "adjective"
+  },
+  {
+    "word": "obdurate",
+    "definition": "Stubbornly refusing to change opinion.",
+    "definition_pt": "Teimoso ao recusar mudar de opinião.",
+    "example": "The obdurate negotiator rejected every offer.",
+    "level": "C2",
+    "part_of_speech": "adjective"
+  },
+  {
+    "word": "parsimonious",
+    "definition": "Unwilling to spend money or use resources.",
+    "definition_pt": "Pouco disposto a gastar dinheiro ou recursos.",
+    "example": "The parsimonious budget limited research.",
+    "level": "C2",
+    "part_of_speech": "adjective"
+  },
+  {
+    "word": "paucity",
+    "definition": "A very small amount of something.",
+    "definition_pt": "Uma quantidade muito pequena de algo.",
+    "example": "A paucity of evidence weakened the case.",
+    "level": "C2",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "quixotic",
+    "definition": "Extremely idealistic and unrealistic.",
+    "definition_pt": "Extremamente idealista e pouco realista.",
+    "example": "The quixotic plan ignored basic costs.",
+    "level": "C2",
+    "part_of_speech": "adjective"
+  },
+  {
+    "word": "recalcitrant",
+    "definition": "Resisting authority or control.",
+    "definition_pt": "Que resiste à autoridade ou ao controle.",
+    "example": "The recalcitrant witness refused to answer.",
+    "level": "C2",
+    "part_of_speech": "adjective"
+  },
+  {
+    "word": "sagacious",
+    "definition": "Wise and showing good judgment.",
+    "definition_pt": "Sábio e com bom julgamento.",
+    "example": "The sagacious leader avoided conflict.",
+    "level": "C2",
+    "part_of_speech": "adjective"
+  },
+  {
+    "word": "sycophant",
+    "definition": "A person who praises powerful people for advantage.",
+    "definition_pt": "Uma pessoa que bajula poderosos para obter vantagem.",
+    "example": "The sycophant agreed with every decision.",
+    "level": "C2",
+    "part_of_speech": "noun"
+  },
+  {
+    "word": "vitriolic",
+    "definition": "Filled with bitter criticism or malice.",
+    "definition_pt": "Cheio de crítica amarga ou malícia.",
+    "example": "The vitriolic review shocked the author.",
+    "level": "C2",
+    "part_of_speech": "adjective"
+  }
+]

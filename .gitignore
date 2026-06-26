@@ -109,3 +109,5 @@ public/uploads/
 ############################
 ehthumbs.db
 Icon?
+backup.sql
+guessword-db.sql

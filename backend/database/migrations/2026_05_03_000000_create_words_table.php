@@ -12,6 +12,7 @@ return new class extends Migration
             $table->id();
             $table->string('word')->unique();
             $table->text('definition');
+            $table->text('definition_pt')->nullable();
             $table->text('example');
             $table->string('level', 2)->index();
             $table->string('part_of_speech')->nullable();
