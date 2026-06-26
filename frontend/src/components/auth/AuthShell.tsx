@@ -1,5 +1,7 @@
 import { FormEvent, useMemo } from "react";
 import { AuthMode } from "@/lib/types";
+import { LocalModeToggle } from "../layout/LocalModeToggle";
+
 
 export const nationalities = [
   "Brazil",
@@ -68,13 +70,17 @@ export function AuthShell({
   return (
     <main className="login-shell">
       <section className="login-panel">
-        <div className="brand-lockup">
-          <div className="brand-mark">GW</div>
-          <div>
-            <p className="eyebrow">GuessWord</p>
-            <h1>Vocabulary</h1>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: "16px", flexWrap: "wrap" }}>
+          <div className="brand-lockup">
+            <div className="brand-mark">GW</div>
+            <div>
+              <p className="eyebrow">GuessWord</p>
+              <h1>Vocabulary</h1>
+            </div>
           </div>
+          <LocalModeToggle />
         </div>
+
 
         <div className="auth-tabs" role="tablist" aria-label="Autenticacao">
           <button

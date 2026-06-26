@@ -9,7 +9,6 @@ import {
   fallbackWords,
   isDue,
   levels,
-  modeLabels,
   normalizeAnswer,
   scrambleWord,
   selectNextWord,
@@ -18,21 +17,20 @@ import {
 import type { HistoryItem, Level, PracticeMode, StudyState, VocabWord, WordProgress } from "@/lib/vocabulary";
 
 import type {
-  ApiErrorPayload,
   ApiWordsResponse,
   AuthMode,
   AuthResponse,
   Feedback,
   Language,
   Leader,
-  LoginProvider,
-  MultiplayerPlayer,
   MultiplayerRoom,
   UserSession,
 } from "@/lib/types";
+import { apiClient } from "@/services/apiClient";
+import { useLocalMode } from "@/store/LocalModeContext";
 
-const API_BASE = process.env.NEXT_PUBLIC_API_URL ?? "http://127.0.0.1:8000/api";
 const CLIENT_ID_KEY = "guessword-client-id";
+
 const SESSION_KEY = "guessword-session-v1";
 const STORAGE_KEY = "guessword-study-state-v1";
 const ROUND_SECONDS = 30;
@@ -72,12 +70,35 @@ function safeSession(): UserSession | null {
   }
 }
 
+interface ProgressPayloadItem {
+  attempts: number;
+  correct_attempts: number;
+  incorrect_attempts: number;
+  streak_correct: number;
+  ease_factor: number;
+  interval_days: number;
+  learned: boolean;
+  last_answered_at: string | null;
+  next_review_at: string | null;
+}
+
+interface HistoryPayloadItem {
+  id: string | number;
+  word: string;
+  level: Level;
+  answer?: string;
+  correct: boolean;
+  score_delta?: number;
+  mode?: string;
+  studied_at: string;
+}
+
 function hydrateWord(word: ApiWordsResponse["data"][number]): VocabWord {
   return {
     id: word.id,
     word: word.word,
     definition: word.definition,
-    definition_pt: (word as any).definition_pt,
+    definition_pt: (word as { definition_pt?: string }).definition_pt,
     example: word.example,
     example_with_blank: word.example_with_blank ?? blankExample(word.example, word.word),
     level: word.level,
@@ -85,23 +106,6 @@ function hydrateWord(word: ApiWordsResponse["data"][number]): VocabWord {
   };
 }
 
-function jsonHeaders(session?: UserSession | null): HeadersInit {
-  const headers: Record<string, string> = { "Content-Type": "application/json" };
-  if (session?.sessionToken) {
-    headers.Authorization = `Bearer ${session.sessionToken}`;
-  }
-  return headers;
-}
-
-async function readApiMessage(response: Response, fallback: string): Promise<string> {
-  try {
-    const payload = (await response.json()) as ApiErrorPayload;
-    const firstError = payload.errors ? Object.values(payload.errors).flat()[0] : null;
-    return firstError ?? payload.message ?? fallback;
-  } catch {
-    return fallback;
-  }
-}
 
 function decodeBase64Url(value: string): string {
   const normalized = value.replace(/-/g, "+").replace(/_/g, "/");
@@ -231,6 +235,7 @@ function applyAttempt(
 }
 
 export function useGameState() {
+  const { isLocalMode } = useLocalMode();
   const [gameStarted, setGameStarted] = useState(false);
   const [clueMode, setClueMode] = useState<"hint" | "no-hint">("hint");
   const [guessedLetters, setGuessedLetters] = useState<string[]>([]);
@@ -268,7 +273,6 @@ export function useGameState() {
   const [feedback, setFeedback] = useState<Feedback>("idle");
   const [timeLeft, setTimeLeft] = useState(ROUND_SECONDS);
   const [hintVisible, setHintVisible] = useState(false);
-  const [hintLetters, setHintLetters] = useState<string[]>([]);
   const [combo, setCombo] = useState(0);
   const [apiOnline, setApiOnline] = useState<boolean | null>(null);
   const [leaderboard, setLeaderboard] = useState<Leader[]>([]);
@@ -479,9 +483,7 @@ export function useGameState() {
 
   const loadLeaderboard = useCallback(async () => {
     try {
-      const response = await fetch(`${API_BASE}/leaderboard`);
-      if (!response.ok) return;
-      const payload = (await response.json()) as { data: Leader[] };
+      const payload = await apiClient.get<{ data: Leader[] }>("/leaderboard");
       setLeaderboard(payload.data ?? []);
     } catch {
       setLeaderboard([]);
@@ -493,54 +495,48 @@ export function useGameState() {
     if (!user) return;
 
     try {
-      const response = await fetch(`${API_BASE}/progress?client_id=${encodeURIComponent(user.clientId)}`, {
-        method: "GET",
-        headers: jsonHeaders(user),
-      });
-
-      if (response.ok) {
-        const payload = (await response.json()) as {
-          data: {
-            xp: number;
-            level: number;
-            current_streak: number;
-            best_streak: number;
-            attempts: number;
-            correct_attempts: number;
-            word_progress: Record<string, any>;
-            history: any[];
-          };
+      const payload = await apiClient.get<{
+        data: {
+          xp: number;
+          level: number;
+          current_streak: number;
+          best_streak: number;
+          attempts: number;
+          correct_attempts: number;
+          word_progress: Record<string, ProgressPayloadItem>;
+          history: HistoryPayloadItem[];
         };
+      }>(`/progress?client_id=${encodeURIComponent(user.clientId)}`);
 
-        const progressData = payload.data;
-        const mappedWordProgress: Record<string, WordProgress> = {};
+      const progressData = payload.data;
+      const mappedWordProgress: Record<string, WordProgress> = {};
 
-        if (progressData.word_progress) {
-          Object.entries(progressData.word_progress).forEach(([wordId, p]: [string, any]) => {
-            mappedWordProgress[wordId] = {
-              attempts: p.attempts,
-              correctAttempts: p.correct_attempts,
-              incorrectAttempts: p.incorrect_attempts,
-              streakCorrect: p.streak_correct,
-              easeFactor: p.ease_factor,
-              intervalDays: p.interval_days,
-              learned: p.learned,
-              lastAnsweredAt: p.last_answered_at,
-              nextReviewAt: p.next_review_at,
-            };
-          });
-        }
+      if (progressData.word_progress) {
+        Object.entries(progressData.word_progress).forEach(([wordId, p]) => {
+          mappedWordProgress[wordId] = {
+            attempts: p.attempts,
+            correctAttempts: p.correct_attempts,
+            incorrectAttempts: p.incorrect_attempts,
+            streakCorrect: p.streak_correct,
+            easeFactor: p.ease_factor,
+            intervalDays: p.interval_days,
+            learned: p.learned,
+            lastAnsweredAt: p.last_answered_at,
+            nextReviewAt: p.next_review_at,
+          };
+        });
+      }
 
-        const mappedHistory = (progressData.history ?? []).map((h: any) => ({
-          id: h.id.toString(),
-          word: h.word,
-          level: h.level,
-          answer: h.answer ?? "",
-          correct: h.correct,
-          score: h.score_delta ?? 0,
-          mode: (h.mode as PracticeMode) ?? "level",
-          studiedAt: h.studied_at,
-        }));
+      const mappedHistory = (progressData.history ?? []).map((h) => ({
+        id: h.id.toString(),
+        word: h.word,
+        level: h.level,
+        answer: h.answer ?? "",
+        correct: h.correct,
+        score: h.score_delta ?? 0,
+        mode: (h.mode as PracticeMode) ?? "level",
+        studiedAt: h.studied_at,
+      }));
 
         setStudyState((prev) => {
           const newState = {
@@ -560,7 +556,6 @@ export function useGameState() {
           }
           return newState;
         });
-      }
     } catch (err) {
       console.error("Failed to sync progress:", err);
     }
@@ -612,10 +607,8 @@ export function useGameState() {
     }, 0);
     const controller = new AbortController();
 
-    fetch(`${API_BASE}/words`, { signal: controller.signal })
-      .then(async (response) => {
-        if (!response.ok) throw new Error("API unavailable");
-        const payload = (await response.json()) as ApiWordsResponse;
+    apiClient.get<ApiWordsResponse>("/words", { signal: controller.signal })
+      .then((payload) => {
         const apiWords = payload.data.map(hydrateWord);
         if (apiWords.length > 0) {
           setWords(apiWords);
@@ -632,7 +625,7 @@ export function useGameState() {
       window.clearTimeout(hydrateTimer);
       controller.abort();
     };
-  }, [finishLogin, loadLeaderboard]);
+  }, [finishLogin, loadLeaderboard, isLocalMode]);
 
   useEffect(() => {
     if (!initialized) return;
@@ -645,12 +638,14 @@ export function useGameState() {
       (leader) => leader.client_id === currentUser.clientId || leader.display_name === currentUser.name,
     );
     if (userInLeaderboard && userInLeaderboard.xp !== studyState.xp) {
-      setStudyState((prev) => ({
-        ...prev,
-        xp: userInLeaderboard.xp,
-        level: userInLeaderboard.level,
-        streak: userInLeaderboard.streak,
-      }));
+      setTimeout(() => {
+        setStudyState((prev) => ({
+          ...prev,
+          xp: userInLeaderboard.xp,
+          level: userInLeaderboard.level,
+          streak: userInLeaderboard.streak,
+        }));
+      }, 0);
     }
   }, [leaderboard, currentUser, studyState.xp]);
 
@@ -668,7 +663,6 @@ export function useGameState() {
     setFeedback("idle");
     setTimeLeft(ROUND_SECONDS);
     setHintVisible(false);
-    setHintLetters(next ? scrambleWord(next.word) : []);
 
     if (next) {
       initializeTilesAndBoxes(next.word, clueMode);
@@ -695,11 +689,9 @@ export function useGameState() {
     try {
       const user = userRef.current;
       const url = user?.clientId
-        ? `${API_BASE}/multiplayer/rooms/${code}?client_id=${encodeURIComponent(user.clientId)}`
-        : `${API_BASE}/multiplayer/rooms/${code}`;
-      const response = await fetch(url);
-      if (!response.ok) return;
-      const payload = (await response.json()) as { data: MultiplayerRoom };
+        ? `/multiplayer/rooms/${code}?client_id=${encodeURIComponent(user.clientId)}`
+        : `/multiplayer/rooms/${code}`;
+      const payload = await apiClient.get<{ data: MultiplayerRoom }>(url);
       setMultiplayerRoom(payload.data);
     } catch {
       setApiOnline(false);
@@ -717,18 +709,19 @@ export function useGameState() {
   useEffect(() => {
     if (!multiplayerRoom || !multiplayerRoom.current_word_id) return;
     if (multiplayerRoom.players.length >= 2 && !gameStarted) {
-      setGameStarted(true);
+      setTimeout(() => setGameStarted(true), 0);
     }
     const matchedWord = words.find((w) => w.id === multiplayerRoom.current_word_id);
     if (!matchedWord) return;
     if (currentWord?.id !== matchedWord.id) {
-      setCurrentWord(matchedWord);
-      setAnswer("");
-      setFeedback("idle");
-      setTimeLeft(multiplayerRoom.round_seconds ?? ROUND_SECONDS);
-      setHintVisible(false);
-      setHintLetters(scrambleWord(matchedWord.word));
-      initializeTilesAndBoxes(matchedWord.word, clueMode);
+      setTimeout(() => {
+        setCurrentWord(matchedWord);
+        setAnswer("");
+        setFeedback("idle");
+        setHintVisible(false);
+        setTimeLeft(multiplayerRoom.round_seconds ?? ROUND_SECONDS);
+        initializeTilesAndBoxes(matchedWord.word, clueMode);
+      }, 0);
     }
   }, [
     multiplayerRoom?.current_word_id,
@@ -745,99 +738,88 @@ export function useGameState() {
     async (word: VocabWord, submittedAnswer: string, seconds: number, hintsUsed: boolean) => {
       const user = userRef.current;
       try {
-        const response = await fetch(`${API_BASE}/attempts`, {
-          method: "POST",
-          headers: jsonHeaders(user),
-          body: JSON.stringify({
-            client_id: studyStateRef.current.clientId,
-            word_id: word.id,
-            answer: submittedAnswer,
-            seconds_spent: seconds,
-            hints_used: hintsUsed,
-            mode,
-          }),
+        const payload = await apiClient.post<{
+          data: {
+            correct: boolean;
+            correct_answer: string;
+            score_delta: number;
+            user_progress: {
+              xp: number;
+              level: number;
+              current_streak: number;
+              best_streak: number;
+              attempts: number;
+              correct_attempts: number;
+              word_progress: Record<string, ProgressPayloadItem>;
+              history: HistoryPayloadItem[];
+            };
+          };
+        }>("/attempts", {
+          client_id: studyStateRef.current.clientId,
+          word_id: word.id,
+          answer: submittedAnswer,
+          seconds_spent: seconds,
+          hints_used: hintsUsed,
+          mode,
         });
 
-        setApiOnline(response.ok);
-        if (response.ok) {
-          void loadLeaderboard();
-          try {
-            const payload = (await response.json()) as {
-              data: {
-                correct: boolean;
-                correct_answer: string;
-                score_delta: number;
-                user_progress: {
-                  xp: number;
-                  level: number;
-                  current_streak: number;
-                  best_streak: number;
-                  attempts: number;
-                  correct_attempts: number;
-                  word_progress: Record<string, any>;
-                  history: any[];
-                };
+        setApiOnline(true);
+        void loadLeaderboard();
+
+        const progressData = payload.data.user_progress;
+        if (progressData) {
+          const mappedWordProgress: Record<string, WordProgress> = {};
+          if (progressData.word_progress) {
+            Object.entries(progressData.word_progress).forEach(([wordId, p]) => {
+              mappedWordProgress[wordId] = {
+                attempts: p.attempts,
+                correctAttempts: p.correct_attempts,
+                incorrectAttempts: p.incorrect_attempts,
+                streakCorrect: p.streak_correct,
+                easeFactor: p.ease_factor,
+                intervalDays: p.interval_days,
+                learned: p.learned,
+                lastAnsweredAt: p.last_answered_at,
+                nextReviewAt: p.next_review_at,
               };
-            };
-            const progressData = payload.data.user_progress;
-            if (progressData) {
-              const mappedWordProgress: Record<string, WordProgress> = {};
-              if (progressData.word_progress) {
-                Object.entries(progressData.word_progress).forEach(([wordId, p]: [string, any]) => {
-                  mappedWordProgress[wordId] = {
-                    attempts: p.attempts,
-                    correctAttempts: p.correct_attempts,
-                    incorrectAttempts: p.incorrect_attempts,
-                    streakCorrect: p.streak_correct,
-                    easeFactor: p.ease_factor,
-                    intervalDays: p.interval_days,
-                    learned: p.learned,
-                    lastAnsweredAt: p.last_answered_at,
-                    nextReviewAt: p.next_review_at,
-                  };
-                });
-              }
-
-              const mappedHistory = (progressData.history ?? []).map((h: any) => ({
-                id: h.id.toString(),
-                word: h.word,
-                level: h.level,
-                answer: h.answer ?? "",
-                correct: h.correct,
-                score: h.score_delta ?? 0,
-                mode: (h.mode as PracticeMode) ?? "level",
-                studiedAt: h.studied_at,
-              }));
-
-              setStudyState((prev) => {
-                const newState = {
-                  ...prev,
-                  xp: progressData.xp,
-                  level: progressData.level,
-                  currentStreak: progressData.current_streak,
-                  bestStreak: progressData.best_streak,
-                  wordProgress: { ...prev.wordProgress, ...mappedWordProgress },
-                  history: mappedHistory,
-                  totalAttempts: progressData.attempts,
-                  correctAttempts: progressData.correct_attempts,
-                };
-                studyStateRef.current = newState;
-                if (typeof window !== "undefined" && user) {
-                  window.localStorage.setItem(`guessword-state-${user.clientId}`, JSON.stringify(newState));
-                }
-                return newState;
-              });
-            }
-          } catch (e) {
-            console.error("Error parsing syncAttempt response:", e);
+            });
           }
+
+          const mappedHistory = (progressData.history ?? []).map((h) => ({
+            id: h.id.toString(),
+            word: h.word,
+            level: h.level,
+            answer: h.answer ?? "",
+            correct: h.correct,
+            score: h.score_delta ?? 0,
+            mode: (h.mode as PracticeMode) ?? "level",
+            studiedAt: h.studied_at,
+          }));
+
+          setStudyState((prev) => {
+            const newState = {
+              ...prev,
+              xp: progressData.xp,
+              level: progressData.level,
+              currentStreak: progressData.current_streak,
+              bestStreak: progressData.best_streak,
+              wordProgress: { ...prev.wordProgress, ...mappedWordProgress },
+              history: mappedHistory,
+              totalAttempts: progressData.attempts,
+              correctAttempts: progressData.correct_attempts,
+            };
+            studyStateRef.current = newState;
+            if (typeof window !== "undefined" && user) {
+              window.localStorage.setItem(`guessword-state-${user.clientId}`, JSON.stringify(newState));
+            }
+            return newState;
+          });
         }
 
-        if (response.ok && user && roomRef.current) {
-          const roomResponse = await fetch(`${API_BASE}/multiplayer/rooms/${roomRef.current.code}/attempts`, {
-            method: "POST",
-            headers: jsonHeaders(user),
-            body: JSON.stringify({
+        if (user && roomRef.current) {
+          const roomPayload = await apiClient.post<{ data: { room: MultiplayerRoom } }>(
+            `/multiplayer/rooms/${roomRef.current.code}/attempts`,
+            {
               client_id: user.clientId,
               display_name: user.name,
               nationality: user.nationality,
@@ -845,12 +827,9 @@ export function useGameState() {
               answer: submittedAnswer,
               seconds_spent: seconds,
               hints_used: hintsUsed,
-            }),
-          });
-          if (roomResponse.ok) {
-            const payload = (await roomResponse.json()) as { data: { room: MultiplayerRoom } };
-            setMultiplayerRoom(payload.data.room);
-          }
+            }
+          );
+          setMultiplayerRoom(roomPayload.data.room);
         }
       } catch {
         setApiOnline(false);
@@ -914,7 +893,7 @@ export function useGameState() {
   useEffect(() => {
     if (feedback !== "idle" || !currentWord || !currentUser) return;
     if (timeLeft <= 0) {
-      submitAnswer(true);
+      setTimeout(() => submitAnswer(true), 0);
       return;
     }
     const timer = window.setTimeout(() => {
@@ -1026,30 +1005,21 @@ export function useGameState() {
     }
     setAuthLoading(true);
     setLoginError("");
-
     try {
-      const response = await fetch(`${API_BASE}/auth/${authMode === "register" ? "register" : "login"}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: authMode === "register" ? name : undefined,
-          email,
-          nationality: loginNationality,
-          password: loginPassword,
-          password_confirmation: authMode === "register" ? loginPasswordConfirmation : undefined,
-        }),
+      const payload = await apiClient.post<AuthResponse>(`/auth/${authMode === "register" ? "register" : "login"}`, {
+        name: authMode === "register" ? name : undefined,
+        email,
+        nationality: loginNationality,
+        password: loginPassword,
+        password_confirmation: authMode === "register" ? loginPasswordConfirmation : undefined,
       });
 
-      if (!response.ok) {
-        setLoginError(await readApiMessage(response, "Não foi possivel autenticar."));
-        return;
-      }
-      const payload = (await response.json()) as AuthResponse;
       finishLogin(authPayloadToSession(payload.data));
       setApiOnline(true);
-    } catch {
+    } catch (err: unknown) {
       setApiOnline(false);
-      setLoginError("Não foi possível conectar ao servidor de autenticação.");
+      const message = err instanceof Error ? err.message : "Não foi possível conectar ao servidor de autenticação.";
+      setLoginError(message);
     } finally {
       setAuthLoading(false);
     }
@@ -1059,7 +1029,7 @@ export function useGameState() {
     setAuthLoading(true);
     setLoginError("");
     try {
-      const base = API_BASE.replace(/\/$/, "");
+      const base = apiClient.getApiBaseUrl().replace(/\/$/, "");
       const redirectUrl = `${base}/auth/google/redirect?nationality=${encodeURIComponent(loginNationality)}`;
       window.location.assign(redirectUrl);
     } catch {
@@ -1071,10 +1041,7 @@ export function useGameState() {
   const logout = () => {
     const sessionToken = currentUser?.sessionToken;
     if (sessionToken) {
-      void fetch(`${API_BASE}/auth/logout`, {
-        method: "POST",
-        headers: { Authorization: `Bearer ${sessionToken}` },
-      }).catch(() => undefined);
+      void apiClient.post("/auth/logout").catch(() => undefined);
     }
     window.localStorage.removeItem(SESSION_KEY);
     setCurrentUser(null);
@@ -1085,18 +1052,12 @@ export function useGameState() {
   const createRoom = async () => {
     if (!currentUser) return;
     try {
-      const response = await fetch(`${API_BASE}/multiplayer/rooms`, {
-        method: "POST",
-        headers: jsonHeaders(currentUser),
-        body: JSON.stringify({
-          client_id: currentUser.clientId,
-          display_name: currentUser.name,
-          nationality: currentUser.nationality,
-          level: selectedLevel,
-        }),
+      const payload = await apiClient.post<{ data: MultiplayerRoom }>("/multiplayer/rooms", {
+        client_id: currentUser.clientId,
+        display_name: currentUser.name,
+        nationality: currentUser.nationality,
+        level: selectedLevel,
       });
-      if (!response.ok) throw new Error("Room unavailable");
-      const payload = (await response.json()) as { data: MultiplayerRoom };
       setMultiplayerRoom(payload.data);
       setJoinCode(payload.data.code);
       setApiOnline(true);
@@ -1108,17 +1069,11 @@ export function useGameState() {
   const joinRoom = async () => {
     if (!currentUser || !joinCode.trim()) return;
     try {
-      const response = await fetch(`${API_BASE}/multiplayer/rooms/${joinCode.trim().toUpperCase()}/join`, {
-        method: "POST",
-        headers: jsonHeaders(currentUser),
-        body: JSON.stringify({
-          client_id: currentUser.clientId,
-          display_name: currentUser.name,
-          nationality: currentUser.nationality,
-        }),
+      const payload = await apiClient.post<{ data: MultiplayerRoom }>(`/multiplayer/rooms/${joinCode.trim().toUpperCase()}/join`, {
+        client_id: currentUser.clientId,
+        display_name: currentUser.name,
+        nationality: currentUser.nationality,
       });
-      if (!response.ok) throw new Error("Join unavailable");
-      const payload = (await response.json()) as { data: MultiplayerRoom };
       setMultiplayerRoom(payload.data);
       setApiOnline(true);
     } catch {

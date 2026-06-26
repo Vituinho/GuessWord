@@ -1,4 +1,5 @@
 import { Language } from "@/lib/types";
+import { LocalModeToggle } from "./LocalModeToggle";
 
 type TopbarProps = {
   apiOnline: boolean | null;
@@ -18,6 +19,7 @@ export function Topbar({ apiOnline, lang, toggleLanguage, logout }: TopbarProps)
         </div>
       </div>
       <div className="top-actions">
+        <LocalModeToggle />
         {apiOnline !== false ? (
           <div className={`api-status ${apiOnline ? "online" : ""}`}>
             <span />
@@ -40,3 +42,4 @@ export function Topbar({ apiOnline, lang, toggleLanguage, logout }: TopbarProps)
     </header>
   );
 }
+

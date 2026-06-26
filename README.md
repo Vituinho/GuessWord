@@ -2,190 +2,112 @@
 
 GuessWord é uma plataforma full-stack para aprender inglês com vocabulário adaptativo, prática com revisão espaçada e partidas multijogador.
 
-## O que é
+---
 
-Este projeto combina um backend Laravel com um frontend Next.js para entregar:
-- Treinos de vocabulário por nível (A1 a C2)
-- Revisões inteligentes baseadas em progresso do usuário
-- Sistema de pontuação com combo e tempo de resposta
-- Autenticação por e-mail e login via Google (OAuth)
-- Modo multijogador com salas, ranking e partidas em tempo real
-- Histórico local de tentativas e progresso do usuário
+## ⚠️ STATUS DO PROJETO
+> [!IMPORTANT]
+> - **O projeto anteriormente utilizava um backend hospedado em produção.**
+> - **Esse backend foi descontinuado.**
+> - **Atualmente o projeto funciona apenas em modo local (localhost).**
+> - Existe a possibilidade de o backend ser reativado no futuro, portanto, as opções e lógicas de integração com o backend online foram preservadas e podem ser reativadas através do botão de alternância de modo.
 
-## Arquitetura
+---
 
-- `backend/` — API REST em Laravel 13 e PHP 8.3
-- `frontend/` — interface em Next.js 16 + React 19 com Tailwind CSS
+## Como Funciona o Modo Local
 
-## Funcionalidades principais
+A aplicação conta com um seletor unificado de API (**🔌 Local / Produção**) localizado:
+1. No canto superior direito da tela de Login/Cadastro.
+2. Na barra de navegação superior (`Topbar`) após efetuar o login.
 
-### Backend
-- Cadastro e login de usuário
-- Login Gmail via OAuth 2.0
-- Listagem de palavras por nível
-- Seleção de desafio com peso para revisão, visto e automático
-- Registro de tentativas e cálculo de progresso
-- Perfil de usuário com XP, streak e histórico
-- Ranking global (leaderboard)
-- Criação e gerenciamento de salas multijogador
-- Sistema de pontuação baseado em nível, velocidade e combo
+- **🔌 Local: Ativo (Recomendado)**: A aplicação direciona todas as chamadas à API para o seu backend local (`http://127.0.0.1:8000/api`).
+- **🔌 Produção**: A aplicação direciona as chamadas para a URL configurada no seu `.env.local` (apontando para o servidor de produção).
 
-### Frontend
-- Responsividade e interface para estudo diário
-- Persistência de sessão e progresso no `localStorage`
-- Opções de prática: nível, revisão, palavras já vistas e modo automático
-- Tela de multijogador com código de sala e placar
-- Feedback em tempo real para respostas corretas/erradas
+---
 
-## Tecnologias
+## Requisitos Prévios
 
-### Backend
-- Laravel 13
-- PHP ^8.3
-- PostgreSQL (padrao)
-- Composer
+Antes de começar, você precisará ter instalado em sua máquina:
+- **PHP** (versão 8.2 ou superior)
+- **Composer** (gerenciador de dependências PHP)
+- **Node.js** (versão 18 ou superior)
+- **NPM** (gerenciador de pacotes Node)
 
-### Frontend
-- Next.js 16
-- React 19
-- TypeScript
-- Tailwind CSS 4
-- Vite (para build do backend se necessário)
+---
 
-## Instalação
+## Instalação e Inicialização Passo a Passo
 
-### Backend
+### 1. Configurando o Backend (Laravel)
 
-1. Abra um terminal em `backend/`
-2. Instale dependências:
+1. Abra um terminal na pasta `backend/`:
+   ```bash
+   cd backend
+   ```
+
+2. Instale as dependências do Composer:
    ```bash
    composer install
    ```
-3. Crie o arquivo de ambiente:
+
+3. Crie o arquivo de configuração de ambiente `.env`:
    ```bash
    cp .env.example .env
    ```
-4. Gere a chave da aplicação:
+
+4. Gere a chave única da aplicação:
    ```bash
    php artisan key:generate
    ```
-5. Suba o PostgreSQL local:
-   ```bash
-   docker compose up -d postgres
-   ```
-   Se voce ja usa um PostgreSQL instalado localmente, crie o banco e usuario equivalentes ao `.env`:
-   ```sql
-   CREATE USER guessword WITH PASSWORD 'guessword';
-   CREATE DATABASE guessword OWNER guessword;
-   ```
-6. Rode as migrations e o seeder:
-   ```bash
-   php artisan migrate --force
-   php artisan db:seed
-   ```
-7. Inicie o servidor Laravel:
+
+5. **Configuração do Banco de Dados SQLite**:
+   O backend está pré-configurado no arquivo `.env` para usar um banco de dados **SQLite** local.
+   - O projeto já possui um banco de dados SQLite pré-populado com as palavras e progresso em `backend/database/database.sqlite`.
+   - Certifique-se de que a variável `DB_DATABASE` no seu arquivo `backend/.env` aponta para o caminho absoluto ou relativo correto do arquivo sqlite. Exemplo:
+     ```env
+     DB_CONNECTION=sqlite
+     DB_DATABASE=database/database.sqlite
+     ```
+   - *Opcional*: Caso queira limpar o banco de dados e recriá-lo com dados novos do seeder padrão do Laravel, rode:
+     ```bash
+     php artisan migrate:fresh --seed
+     ```
+
+6. Inicie o servidor local do Laravel:
    ```bash
    php artisan serve
    ```
+   O servidor estará ativo em `http://127.0.0.1:8000`.
 
-### Frontend
+---
 
-1. Abra outro terminal em `frontend/`
-2. Instale dependências:
+### 2. Configurando o Frontend (Next.js)
+
+1. Abra outro terminal na pasta `frontend/`:
+   ```bash
+   cd frontend
+   ```
+
+2. Instale as dependências do Node:
    ```bash
    npm install
    ```
-3. Configure a URL da API, se necessário:
-   Crie um arquivo `.env.local` com:
-   ```env
-   NEXT_PUBLIC_API_URL=http://127.0.0.1:8000/api
+
+3. Crie o arquivo `.env.local` (opcional se quiser definir portas ou URLs de produção customizadas):
+   ```bash
+   cp .env.example .env.local
    ```
-   O frontend usa este valor ou `http://127.0.0.1:8000/api` como padrão.
+   *Nota: Por padrão, o frontend tentará conectar em `http://127.0.0.1:8000/api` se nenhuma variável for informada.*
+
 4. Inicie o servidor de desenvolvimento:
    ```bash
    npm run dev
    ```
-
-## Variáveis de ambiente importantes
-
-### Backend (`backend/.env`)
-- `APP_URL` — URL base da API
-- `FRONTEND_URL` — URL do Next.js para onde o Google volta depois do callback (padrao: `http://127.0.0.1:3000`)
-- `DB_CONNECTION` — conexao do banco de dados (`pgsql` por padrao)
-- `DB_HOST`, `DB_PORT`, `DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD` — credenciais do PostgreSQL
-- `GOOGLE_CLIENT_ID` — ID do cliente Google OAuth
-- `GOOGLE_CLIENT_SECRET` — segredo do cliente Google OAuth
-- `GOOGLE_REDIRECT_URI` — URL de callback (padrão: `http://127.0.0.1:8000/api/auth/google-callback`)
-
-No Google Cloud Console, em OAuth Client, adicione exatamente este Authorized redirect URI:
-```env
-http://127.0.0.1:8000/api/auth/google-callback
-```
-O botao "Continuar com Google" abre `GET /api/auth/google/redirect`, que redireciona o navegador para `accounts.google.com` e depois volta para `FRONTEND_URL`.
-
-### Frontend (`frontend/.env.local`)
-- `NEXT_PUBLIC_API_URL` — URL completa da API Laravel
-
-## Endpoints principais da API
-
-- `GET /api/health`
-- `POST /api/auth/register`
-- `POST /api/auth/login`
-- `POST /api/auth/logout`
-- `GET /api/auth/google-url`
-- `GET /api/auth/google/redirect`
-- `GET /api/auth/google-callback`
-- `GET /api/words?level={A1|A2|B1|B2|C1|C2}`
-- `GET /api/challenge?client_id={id}&level={nivel}&mode={level|review|seen|auto}`
-- `POST /api/attempts`
-- `GET /api/progress?client_id={id}`
-- `GET /api/leaderboard`
-- `POST /api/multiplayer/rooms`
-- `GET /api/multiplayer/rooms/{code}`
-- `POST /api/multiplayer/rooms/{code}/join`
-- `POST /api/multiplayer/rooms/{code}/attempts`
-
-## Como rodar tudo
-
-1. Inicie o backend do Laravel:
-   ```bash
-   cd backend
-   php artisan serve
-   ```
-2. Inicie o frontend do Next.js:
-   ```bash
-   cd frontend
-   npm run dev
-   ```
-3. Acesse a interface no navegador em `http://127.0.0.1:3000`
-
-## Testes
-
-### Backend
-- Execute:
-  ```bash
-  cd backend
-  php artisan test
-  ```
-
-### Frontend
-- Execute lint:
-  ```bash
-  cd frontend
-  npm run lint
-  ```
-
-## Observações
-
-- O backend usa valores de `client_id` persistidos no navegador para rastrear progresso e leaderboard.
-- O seeder padrão insere um conjunto inicial de palavras em níveis A1 a C2.
-- O modo multijogador gera salas com código alfanumérico e calcula pontuação com combo e velocidade.
-
-## Estrutura de pastas
-
-- `backend/` — API Laravel, models, controllers, migrations e seeders
-- `frontend/` — aplicação Next.js, página principal e lógica de estudo
+   A aplicação Next.js estará acessível em `http://localhost:3000`.
 
 ---
 
-Pronto para usar e evoluir como aplicação de estudo de vocabulário em inglês.
+## Estrutura de Diretórios
+
+- `/backend` — API REST construída em Laravel e banco SQLite local.
+- `/frontend` — Lógica e interface web criadas com Next.js 16 + React 19.
+- `/frontend/src/services/apiClient.ts` — Wrapper de chamadas HTTP unificado.
+- `/frontend/src/store/LocalModeContext.tsx` — Contexto React para estado do modo local.
