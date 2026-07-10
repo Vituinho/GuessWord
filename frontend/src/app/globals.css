@@ -247,6 +247,82 @@ h1 {
   font-weight: 900;
 }
 
+.login-actions-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.local-primary-button {
+  min-height: 52px;
+  border: 0;
+  border-radius: 8px;
+  background: linear-gradient(135deg, var(--purple), var(--blue));
+  color: white;
+  font-weight: 850;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(147, 51, 234, 0.25);
+  transition: filter 160ms ease, transform 160ms ease, box-shadow 160ms ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.local-primary-button:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.06);
+  box-shadow: 0 6px 16px rgba(147, 51, 234, 0.35);
+}
+
+.local-primary-button:active {
+  transform: translateY(0);
+}
+
+.login-actions-secondary {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.backend-secondary-button,
+.gmail-button-secondary {
+  min-height: 44px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--muted);
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background 160ms ease, border-color 160ms ease, color 160ms ease;
+}
+
+.backend-secondary-button:hover,
+.gmail-button-secondary:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.25);
+  color: white;
+}
+
+.gmail-button-secondary::before {
+  content: "G";
+  display: grid;
+  width: 18px;
+  height: 18px;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 999px;
+  color: #2563eb;
+  font-size: 11px;
+  font-weight: 900;
+}
+
 .offline-button {
   min-height: 44px;
   border: 1px solid var(--line);

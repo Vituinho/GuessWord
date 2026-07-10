@@ -235,7 +235,7 @@ function applyAttempt(
 }
 
 export function useGameState() {
-  const { isLocalMode } = useLocalMode();
+  const { isLocalMode, toggleLocalMode } = useLocalMode();
   const [gameStarted, setGameStarted] = useState(false);
   const [clueMode, setClueMode] = useState<"hint" | "no-hint">("hint");
   const [guessedLetters, setGuessedLetters] = useState<string[]>([]);
@@ -482,17 +482,21 @@ export function useGameState() {
   }, [multiplayerRoom]);
 
   const loadLeaderboard = useCallback(async () => {
+    if (isLocalMode) {
+      setLeaderboard([]);
+      return;
+    }
     try {
       const payload = await apiClient.get<{ data: Leader[] }>("/leaderboard");
       setLeaderboard(payload.data ?? []);
     } catch {
       setLeaderboard([]);
     }
-  }, []);
+  }, [isLocalMode]);
 
   const syncProgress = useCallback(async (session?: UserSession | null) => {
     const user = session ?? userRef.current;
-    if (!user) return;
+    if (!user || isLocalMode) return;
 
     try {
       const payload = await apiClient.get<{
@@ -559,10 +563,10 @@ export function useGameState() {
     } catch (err) {
       console.error("Failed to sync progress:", err);
     }
-  }, []);
+  }, [isLocalMode]);
 
   const finishLogin = useCallback(
-    (session: UserSession) => {
+    (session: UserSession, bypassSync = false) => {
       window.localStorage.setItem(CLIENT_ID_KEY, session.clientId);
       window.localStorage.setItem(SESSION_KEY, JSON.stringify(session));
       setCurrentUser(session);
@@ -570,10 +574,12 @@ export function useGameState() {
       studyStateRef.current = restored;
       setStudyState(restored);
       setLoginError("");
-      void loadLeaderboard();
-      void syncProgress(session);
+      if (!isLocalMode && !bypassSync) {
+        void loadLeaderboard();
+        void syncProgress(session);
+      }
     },
-    [loadLeaderboard, syncProgress],
+    [loadLeaderboard, syncProgress, isLocalMode],
   );
 
   useEffect(() => {
@@ -597,7 +603,9 @@ export function useGameState() {
         const restored = safeStudyState(session.clientId);
         studyStateRef.current = restored;
         setStudyState(restored);
-        void syncProgress(session);
+        if (!isLocalMode) {
+          void syncProgress(session);
+        }
       } else {
         const empty = createEmptyStudyState(anonymousClientId);
         studyStateRef.current = empty;
@@ -615,7 +623,9 @@ export function useGameState() {
           wordsRef.current = apiWords;
         }
         setApiOnline(true);
-        void loadLeaderboard();
+        if (!isLocalMode) {
+          void loadLeaderboard();
+        }
       })
       .catch(() => {
         setApiOnline(false);
@@ -737,6 +747,7 @@ export function useGameState() {
   const syncAttempt = useCallback(
     async (word: VocabWord, submittedAnswer: string, seconds: number, hintsUsed: boolean) => {
       const user = userRef.current;
+      if (!user || isLocalMode) return;
       try {
         const payload = await apiClient.post<{
           data: {
@@ -835,7 +846,7 @@ export function useGameState() {
         setApiOnline(false);
       }
     },
-    [loadLeaderboard, mode],
+    [loadLeaderboard, mode, isLocalMode],
   );
 
   const submitAnswer = useCallback(
@@ -1040,7 +1051,7 @@ export function useGameState() {
 
   const logout = () => {
     const sessionToken = currentUser?.sessionToken;
-    if (sessionToken) {
+    if (sessionToken && !isLocalMode) {
       void apiClient.post("/auth/logout").catch(() => undefined);
     }
     window.localStorage.removeItem(SESSION_KEY);
@@ -1048,6 +1059,29 @@ export function useGameState() {
     setMultiplayerRoom(null);
     setCombo(0);
   };
+
+  const submitLocalAuth = useCallback(() => {
+    if (!isLocalMode) {
+      toggleLocalMode();
+    }
+
+    const anonymousClientId = (typeof window !== "undefined" && window.localStorage.getItem(CLIENT_ID_KEY)) || createClientId();
+    if (typeof window !== "undefined") {
+      window.localStorage.setItem(CLIENT_ID_KEY, anonymousClientId);
+    }
+
+    const localSession: UserSession = {
+      clientId: anonymousClientId,
+      name: "Local User",
+      email: "local@local.com",
+      nationality: "Brazil",
+      provider: "email",
+      gmailConnected: false,
+      sessionToken: null,
+    };
+
+    finishLogin(localSession, true);
+  }, [isLocalMode, toggleLocalMode, finishLogin]);
 
   const createRoom = async () => {
     if (!currentUser) return;
@@ -1156,6 +1190,7 @@ export function useGameState() {
     startGame,
     submitAnswer,
     submitAuth,
+    submitLocalAuth,
     startGoogleLogin,
     logout,
     createRoom,

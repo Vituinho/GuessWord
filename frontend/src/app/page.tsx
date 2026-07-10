@@ -19,6 +19,7 @@ export default function Home() {
         authMode={state.authMode}
         switchAuthMode={state.switchAuthMode}
         submitAuth={state.submitAuth}
+        submitLocalAuth={state.submitLocalAuth}
         loginName={state.loginName}
         setLoginName={state.setLoginName}
         loginEmail={state.loginEmail}

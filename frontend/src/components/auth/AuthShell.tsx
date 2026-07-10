@@ -22,6 +22,7 @@ type AuthShellProps = {
   authMode: AuthMode;
   switchAuthMode: (mode: AuthMode) => void;
   submitAuth: () => void;
+  submitLocalAuth: () => void;
   loginName: string;
   setLoginName: (val: string) => void;
   loginEmail: string;
@@ -41,6 +42,7 @@ export function AuthShell({
   authMode,
   switchAuthMode,
   submitAuth,
+  submitLocalAuth,
   loginName,
   setLoginName,
   loginEmail,
@@ -179,13 +181,25 @@ export function AuthShell({
 
           {loginError ? <div className="login-error">{loginError}</div> : null}
 
-          <div className="login-actions">
-            <button disabled={authLoading} type="submit">
-              {authLoading ? "Aguarde" : authMode === "login" ? "Entrar" : "Criar conta"}
+          <div className="login-actions-container">
+            {/* Primary Action Button */}
+            <button
+              className="local-primary-button"
+              onClick={submitLocalAuth}
+              type="button"
+            >
+              {authMode === "login" ? "Login (Local)" : "Register (Local)"}
             </button>
-            <button className="gmail-button" disabled={authLoading} onClick={startGoogleLogin} type="button">
-              Continuar com Google
-            </button>
+
+            {/* Secondary Action Buttons */}
+            <div className="login-actions-secondary">
+              <button disabled={authLoading} type="submit" className="backend-secondary-button">
+                {authLoading ? "Aguarde" : authMode === "login" ? "Entrar (Nuvem)" : "Criar conta (Nuvem)"}
+              </button>
+              <button className="gmail-button-secondary" disabled={authLoading} onClick={startGoogleLogin} type="button">
+                Nuvem: Google
+              </button>
+            </div>
           </div>
         </form>
       </section>
